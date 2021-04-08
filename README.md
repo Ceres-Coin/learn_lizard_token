@@ -1,1 +1,1 @@
-# solidity
+# solidity code of lizardtoken.finance
