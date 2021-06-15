@@ -39,6 +39,15 @@ module.exports = async function(deployer, network, accounts) {
     const instantceLizToken = await LizToken.deployed()
     console.log(chalk.redBright.bold("instantceLizToken: ",instantceLizToken.address));
 
+    const ar_name = await instantceLizToken.name();
+    console.log(chalk.yellow("ar_name: ",ar_name.toString()));
+
+    const ar_symbol = await instantceLizToken.symbol();
+    console.log(chalk.yellow("ar_symbol: ",ar_symbol.toString()));
+
+    const ar_decimals = await instantceLizToken.decimals();
+    console.log(chalk.yellow("ar_decimals: ",ar_decimals.toString()));
+
 
 
 
