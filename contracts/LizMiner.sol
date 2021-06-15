@@ -58,7 +58,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     event TakedBack(address indexed tokenaddress,uint256 pct);
     
    
-    constructor()
+    constructor() public
     {
         _owner=msg.sender;
     }
@@ -431,7 +431,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
             logCheckPoint(diff,true,block.number);
         }
 
-        IBEP20(_Lizaddr).burnFrom(msg.sender, costcount); 
+        // IBEP20(_Lizaddr).burnFrom(msg.sender, costcount); 
         _userInfos[msg.sender].userlevel=newlevel;
         emit VipChanged(msg.sender,newlevel);
         return true;
@@ -596,7 +596,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
            {
                uint256 fee = amountb.div(100);//Destory 1%
                _Lizaddr.safeTransfer(msg.sender, amountb.sub(fee));
-               IBEP20(_Lizaddr).burn(fee);
+            //    IBEP20(_Lizaddr).burn(fee);
            }
            else
            {

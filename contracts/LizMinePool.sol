@@ -10,7 +10,7 @@ contract LizMinePool
     address _feeowner;
     using TransferHelper for address;
  
-    constructor(address tokenaddress,address feeowner)
+    constructor(address tokenaddress,address feeowner) public
     {
         _owner=msg.sender;
         _token=tokenaddress;

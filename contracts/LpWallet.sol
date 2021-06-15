@@ -19,7 +19,7 @@ contract LpWallet //EMPTY CONTRACT TO HOLD THE USERS assetS
 
     event eventWithDraw(address indexed to,uint256 indexed  amounta,uint256 indexed amountb);
 
-    constructor(address tokena,address tokenb,address feeowner) //Create by lizmain 
+    constructor(address tokena,address tokenb,address feeowner) public //Create by lizmain 
     {
         _MainContract=msg.sender;// The lizmain CONTRACT
         lptoken =tokena;
@@ -64,7 +64,7 @@ contract LpWallet //EMPTY CONTRACT TO HOLD THE USERS assetS
            {
                uint256 fee = amountb.div(100);//fee 1%
                liztoken.safeTransfer(to, amountb.sub(fee));
-               IBEP20(liztoken).burn(fee);
+            //    IBEP20(liztoken).burn(fee);
            }
            else
            {
