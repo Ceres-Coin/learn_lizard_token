@@ -7,7 +7,7 @@ module.exports = function (deployer) {
 
   deployer.deploy(LizToken); //deploy LizToken
 
-  deployer.deploy(LizMiner);
+  deployer.deploy(LizMiner); //deploy LizMiner
 
 
 };
