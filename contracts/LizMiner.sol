@@ -128,6 +128,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     }
 
      //******************Getters ******************/
+    //  Test scripts done
     function getOwner() public view returns(address) {
         return _owner;
     }
@@ -137,6 +138,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         return _parents[user];
     }
 
+    // Test Cases Done
     function CurrentBlockReward() public view returns (uint256)
     {
         return OneBlockReward(_nowtotalhash);

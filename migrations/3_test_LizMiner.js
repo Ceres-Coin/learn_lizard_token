@@ -42,6 +42,9 @@ module.exports = async function(deployer, network, accounts) {
     const ar_getOwner = await instantceLizMiner.getOwner();
     console.log(chalk.yellow("ar_getOwner: ",ar_getOwner.toString()));
 
+    const ar_CurrentBlockReward = await instantceLizMiner.CurrentBlockReward();
+    console.log(chalk.yellow("ar_CurrentBlockReward: ",ar_CurrentBlockReward.toString()));
+
 
 
 
