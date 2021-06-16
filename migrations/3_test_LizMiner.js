@@ -48,6 +48,9 @@ module.exports = async function(deployer, network, accounts) {
     const ar_getTotalHash = await instantceLizMiner.getTotalHash();
     console.log(chalk.yellow("ar_getTotalHash: ",ar_getTotalHash.toString()));
 
+    const ar_getFeeOnwer = await instantceLizMiner.getFeeOnwer();
+    console.log(chalk.yellow("ar_getFeeOnwer: ",ar_getFeeOnwer.toString()));
+
 
 
 

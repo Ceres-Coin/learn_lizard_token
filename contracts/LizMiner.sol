@@ -188,6 +188,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         return _userInfos[user].selfhash;
     }
 
+    // Test Cases done
     function getFeeOnwer() public view returns (address)
     {
         return _feeowner;
