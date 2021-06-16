@@ -45,6 +45,9 @@ module.exports = async function(deployer, network, accounts) {
     const ar_CurrentBlockReward = await instantceLizMiner.CurrentBlockReward();
     console.log(chalk.yellow("ar_CurrentBlockReward: ",ar_CurrentBlockReward.toString()));
 
+    const ar_getTotalHash = await instantceLizMiner.getTotalHash();
+    console.log(chalk.yellow("ar_getTotalHash: ",ar_getTotalHash.toString()));
+
 
 
 

@@ -152,6 +152,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
             return 100000000;
     }
 
+    // Test Cases Done
      function getTotalHash() public view returns (uint256)
      {
          return _nowtotalhash;
