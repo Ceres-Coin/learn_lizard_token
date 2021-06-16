@@ -39,6 +39,9 @@ module.exports = async function(deployer, network, accounts) {
     const instantceLizMiner = await LizMiner.deployed()
     console.log(chalk.redBright.bold("instantceLizMiner: ",instantceLizMiner.address));
 
+    const ar_getOwner = await instantceLizToken.getOwner();
+    console.log(chalk.yellow("ar_getOwner: ",ar_getOwner.toString()));
+
 
 
 
