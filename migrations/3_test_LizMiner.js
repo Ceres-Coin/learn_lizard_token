@@ -12,8 +12,18 @@ const BIG9 = new BigNumber("1e9")
 const BIG18 = new BigNumber("1e18")
 
 const LizMiner = artifacts.require("LizMiner");
-
+// FAKE token
 const WETH = artifacts.require("BEP20/WETH");
+const FakeCollateral_USDC = artifacts.require("FakeCollateral/FakeCollateral_USDC");
+
+// set constants
+const ONE_MILLION_DEC18 = new BigNumber("1000000e18");
+const FIVE_MILLION_DEC18 = new BigNumber("5000000e18");
+const TEN_MILLION_DEC18 = new BigNumber("10000000e18");
+const ONE_HUNDRED_MILLION_DEC18 = new BigNumber("100000000e18");
+const ONE_HUNDRED_MILLION_DEC6 = new BigNumber("100000000e6");
+const ONE_BILLION_DEC18 = new BigNumber("1000000000e18");
+const COLLATERAL_SEED_DEC18 = new BigNumber(508500e18);
 
 
 
@@ -48,11 +58,19 @@ module.exports = async function(deployer, network, accounts) {
     const IS_BSC_TESTNET = (network == 'testnet');
     console.log("IS_DEV: ",IS_DEV);
     console.log("IS_BSC_TESTNET: ",IS_BSC_TESTNET);
+    let wethInstance;
+    let col_instance_USDC;
 
     if (IS_DEV) {
         console.log(chalk.yellow('===== FAKE COLLATERAL ====='));
 
 		await deployer.deploy(WETH, CONTRACT_OWNER);
+        await deployer.deploy(FakeCollateral_USDC, CONTRACT_OWNER, ONE_HUNDRED_MILLION_DEC6, "USDC", 6);
+
+        wethInstance = await WETH.deployed();
+		col_instance_USDC = await FakeCollateral_USDC.deployed(); 
+		console.log("wethInstance: ",wethInstance.address);
+		console.log("col_instance_USDC: ",col_instance_USDC.address);
     }
 
 
