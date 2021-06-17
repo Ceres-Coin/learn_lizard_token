@@ -13,17 +13,20 @@ const BIG18 = new BigNumber("1e18")
 
 const LizMiner = artifacts.require("LizMiner");
 
+const WETH = artifacts.require("BEP20/WETH");
+
 
 
 
 // Make sure Ganache is running beforehand
 module.exports = async function(deployer, network, accounts) {
-    console.log(network.toString());
 
+    // START test file
     console.log(chalk.green.bold("=================== START Test 3_test_LizMiner ==================="));
     console.log(chalk.green.bold("=================== START Test 3_test_LizMiner ==================="));
     console.log(chalk.green.bold("=================== START Test 3_test_LizMiner ==================="));
     
+    // Print Accounts list
     const account0 = accounts[0];
     const CONTRACT_OWNER = account0;
     const account1 = accounts[1];
@@ -36,6 +39,22 @@ module.exports = async function(deployer, network, accounts) {
     console.log(chalk.blue("============= account0 ",account0," ================"));
     console.log(chalk.blue("============= account1 ",account1," ================"));
     console.log(chalk.blue("============= account2 ",account2," ================"));
+
+
+    // verify the network, if network is dev, deploy the fake token;
+    const IS_MAINNET = (network == 'mainnet');
+	const IS_ROPSTEN = (network == 'ropsten');
+	const IS_DEV = (network == 'development');
+    const IS_BSC_TESTNET = (network == 'testnet');
+    console.log("IS_DEV: ",IS_DEV);
+    console.log("IS_BSC_TESTNET: ",IS_BSC_TESTNET);
+
+    if (IS_DEV) {
+        console.log(chalk.yellow('===== FAKE COLLATERAL ====='));
+
+		await deployer.deploy(WETH, CONTRACT_OWNER);
+    }
+
 
     const instantceLizMiner = await LizMiner.deployed()
     console.log(chalk.redBright.bold("instantceLizMiner: ",instantceLizMiner.address));
