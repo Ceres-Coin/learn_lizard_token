@@ -18,6 +18,7 @@ const LizMiner = artifacts.require("LizMiner");
 
 // Make sure Ganache is running beforehand
 module.exports = async function(deployer, network, accounts) {
+    console.log(network.toString());
 
     console.log(chalk.green.bold("=================== START Test 3_test_LizMiner ==================="));
     console.log(chalk.green.bold("=================== START Test 3_test_LizMiner ==================="));
@@ -50,7 +51,7 @@ module.exports = async function(deployer, network, accounts) {
 
     const ar_getFeeOnwer = await instantceLizMiner.getFeeOnwer();
     console.log(chalk.yellow("ar_getFeeOnwer: ",ar_getFeeOnwer.toString()));
-    
+
 
 
 
