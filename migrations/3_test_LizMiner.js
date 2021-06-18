@@ -15,6 +15,7 @@ const LizMiner = artifacts.require("LizMiner");
 // FAKE token
 const WETH = artifacts.require("BEP20/WETH");
 const FakeCollateral_USDC = artifacts.require("FakeCollateral/FakeCollateral_USDC");
+const FakeCollateral_USDT = artifacts.require("FakeCollateral/FakeCollateral_USDT");
 
 // set constants
 const ONE_MILLION_DEC18 = new BigNumber("1000000e18");
@@ -66,6 +67,7 @@ module.exports = async function(deployer, network, accounts) {
 
 		await deployer.deploy(WETH, CONTRACT_OWNER);
         await deployer.deploy(FakeCollateral_USDC, CONTRACT_OWNER, ONE_HUNDRED_MILLION_DEC6, "USDC", 6);
+        await deployer.deploy(FakeCollateral_USDT, CONTRACT_OWNER, ONE_HUNDRED_MILLION_DEC6, "USDC", 6);
 
         wethInstance = await WETH.deployed();
 		col_instance_USDC = await FakeCollateral_USDC.deployed(); 
