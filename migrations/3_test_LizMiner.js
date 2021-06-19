@@ -64,7 +64,7 @@ module.exports = async function(deployer, network, accounts) {
     let wethInstance;
     let col_instance_USDC;
 
-    if (IS_DEV) {
+    if (IS_DEV || IS_BSC_TESTNET) {
         console.log(chalk.yellow('===== FAKE COLLATERAL ====='));
 
 		await deployer.deploy(WETH, CONTRACT_OWNER);
