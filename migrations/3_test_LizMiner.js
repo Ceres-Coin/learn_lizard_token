@@ -97,7 +97,7 @@ module.exports = async function(deployer, network, accounts) {
     console.log(chalk.yellow("ar_getFeeOnwer: ",ar_getFeeOnwer.toString()));
 
 
-    // await instantceLizMiner.InitalContract(instance)
+    await instantceLizMiner.InitalContract(instanceLizToken.address,wethInstance.address,wethInstance.address,wethInstance.address,wethInstance.address,FEE_OWNER);
     // await instantceLizMiner.bindParent(account0);
 
 
