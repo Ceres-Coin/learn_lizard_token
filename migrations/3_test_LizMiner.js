@@ -12,6 +12,7 @@ const BIG9 = new BigNumber("1e9")
 const BIG18 = new BigNumber("1e18")
 
 const LizMiner = artifacts.require("LizMiner");
+const LizToken = artifacts.require("LIZToken");
 // FAKE token
 const WETH = artifacts.require("BEP20/WETH");
 const FakeCollateral_USDC = artifacts.require("FakeCollateral/FakeCollateral_USDC");
@@ -40,6 +41,7 @@ module.exports = async function(deployer, network, accounts) {
     // Print Accounts list
     const account0 = accounts[0];
     const CONTRACT_OWNER = account0;
+    const FEE_OWNER = account0;
     const account1 = accounts[1];
     const account2 = accounts[2];
     const account3 = accounts[3];
@@ -75,9 +77,12 @@ module.exports = async function(deployer, network, accounts) {
 		console.log("col_instance_USDC: ",col_instance_USDC.address);
     }
 
-
+    // Print instanceLizMiner
     const instantceLizMiner = await LizMiner.deployed()
     console.log(chalk.redBright.bold("instantceLizMiner: ",instantceLizMiner.address));
+    // Print instanceLizToken
+    const instanceLizToken = await LizToken.deployed();
+    console.log(chalk.redBright.bold("instanceLizToken: ",instanceLizToken.address));
 
     const ar_getOwner = await instantceLizMiner.getOwner();
     console.log(chalk.yellow("ar_getOwner: ",ar_getOwner.toString()));
@@ -92,6 +97,8 @@ module.exports = async function(deployer, network, accounts) {
     console.log(chalk.yellow("ar_getFeeOnwer: ",ar_getFeeOnwer.toString()));
 
 
+    // await instantceLizMiner.InitalContract(instance)
+    // await instantceLizMiner.bindParent(account0);
 
 
 
