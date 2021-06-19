@@ -1,6 +1,10 @@
 {
   "name": "hardhat-project",
   "devDependencies": {
+    "ethereum-waffle": "^3.4.0",
     "hardhat": "^2.3.3"
+  },
+  "scripts": {
+    "build": "waffle"
   }
 }
