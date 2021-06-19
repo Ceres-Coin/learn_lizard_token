@@ -79,13 +79,14 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         require(_checkpoints.length==0);
         _Lizaddr=lizToken;
         _Liztrade=liztrade;
+        _wrappedbnbaddress= wrappedbnbaddress;
         _bnbtradeaddress=bnbtradeaddress;
         _usdtaddress=usdtaddress;
-        _wrappedbnbaddress= wrappedbnbaddress;
         _feeowner= feeowner;
+
         _minepool = new LizMinePool(lizToken,feeowner);
-         _parents[msg.sender] = address(_minepool);
-         _checkpoints.push(CheckPoint({startblock:40000,totalhash:1}));
+        _parents[msg.sender] = address(_minepool);
+        _checkpoints.push(CheckPoint({startblock:40000,totalhash:1}));
 
         _levelconfig[0] = [100,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
         _levelconfig[1] = [150,100,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -97,11 +98,12 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         _levelconfig[7] = [250,180,160,110,40,30,20,10,10,10,10,10,10,10,10,10,10,10,10,10];
     }
 
+    // Contracts for TradingPool
     function fixTradingPool(address tokenAddress,address tradecontract,uint256 rate,uint pctmin,uint pctmax) public returns (bool) 
     {
-         require(msg.sender==_owner);
-        _lpPools[tokenAddress].hashrate=rate;
+        require(msg.sender==_owner);
         _lpPools[tokenAddress].tradeContract=tradecontract;
+        _lpPools[tokenAddress].hashrate=rate;
         _lpPools[tokenAddress].minpct=pctmin;
         _lpPools[tokenAddress].maxpct=pctmax;
         return true;
