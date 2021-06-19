@@ -96,9 +96,37 @@ module.exports = async function(deployer, network, accounts) {
     const ar_getFeeOnwer = await instantceLizMiner.getFeeOnwer();
     console.log(chalk.yellow("ar_getFeeOnwer: ",ar_getFeeOnwer.toString()));
 
-
+    console.log(chalk.red.bold("========================= START INITIAL CONTRACT =================="));
     await instantceLizMiner.InitalContract(instanceLizToken.address,wethInstance.address,wethInstance.address,wethInstance.address,wethInstance.address,FEE_OWNER);
-    // await instantceLizMiner.bindParent(account0);
+
+
+    let parentOfAccount0,parentOfAccount1,parentOfAccount2;
+    const _parents_account0 = (await instantceLizMiner._parents.call(account0));
+    const _parents_account1 = (await instantceLizMiner._parents.call(account1));
+    console.log(chalk.yellow(account0, "'s Parents: ",_parents_account0.toString()));
+    console.log(chalk.yellow(account1, "'s Parents: ",_parents_account1.toString()));
+
+    console.log(chalk.red.bold("bind account1's parent = account0 "))
+    await instantceLizMiner.bindParent(account0,{from:account1});
+
+    const _parents_account0_after = (await instantceLizMiner._parents.call(account0));
+    const _parents_account1_after = (await instantceLizMiner._parents.call(account1));
+    console.log(chalk.yellow(account0, "'s Parents: ",_parents_account0_after.toString()));
+    console.log(chalk.yellow(account1, "'s Parents: ",_parents_account1_after.toString()));
+
+
+    console.log(chalk.red.bold("bind account2's parent = account0 "))
+    await instantceLizMiner.bindParent(account0,{from:account2});
+
+    parentOfAccount0 = (await instantceLizMiner._parents.call(account0));
+    parentOfAccount1 = (await instantceLizMiner._parents.call(account1));
+    parentOfAccount2 = (await instantceLizMiner._parents.call(account2));
+    console.log(chalk.yellow(account0, "'s Parents: ",parentOfAccount0.toString()));
+    console.log(chalk.yellow(account1, "'s Parents: ",parentOfAccount1.toString()));
+    console.log(chalk.yellow(account2, "'s Parents: ",parentOfAccount2.toString()));
+
+
+
 
 
 
