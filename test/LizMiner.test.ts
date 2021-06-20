@@ -73,7 +73,6 @@ describe('LizMiner', () => {
 
     // getParent()
     it('getParent()', async () => {
-        // console.log(chalk.red.bold("bind account1's parent = wallet "));
         const instanceLizMiner_fromAccount1 = instanceLizMiner.connect(account1);
         await instanceLizMiner_fromAccount1.bindParent(wallet.address,{gasLimit:GAS_LIMIT});
         expect(await instanceLizMiner.getParent(account1.address)).to.equal(wallet.address);
@@ -101,6 +100,28 @@ describe('LizMiner', () => {
     // Check Default CurrentBlockReward = 0
     it('CurrentBlockReward()', async () => {
         expect(await instanceLizMiner.CurrentBlockReward()).to.equal(0);
+    });
+
+    // getUserLevel(wallet)
+    // getUserLevel(account1)
+    // getUserLevel(account2)
+    it('check getUserLevel(wallet/account1/account2)', async () => {
+        const instanceLizMiner_fromAccount1 = instanceLizMiner.connect(account1);
+        await instanceLizMiner_fromAccount1.bindParent(wallet.address,{gasLimit:GAS_LIMIT});
+
+        const instanceLizMiner_fromAccount2 = instanceLizMiner.connect(account2);
+        await instanceLizMiner_fromAccount2.bindParent(wallet.address,{gasLimit:GAS_LIMIT});
+
+        expect(await instanceLizMiner.getUserLevel(wallet.address)).to.equal(0);
+        expect(await instanceLizMiner.getUserLevel(account1.address)).to.equal(0);
+        expect(await instanceLizMiner.getUserLevel(account2.address)).to.equal(0);
+
+        // const level_wallet = await instanceLizMiner.getUserLevel(wallet.address);
+        // console.log(chalk.yellow("level_wallet: ",level_wallet));
+        // const level_account1 = await instanceLizMiner.getUserLevel(account1.address);
+        // console.log(chalk.yellow("level_account1: ",level_account1));
+        // const level_account2 = await instanceLizMiner.getUserLevel(account2.address);
+        // console.log(chalk.yellow("level_account2: ",level_account2));
     });
     
 });
