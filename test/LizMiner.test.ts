@@ -190,7 +190,7 @@ describe('LizMiner', () => {
     // check buyVipPrice() func
     it('check buyVipPrice(account1,1)', async () => {
         const buyVipPrice_account1_vip1 = await instanceLizMiner.buyVipPrice(account1.address,1,{gasLimit:GAS_LIMIT});
-        console.log(chalk.yellow("buyVipPrice_account1_vip1: ",buyVipPrice_account1_vip1));
+        // console.log(chalk.yellow("buyVipPrice_account1_vip1: ",buyVipPrice_account1_vip1));
         expect(buyVipPrice_account1_vip1).to.equal(100);
 
         expect(await instanceLizMiner.buyVipPrice(account1.address,2,{gasLimit:GAS_LIMIT})).to.equal(300);
