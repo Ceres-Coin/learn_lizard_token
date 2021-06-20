@@ -13,13 +13,18 @@ describe('LIZToken', () => {
 
   beforeEach(async () => {
     token = await deployContract(wallet, LIZToken,[]);
-    console.log(chalk.blue("wallet: ",wallet.address));
-    console.log(chalk.blue("walletTo: ",walletTo.address));
+    // console.log(chalk.blue("wallet: ",wallet.address));
+    // console.log(chalk.blue("walletTo: ",walletTo.address));
   });
 
   it('getOwner', async () => {
     const getOwner = await token.getOwner();
     console.log(chalk.yellow("getOwner: ",getOwner.toString()));
+    
+    const name = await token.name();
+    console.log(chalk.yellow("name: ",name.toString()));
+
+
     expect(await token.getOwner()).to.equal(wallet.address);
   });
 
