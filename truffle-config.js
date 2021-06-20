@@ -24,6 +24,9 @@ module.exports = {
      host: "127.0.0.1",     // Localhost (default: none)
      port: 7545,            // Standard Ethereum port (default: none)
      network_id: "*",       // Any network (default: none)
+     gas: 7500000,
+      gasPrice: 20000000000,
+      gasLimit: 7500000,
     },
     testnet: {
       // provider: () => new HDWalletProvider(mnemonic, 'https://data-seed-prebsc-1-s3.binance.org:8545/'),
@@ -51,7 +54,7 @@ module.exports = {
       settings: {          // See the solidity docs for advice about optimization and evmVersion
        optimizer: {
          enabled: true,
-         runs: 1000
+         runs: 1000000
        }
       //  evmVersion: "byzantium"
       }
