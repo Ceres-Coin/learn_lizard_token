@@ -303,6 +303,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         return hashdiff;
     }
 
+    // TEST CASES DONE
     function SetUserLevel(address user,uint level) public
     {
         require(msg.sender==_owner);
@@ -446,6 +447,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         return true;
     }
 
+    // TEST CASES DONE
     function bindParent(address parent) public 
     {
         require(_parents[msg.sender]==address(0),"Already bind");

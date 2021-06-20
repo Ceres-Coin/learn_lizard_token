@@ -168,7 +168,22 @@ describe('LizMiner', () => {
     // getFeeOnwer()
     // Check Default getFeeOnwer = account5
     it('check getFeeOnwer() default is account5', async () => {
-        expect(await instanceLizMiner.getFeeOnwer()).to.equal(account4.address);
+        expect(await instanceLizMiner.getFeeOnwer()).to.equal(account5.address);
+    });
+
+    // // getExchangeCountOfOneUsdt()
+    // it('check getExchangeCountOfOneUsdt() for lizToken', async () => {
+    //     const getExchangeCountOfOneUsdt_LIZToken = await instanceLizMiner.getExchangeCountOfOneUsdt(instanceLIZToken.address);
+    //     console.log("getExchangeCountOfOneUsdt_LIZToken: ",getExchangeCountOfOneUsdt_LIZToken);
+    // });
+
+    it('check SetUserLevel(account1 = 1) & (account2 = 2)', async () => {
+        await instanceLizMiner.SetUserLevel(account1.address,1);
+        await instanceLizMiner.SetUserLevel(account2.address,2);
+
+        expect(await instanceLizMiner.getUserLevel(wallet.address)).to.equal(0);
+        expect(await instanceLizMiner.getUserLevel(account1.address)).to.equal(1);
+        expect(await instanceLizMiner.getUserLevel(account2.address)).to.equal(2);
     });
     
 });
