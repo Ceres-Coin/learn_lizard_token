@@ -28,19 +28,19 @@ describe('LizMiner', () => {
     instanceFakeCollateral_USDT = await deployContract(wallet,FakeCollateral_USDT,[wallet.address,1000000,"USDC",6]);
     
 
-    console.log(chalk.blue("instanceLizMiner.address: ",instanceLizMiner.address));
-    console.log(chalk.blue("instanceLIZToken.address: ",instanceLIZToken.address));
-    console.log(chalk.blue("instanceWETH.address: ",instanceWETH.address));
-    console.log(chalk.blue("instanceFakeCollateral_USDC.address: ",instanceFakeCollateral_USDC.address));
-    console.log(chalk.blue("instanceFakeCollateral_USDT.address: ",instanceFakeCollateral_USDT.address));
+    // console.log(chalk.blue("instanceLizMiner.address: ",instanceLizMiner.address));
+    // console.log(chalk.blue("instanceLIZToken.address: ",instanceLIZToken.address));
+    // console.log(chalk.blue("instanceWETH.address: ",instanceWETH.address));
+    // console.log(chalk.blue("instanceFakeCollateral_USDC.address: ",instanceFakeCollateral_USDC.address));
+    // console.log(chalk.blue("instanceFakeCollateral_USDT.address: ",instanceFakeCollateral_USDT.address));
     
-    console.log(chalk.blue("wallet.address: ",wallet.address));
-    console.log(chalk.blue("account1.address: ",account1.address));
-    console.log(chalk.blue("account2.address: ",account2.address));
-    console.log(chalk.blue("account3.address: ",account3.address));
-    console.log(chalk.blue("account4.address: ",account4.address));
+    // console.log(chalk.blue("wallet.address: ",wallet.address));
+    // console.log(chalk.blue("account1.address: ",account1.address));
+    // console.log(chalk.blue("account2.address: ",account2.address));
+    // console.log(chalk.blue("account3.address: ",account3.address));
+    // console.log(chalk.blue("account4.address: ",account4.address));
 
-    console.log(chalk.redBright.bold("========= initial contract ========="));
+    // console.log(chalk.redBright.bold("========= initial contract ========="));
     await instanceLizMiner.InitalContract(instanceLIZToken.address,instanceWETH.address,instanceWETH.address,instanceWETH.address,instanceWETH.address,FEE_OWNER.address);
 
   });
