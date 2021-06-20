@@ -433,7 +433,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         logCheckPoint(addhash.add(dhash),true,startblock);
     }
  
-
+    // TEST CASE DONE
     function buyVip(uint newlevel) public nonReentrant returns (bool)
     {
         require(newlevel<8);
