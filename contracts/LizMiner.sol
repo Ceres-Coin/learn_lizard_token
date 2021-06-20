@@ -470,7 +470,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         _mychilders[parent].push(msg.sender);
         emit BindingParents(msg.sender,parent);
     }
-
+    // TEST CASE DONE
     function SetParentByAdmin(address user,address parent) public
     {
         require(msg.sender==_owner);
