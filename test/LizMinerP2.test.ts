@@ -109,6 +109,21 @@ describe('LizMiner', () => {
         console.log(chalk.yellow(await instanceLIZToken.balanceOf(wallet.address)));
         console.log(chalk.yellow(await instanceLIZToken.balanceOf(account1.address)));
         console.log(chalk.yellow(await instanceLIZToken.balanceOf(account2.address)));
+
+        console.log(chalk.red.bold("================= getPendingCoin ==============="))
+        console.log(chalk.yellow(await instanceLizMiner.getPendingCoin(wallet.address)));
+        console.log(chalk.yellow(await instanceLizMiner.getPendingCoin(account1.address)));
+        console.log(chalk.yellow(await instanceLizMiner.getPendingCoin(account2.address)));
+
+        console.log(chalk.red.bold("================= WithDrawCredit ==============="))
+        await instanceLizMiner_fromAccount1.WithDrawCredit({gasLimit:GAS_LIMIT});
+        await instanceLizMiner_fromAccount2.WithDrawCredit({gasLimit:GAS_LIMIT});
+        console.log(chalk.yellow("Print balanceOf AFTER WithDrawCredit"));
+        console.log(chalk.yellow(await instanceLIZToken.balanceOf(wallet.address)));
+        console.log(chalk.yellow(await instanceLIZToken.balanceOf(account1.address)));
+        console.log(chalk.yellow(await instanceLIZToken.balanceOf(account2.address)));
+
+
     });
 
     

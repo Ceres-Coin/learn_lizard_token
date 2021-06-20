@@ -478,6 +478,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
          _mychilders[parent].push(user);
     }
 
+    // TEST CASE DONE
     function  getPendingCoin(address user) public view returns(uint256)
     {
         if(_userInfos[user].lastblock==0)
