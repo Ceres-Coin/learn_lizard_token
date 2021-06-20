@@ -33,8 +33,13 @@ describe('LIZToken', () => {
     expect(await token.decimals()).to.equal(18);
   });
 
-  it('Assigns initial balance', async () => {
+  it('mint()', async () => {
+    await token.mint(1000);
     expect(await token.balanceOf(wallet.address)).to.equal(1000);
+  });
+
+  it('Assigns initial balance', async () => {
+    expect(await token.balanceOf(wallet.address)).to.equal(2000);
   });
 
   it('Transfer adds amount to destination account', async () => {
