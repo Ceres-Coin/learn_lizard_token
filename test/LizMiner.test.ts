@@ -14,8 +14,8 @@ use(solidity);
 const GAS_LIMIT = 3000000;
 
 describe('LizMiner', () => {
-  const [wallet, account1,account2,account3,account4] = new MockProvider().getWallets();
-  let FEE_OWNER = wallet;
+  const [wallet, account1,account2,account3,account4,account5] = new MockProvider().getWallets();
+  let FEE_OWNER = account5;
   let instanceLizMiner: Contract;
   let instanceLIZToken: Contract;
   let instanceWETH : Contract;
@@ -145,24 +145,30 @@ describe('LizMiner', () => {
         // console.log(chalk.yellow("getUserTeamHash_account2: ",getUserTeamHash_account2));
     });
 
-        // check getUserSelfHash() default = 0;
-        it('check getUserSelfHash(wallet/account1/account2)', async () => {
-            const instanceLizMiner_fromAccount1 = instanceLizMiner.connect(account1);
-            await instanceLizMiner_fromAccount1.bindParent(wallet.address,{gasLimit:GAS_LIMIT});
-    
-            const instanceLizMiner_fromAccount2 = instanceLizMiner.connect(account2);
-            await instanceLizMiner_fromAccount2.bindParent(wallet.address,{gasLimit:GAS_LIMIT});
-    
-            expect(await instanceLizMiner.getUserSelfHash(wallet.address)).to.equal(0);
-            expect(await instanceLizMiner.getUserSelfHash(account1.address)).to.equal(0);
-            expect(await instanceLizMiner.getUserSelfHash(account2.address)).to.equal(0);
-    
-            // const getUserSelfHash_wallet = await instanceLizMiner.getUserSelfHash(wallet.address);
-            // console.log(chalk.yellow("getUserSelfHash_wallet: ",getUserSelfHash_wallet));
-            // const getUserSelfHash_account1 = await instanceLizMiner.getUserSelfHash(account1.address);
-            // console.log(chalk.yellow("getUserSelfHash_account1: ",getUserSelfHash_account1));
-            // const getUserSelfHash_account2 = await instanceLizMiner.getUserSelfHash(account2.address);
-            // console.log(chalk.yellow("getUserSelfHash_account2: ",getUserSelfHash_account2));
-        });
+    // check getUserSelfHash() default = 0;
+    it('check getUserSelfHash(wallet/account1/account2) defult = 0', async () => {
+        const instanceLizMiner_fromAccount1 = instanceLizMiner.connect(account1);
+        await instanceLizMiner_fromAccount1.bindParent(wallet.address,{gasLimit:GAS_LIMIT});
+
+        const instanceLizMiner_fromAccount2 = instanceLizMiner.connect(account2);
+        await instanceLizMiner_fromAccount2.bindParent(wallet.address,{gasLimit:GAS_LIMIT});
+
+        expect(await instanceLizMiner.getUserSelfHash(wallet.address)).to.equal(0);
+        expect(await instanceLizMiner.getUserSelfHash(account1.address)).to.equal(0);
+        expect(await instanceLizMiner.getUserSelfHash(account2.address)).to.equal(0);
+
+        // const getUserSelfHash_wallet = await instanceLizMiner.getUserSelfHash(wallet.address);
+        // console.log(chalk.yellow("getUserSelfHash_wallet: ",getUserSelfHash_wallet));
+        // const getUserSelfHash_account1 = await instanceLizMiner.getUserSelfHash(account1.address);
+        // console.log(chalk.yellow("getUserSelfHash_account1: ",getUserSelfHash_account1));
+        // const getUserSelfHash_account2 = await instanceLizMiner.getUserSelfHash(account2.address);
+        // console.log(chalk.yellow("getUserSelfHash_account2: ",getUserSelfHash_account2));
+    });
+
+    // getFeeOnwer()
+    // Check Default getFeeOnwer = account5
+    it('check getFeeOnwer() default is account5', async () => {
+        expect(await instanceLizMiner.getFeeOnwer()).to.equal(account4.address);
+    });
     
 });
