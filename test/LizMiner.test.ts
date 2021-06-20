@@ -187,18 +187,48 @@ describe('LizMiner', () => {
         expect(await instanceLizMiner.getUserLevel(account2.address)).to.equal(2);
     });
 
-    // check buyVipPrice() func
+    // check buyVipPrice(account1,1) func
     it('check buyVipPrice(account1,1)', async () => {
         const buyVipPrice_account1_vip1 = await instanceLizMiner.buyVipPrice(account1.address,1,{gasLimit:GAS_LIMIT});
-        // console.log(chalk.yellow("buyVipPrice_account1_vip1: ",buyVipPrice_account1_vip1));
         expect(buyVipPrice_account1_vip1).to.equal(100);
 
-        expect(await instanceLizMiner.buyVipPrice(account1.address,2,{gasLimit:GAS_LIMIT})).to.equal(300);
-        
+    });
 
-        // expect(await instanceLizMiner.getUserLevel(wallet.address)).to.equal(0);
-        // expect(await instanceLizMiner.getUserLevel(account1.address)).to.equal(1);
-        // expect(await instanceLizMiner.getUserLevel(account2.address)).to.equal(2);
+    // check buyVipPrice(2) func
+    it('check buyVipPrice(2) = 300', async () => {
+        expect(await instanceLizMiner.buyVipPrice(account1.address,2,{gasLimit:GAS_LIMIT})).to.equal(300);
+    });
+
+    // check buyVipPrice(3) func
+    it('check buyVipPrice(3) = 500', async () => {
+        expect(await instanceLizMiner.buyVipPrice(account1.address,3,{gasLimit:GAS_LIMIT})).to.equal(500);
+    });
+
+    // check buyVipPrice(4) func
+    it('check buyVipPrice(4) = 800', async () => {
+        expect(await instanceLizMiner.buyVipPrice(account1.address,4,{gasLimit:GAS_LIMIT})).to.equal(800);
+    });
+
+    // check buyVipPrice(5) func
+    it('check buyVipPrice(5) = 1200', async () => {
+        expect(await instanceLizMiner.buyVipPrice(account1.address,5,{gasLimit:GAS_LIMIT})).to.equal(1200);
+    });
+
+    // check buyVipPrice(6) func
+    it('check buyVipPrice(6) = 1600', async () => {
+        expect(await instanceLizMiner.buyVipPrice(account1.address,6,{gasLimit:GAS_LIMIT})).to.equal(1600);
+    });
+
+    // check buyVipPrice(7) func
+    it('check buyVipPrice(7) = 2000', async () => {
+        expect(await instanceLizMiner.buyVipPrice(account1.address,7,{gasLimit:GAS_LIMIT})).to.equal(2000);
+    });
+
+    // check buyVipPrice(8) func
+    it('check buyVipPrice(8) = 0', async () => {
+        expect(await instanceLizMiner.buyVipPrice(account1.address,8,{gasLimit:GAS_LIMIT})).to.equal(0);
+        expect(await instanceLizMiner.buyVipPrice(account1.address,9,{gasLimit:GAS_LIMIT})).to.equal(0);
+        expect(await instanceLizMiner.buyVipPrice(account1.address,10,{gasLimit:GAS_LIMIT})).to.equal(0);
     });
 
 
