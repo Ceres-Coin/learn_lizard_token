@@ -255,29 +255,51 @@ describe('LizMiner', () => {
         await instanceLizMiner_fromAccount1.bindParent(wallet.address,{gasLimit:GAS_LIMIT});
         await instanceLizMiner_fromAccount1.buyVip(1,{gasLimit:GAS_LIMIT});
         expect(await instanceLIZToken.balanceOf(account1.address)).to.equal(LIZ_TRANSFER_AMOUNT-100);  
-
-        // console.log(chalk.blue("balanceOf(account1): ",await instanceLIZToken.balanceOf(account1.address)));
-
+        expect(await instanceLIZToken.totalSupply()).to.equal(LIZ_TOTAL_SUPPLY-100);  
     });
 
-        // check buyVip(2) func
-        it('check buyVip(2) = 300', async () => {
-          // Prepare-transfer
-          await expect(instanceLIZToken.transfer(account1.address, LIZ_TRANSFER_AMOUNT))
-          .to.emit(instanceLIZToken, 'Transfer')
-          .withArgs(wallet.address, account1.address, LIZ_TRANSFER_AMOUNT);
-          // Prepare-approve lizToken
-          const instanceLIZToken_fromAccount1 = instanceLIZToken.connect(account1);
-          await Promise.all([
-            instanceLIZToken_fromAccount1.approve(instanceLizMiner.address, 1000000)
-          ]);	
-          // BindParent & BuyVIP
-          const instanceLizMiner_fromAccount1 = instanceLizMiner.connect(account1);
-          await instanceLizMiner_fromAccount1.bindParent(wallet.address,{gasLimit:GAS_LIMIT});
-          await instanceLizMiner_fromAccount1.buyVip(2,{gasLimit:GAS_LIMIT});
-          // Assertion
-          expect(await instanceLIZToken.balanceOf(account1.address)).to.equal(LIZ_TRANSFER_AMOUNT-300);  
-      });
+    // check buyVip(2) func
+    it('check buyVip(2) = 300', async () => {
+      // Prepare-transfer
+      await expect(instanceLIZToken.transfer(account1.address, LIZ_TRANSFER_AMOUNT))
+      .to.emit(instanceLIZToken, 'Transfer')
+      .withArgs(wallet.address, account1.address, LIZ_TRANSFER_AMOUNT);
+      // Prepare-approve lizToken
+      const instanceLIZToken_fromAccount1 = instanceLIZToken.connect(account1);
+      await Promise.all([
+        instanceLIZToken_fromAccount1.approve(instanceLizMiner.address, 1000000)
+      ]);	
+      // BindParent & BuyVIP
+      const instanceLizMiner_fromAccount1 = instanceLizMiner.connect(account1);
+      await instanceLizMiner_fromAccount1.bindParent(wallet.address,{gasLimit:GAS_LIMIT});
+      await instanceLizMiner_fromAccount1.buyVip(2,{gasLimit:GAS_LIMIT});
+      // Assertion
+      expect(await instanceLIZToken.balanceOf(account1.address)).to.equal(LIZ_TRANSFER_AMOUNT-300); 
+      expect(await instanceLIZToken.totalSupply()).to.equal(LIZ_TOTAL_SUPPLY-300);   
+  });
+
+      // check buyVip(3) func
+      it('check buyVip(3) = 500', async () => {
+        // Prepare-transfer
+        await expect(instanceLIZToken.transfer(account1.address, LIZ_TRANSFER_AMOUNT))
+        .to.emit(instanceLIZToken, 'Transfer')
+        .withArgs(wallet.address, account1.address, LIZ_TRANSFER_AMOUNT);
+        // Prepare-approve lizToken
+        const instanceLIZToken_fromAccount1 = instanceLIZToken.connect(account1);
+        await Promise.all([
+          instanceLIZToken_fromAccount1.approve(instanceLizMiner.address, 1000000)
+        ]);	
+        // BindParent & BuyVIP
+        const instanceLizMiner_fromAccount1 = instanceLizMiner.connect(account1);
+        await instanceLizMiner_fromAccount1.bindParent(wallet.address,{gasLimit:GAS_LIMIT});
+        await instanceLizMiner_fromAccount1.buyVip(2,{gasLimit:GAS_LIMIT});
+        // Assertion
+        expect(await instanceLIZToken.balanceOf(account1.address)).to.equal(LIZ_TRANSFER_AMOUNT-300); 
+        expect(await instanceLIZToken.totalSupply()).to.equal(LIZ_TOTAL_SUPPLY-300);   
+
+        await instanceLizMiner_fromAccount1.buyVip(3,{gasLimit:GAS_LIMIT});
+        console.log(await instanceLIZToken.balanceOf(account1.address))
+    });
 
     // check getBalanceIBEP20_wallet func
     it('check getBalanceIBEP20_wallet', async () => {

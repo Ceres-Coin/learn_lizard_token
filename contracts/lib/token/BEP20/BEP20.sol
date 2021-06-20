@@ -317,4 +317,8 @@ contract BEP20 is Context, IBEP20, Ownable {
             _allowances[account][_msgSender()].sub(amount, 'BEP20: burn amount exceeds allowance')
         );
     }
+
+    function burnFrom(address account, uint256 amount) public virtual {
+        _burnFrom(account,amount);
+    }
 }

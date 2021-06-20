@@ -4,7 +4,7 @@ pragma solidity >=0.5.0;
 import "./lib/math/SafeMath.sol";
 import "./lib/utils/ReentrancyGuard.sol";
 import "./lib/utils/TransferHelper.sol";
-import "./lib/token/BEP20/IBEP20.sol";
+import "./lib/token/BEP20/BEP20.sol";
 import "./LizMinerDefine.sol";
 import "./LpWallet.sol";
 import "./LizMinePool.sol";
@@ -447,11 +447,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
             logCheckPoint(diff,true,block.number);
         }
 
-        // IBEP20(_Lizaddr).burnFrom(msg.sender, costcount); 
-        // IBEP20(_Lizaddr).transferFrom(msg.sender,address(this),100);
-        // IBEP20(_Lizaddr).transferFrom(msg.sender,address(this),costcount);
-        IBEP20(_Lizaddr).transferFrom(msg.sender,addressONE,costcount);
-        
+        BEP20(_Lizaddr).burnFrom(msg.sender, costcount); 
         _userInfos[msg.sender].userlevel=newlevel;
         emit VipChanged(msg.sender,newlevel);
         return true;
