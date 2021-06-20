@@ -13,6 +13,7 @@ use(solidity);
 
 describe('LizMiner', () => {
   const [wallet, account1,account2,account3,account4] = new MockProvider().getWallets();
+  let FEE_OWNER = wallet;
   let instanceLizMiner: Contract;
   let instanceLIZToken: Contract;
   let instanceWETH : Contract;
@@ -39,15 +40,19 @@ describe('LizMiner', () => {
     console.log(chalk.blue("account3.address: ",account3.address));
     console.log(chalk.blue("account4.address: ",account4.address));
 
+    console.log(chalk.redBright.bold("========= initial contract ========="));
+    await instanceLizMiner.InitalContract(instanceLIZToken.address,instanceWETH.address,instanceWETH.address,instanceWETH.address,instanceWETH.address,FEE_OWNER.address);
+
   });
 
   it('getOwner()', async () => {
     expect(await instanceLizMiner.getOwner()).to.equal(wallet.address);
   });
 
-//   it('bindParent()', async () => {
-//     console.log(chalk.red.bold("bind walletTo's parent = wallet "))
-//     await instanceLizMiner.bindParent(walletTo.address,{from:wallet.address,gasLimit:3000000});
-//   });
+  it('bindParent()', async () => {
+    console.log(chalk.red.bold("bind account1's parent = wallet "));
+    const instanceLizMiner_fromAccount1 = instanceLizMiner.connect(account1);
+    await instanceLizMiner_fromAccount1.bindParent(wallet.address,{gasLimit:3000000});
+  });
 
 });
