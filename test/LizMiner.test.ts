@@ -90,5 +90,11 @@ describe('LizMiner', () => {
         expect(await instanceLizMiner.getParent(account1.address)).to.equal(wallet.address);
         expect(await instanceLizMiner.getParent(account2.address)).to.equal(wallet.address);
     });
+
+    // getTotalHash()
+    // Check Default TotalHash = 0
+    it('getTotalHash()', async () => {
+        expect(await instanceLizMiner.getTotalHash()).to.equal(0);
+    });
     
 });
