@@ -10,6 +10,8 @@ import FakeCollateral_USDT from '../build/contracts/FakeCollateral_USDT.json'
 import chalk from 'chalk';
 
 use(solidity);
+// Constants
+const GAS_LIMIT = 3000000;
 
 describe('LizMiner', () => {
   const [wallet, account1,account2,account3,account4] = new MockProvider().getWallets();
@@ -45,14 +47,48 @@ describe('LizMiner', () => {
 
   });
 
-  it('getOwner()', async () => {
-    expect(await instanceLizMiner.getOwner()).to.equal(wallet.address);
-  });
+    it('getOwner()', async () => {
+        expect(await instanceLizMiner.getOwner()).to.equal(wallet.address);
+    });
 
-  it('bindParent()', async () => {
-    console.log(chalk.red.bold("bind account1's parent = wallet "));
-    const instanceLizMiner_fromAccount1 = instanceLizMiner.connect(account1);
-    await instanceLizMiner_fromAccount1.bindParent(wallet.address,{gasLimit:3000000});
-  });
+    // bind account1's parent is wallet;
+    it('bindParent()', async () => {
+        // console.log(chalk.red.bold("bind account1's parent = wallet "));
+        const instanceLizMiner_fromAccount1 = instanceLizMiner.connect(account1);
+        await instanceLizMiner_fromAccount1.bindParent(wallet.address,{gasLimit:GAS_LIMIT});
+        expect(await instanceLizMiner._parents(account1.address)).to.equal(wallet.address);
+    });
 
+    // bind account1 & account2's parent is wallet;
+    it('bindParent_P2()', async () => {
+        const instanceLizMiner_fromAccount1 = instanceLizMiner.connect(account1);
+        await instanceLizMiner_fromAccount1.bindParent(wallet.address,{gasLimit:GAS_LIMIT});
+
+        const instanceLizMiner_fromAccount2 = instanceLizMiner.connect(account2);
+        await instanceLizMiner_fromAccount2.bindParent(wallet.address,{gasLimit:GAS_LIMIT});
+
+        expect(await instanceLizMiner._parents(account1.address)).to.equal(wallet.address);
+        expect(await instanceLizMiner._parents(account2.address)).to.equal(wallet.address);
+    });
+
+    // getParent()
+    it('getParent()', async () => {
+        // console.log(chalk.red.bold("bind account1's parent = wallet "));
+        const instanceLizMiner_fromAccount1 = instanceLizMiner.connect(account1);
+        await instanceLizMiner_fromAccount1.bindParent(wallet.address,{gasLimit:GAS_LIMIT});
+        expect(await instanceLizMiner.getParent(account1.address)).to.equal(wallet.address);
+    });
+
+    // getParent_P2
+    it('getParent_P2()', async () => {
+        const instanceLizMiner_fromAccount1 = instanceLizMiner.connect(account1);
+        await instanceLizMiner_fromAccount1.bindParent(wallet.address,{gasLimit:GAS_LIMIT});
+
+        const instanceLizMiner_fromAccount2 = instanceLizMiner.connect(account2);
+        await instanceLizMiner_fromAccount2.bindParent(wallet.address,{gasLimit:GAS_LIMIT});
+
+        expect(await instanceLizMiner.getParent(account1.address)).to.equal(wallet.address);
+        expect(await instanceLizMiner.getParent(account2.address)).to.equal(wallet.address);
+    });
+    
 });
