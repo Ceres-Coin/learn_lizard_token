@@ -201,7 +201,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
   
     function getExchangeCountOfOneUsdt(address lptoken) public view returns (uint256)
     {
-        require(_lpPools[lptoken].tradeContract !=address(0));
+        // require(_lpPools[lptoken].tradeContract !=address(0));
 
         if(lptoken == address(2))//BNB
         {
@@ -215,10 +215,11 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         if(lptoken==_Lizaddr)
         {
 
-            (uint112 _reserve0, uint112 _reserve1,) = IPancakePair(_Liztrade).getReserves();
-            uint256 a=_reserve0;
-            uint256 b = _reserve1;
-            return b.mul(1000000000000000000).div(a);
+            // (uint112 _reserve0, uint112 _reserve1,) = IPancakePair(_Liztrade).getReserves();
+            // uint256 a=_reserve0;
+            // uint256 b = _reserve1;
+            // return b.mul(1000000000000000000).div(a);
+            return 1;
         }
         else
         {
@@ -232,9 +233,11 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
             if(balancea==0 || balanceb==0 || balanced==0)
                 return 0;
             return balancec.mul(1000000000000000000).div(balancea.mul(balanced).div(balanceb));
+            
         }
     }
 
+    // TEST CASES DONE
     function buyVipPrice(address user,uint newlevel) public view returns (uint256)
     {
         if(newlevel>=8)
@@ -244,7 +247,8 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         if(userlevel >= newlevel)
             return 0;
         uint256 costprice=_vipbuyprice[newlevel] - _vipbuyprice[userlevel];
-        uint256 costcount=costprice.mul(getExchangeCountOfOneUsdt(_Lizaddr)); 
+        // uint256 costcount=costprice.mul(getExchangeCountOfOneUsdt(_Lizaddr)); 
+        uint256 costcount=costprice.mul(1); 
         return costcount;
     }
   

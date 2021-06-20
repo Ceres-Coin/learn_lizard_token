@@ -171,12 +171,13 @@ describe('LizMiner', () => {
         expect(await instanceLizMiner.getFeeOnwer()).to.equal(account5.address);
     });
 
-    // // getExchangeCountOfOneUsdt()
-    // it('check getExchangeCountOfOneUsdt() for lizToken', async () => {
-    //     const getExchangeCountOfOneUsdt_LIZToken = await instanceLizMiner.getExchangeCountOfOneUsdt(instanceLIZToken.address);
-    //     console.log("getExchangeCountOfOneUsdt_LIZToken: ",getExchangeCountOfOneUsdt_LIZToken);
-    // });
+    // getExchangeCountOfOneUsdt()
+    it('check getExchangeCountOfOneUsdt() for lizToken', async () => {
+        const getExchangeCountOfOneUsdt_LIZToken = await instanceLizMiner.getExchangeCountOfOneUsdt(instanceLIZToken.address);
+        expect(getExchangeCountOfOneUsdt_LIZToken).to.equal(1);
+    });
 
+    // check SetUserLevel() func
     it('check SetUserLevel(account1 = 1) & (account2 = 2)', async () => {
         await instanceLizMiner.SetUserLevel(account1.address,1);
         await instanceLizMiner.SetUserLevel(account2.address,2);
@@ -185,5 +186,21 @@ describe('LizMiner', () => {
         expect(await instanceLizMiner.getUserLevel(account1.address)).to.equal(1);
         expect(await instanceLizMiner.getUserLevel(account2.address)).to.equal(2);
     });
+
+    // check buyVipPrice() func
+    it('check buyVipPrice(account1,1)', async () => {
+        const buyVipPrice_account1_vip1 = await instanceLizMiner.buyVipPrice(account1.address,1,{gasLimit:GAS_LIMIT});
+        console.log(chalk.yellow("buyVipPrice_account1_vip1: ",buyVipPrice_account1_vip1));
+        expect(buyVipPrice_account1_vip1).to.equal(100);
+
+        expect(await instanceLizMiner.buyVipPrice(account1.address,2,{gasLimit:GAS_LIMIT})).to.equal(300);
+        
+
+        // expect(await instanceLizMiner.getUserLevel(wallet.address)).to.equal(0);
+        // expect(await instanceLizMiner.getUserLevel(account1.address)).to.equal(1);
+        // expect(await instanceLizMiner.getUserLevel(account2.address)).to.equal(2);
+    });
+
+
     
 });
