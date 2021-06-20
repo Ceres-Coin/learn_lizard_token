@@ -17,15 +17,20 @@ describe('LIZToken', () => {
     // console.log(chalk.blue("walletTo: ",walletTo.address));
   });
 
-  it('getOwner', async () => {
-    const getOwner = await token.getOwner();
-    console.log(chalk.yellow("getOwner: ",getOwner.toString()));
-    
-    const name = await token.name();
-    console.log(chalk.yellow("name: ",name.toString()));
-
-
+  it('getOwner()', async () => {
     expect(await token.getOwner()).to.equal(wallet.address);
+  });
+
+  it('name()', async () => {
+    expect(await token.name()).to.equal('LIZ');
+  });
+
+  it('symbol()', async () => {
+    expect(await token.symbol()).to.equal('Lizard');
+  });
+
+  it('decimals()', async () => {
+    expect(await token.decimals()).to.equal(18);
   });
 
   it('Assigns initial balance', async () => {
