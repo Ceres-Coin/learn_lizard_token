@@ -13,6 +13,8 @@ describe('LIZToken', () => {
 
   beforeEach(async () => {
     token = await deployContract(wallet, LIZToken,[]);
+    console.log(chalk.blue("wallet: ",wallet.address));
+    console.log(chalk.blue("walletTo: ",walletTo.address));
   });
 
   it('getOwner', async () => {
