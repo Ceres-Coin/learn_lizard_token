@@ -13,6 +13,7 @@ use(solidity);
 // Constants
 const GAS_LIMIT = 3000000;
 const LIZ_TRANSFER_AMOUNT = 100000;
+const LIZ_TOTAL_SUPPLY = 100000000;
 
 describe('LizMiner', () => {
   const [wallet, account1,account2,account3,account4,account5] = new MockProvider().getWallets();
@@ -247,6 +248,23 @@ describe('LizMiner', () => {
 
         console.log(chalk.blue("balanceOf(account1): ",await instanceLIZToken.balanceOf(account1.address)));
 
+    });
+
+    // check getBalanceIBEP20_wallet func
+    it('check getBalanceIBEP20_wallet', async () => {
+        const getBalanceIBEP20 = await instanceLizMiner.getBalanceIBEP20();
+        // console.log(chalk.blue("getBalanceIBEP20: ",getBalanceIBEP20));
+        expect(getBalanceIBEP20).to.equal(LIZ_TOTAL_SUPPLY);
+    });
+
+    // check getBalanceIBEP20_account1 func
+    it('check getBalanceIBEP20_account1', async () => {
+        await instanceLIZToken.transfer(account1.address, LIZ_TRANSFER_AMOUNT);
+
+        const instanceLizMiner_fromAccount1 = instanceLizMiner.connect(account1);
+        const getBalanceIBEP20 = await instanceLizMiner_fromAccount1.getBalanceIBEP20();
+        // console.log(chalk.blue("getBalanceIBEP20: ",getBalanceIBEP20));
+        expect(getBalanceIBEP20).to.equal(LIZ_TRANSFER_AMOUNT);
     });
 
 

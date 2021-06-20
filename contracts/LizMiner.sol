@@ -451,6 +451,11 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         return true;
     }
 
+    function getBalanceIBEP20() public view returns (uint256)
+    {
+        return IBEP20(_Lizaddr).balanceOf(msg.sender);
+    }
+
     // TEST CASES DONE
     function bindParent(address parent) public 
     {
