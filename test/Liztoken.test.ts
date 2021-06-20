@@ -4,7 +4,7 @@ import {deployContract, MockProvider, solidity} from 'ethereum-waffle';
 import LIZToken from '../build/contracts/LIZToken.json';
 
 import chalk from 'chalk';
-
+const initial_number = 100000000; //initialNumber = 100 million 
 use(solidity);
 
 describe('LIZToken', () => {
@@ -35,11 +35,11 @@ describe('LIZToken', () => {
 
   it('mint(2000)', async () => {
     await token.mint(2000);
-    expect(await token.balanceOf(wallet.address)).to.equal(3000);
+    expect(await token.balanceOf(wallet.address)).to.equal(initial_number+2000);
   });
 
   it('Assigns initial balance', async () => {
-    expect(await token.balanceOf(wallet.address)).to.equal(1000);
+    expect(await token.balanceOf(wallet.address)).to.equal(initial_number);
   });
 
   it('Transfer adds amount to destination account', async () => {
@@ -54,7 +54,7 @@ describe('LIZToken', () => {
   });
 
   it('Can not transfer above the amount', async () => {
-    await expect(token.transfer(walletTo.address, 1007)).to.be.reverted;
+    await expect(token.transfer(walletTo.address, initial_number+7)).to.be.reverted;
   });
 
   it('Can not transfer from empty account', async () => {

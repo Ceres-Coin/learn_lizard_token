@@ -231,6 +231,18 @@ describe('LizMiner', () => {
         expect(await instanceLizMiner.buyVipPrice(account1.address,10,{gasLimit:GAS_LIMIT})).to.equal(0);
     });
 
+    // check buyVip(1) func
+    it('check buyVip(1)', async () => {
+
+        await expect(instanceLIZToken.transfer(account1.address, 1000))
+        .to.emit(instanceLIZToken, 'Transfer')
+        .withArgs(wallet.address, account1.address, 1000);
+
+        // const instanceLizMiner_fromAccount1 = instanceLizMiner.connect(account1);
+        // await instanceLizMiner_fromAccount1.buyVipPrice(1,{gasLimit:GAS_LIMIT});
+
+    });
+
 
     
 });
