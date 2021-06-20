@@ -123,5 +123,46 @@ describe('LizMiner', () => {
         // const level_account2 = await instanceLizMiner.getUserLevel(account2.address);
         // console.log(chalk.yellow("level_account2: ",level_account2));
     });
+
+
+    // check getUserTeamHash() default = 0;
+    it('check getUserTeamHash(wallet/account1/account2)', async () => {
+        const instanceLizMiner_fromAccount1 = instanceLizMiner.connect(account1);
+        await instanceLizMiner_fromAccount1.bindParent(wallet.address,{gasLimit:GAS_LIMIT});
+
+        const instanceLizMiner_fromAccount2 = instanceLizMiner.connect(account2);
+        await instanceLizMiner_fromAccount2.bindParent(wallet.address,{gasLimit:GAS_LIMIT});
+
+        expect(await instanceLizMiner.getUserTeamHash(wallet.address)).to.equal(0);
+        expect(await instanceLizMiner.getUserTeamHash(account1.address)).to.equal(0);
+        expect(await instanceLizMiner.getUserTeamHash(account2.address)).to.equal(0);
+
+        // const getUserTeamHash_wallet = await instanceLizMiner.getUserTeamHash(wallet.address);
+        // console.log(chalk.yellow("getUserTeamHash_wallet: ",getUserTeamHash_wallet));
+        // const getUserTeamHash_account1 = await instanceLizMiner.getUserTeamHash(account1.address);
+        // console.log(chalk.yellow("getUserTeamHash_account1: ",getUserTeamHash_account1));
+        // const getUserTeamHash_account2 = await instanceLizMiner.getUserTeamHash(account2.address);
+        // console.log(chalk.yellow("getUserTeamHash_account2: ",getUserTeamHash_account2));
+    });
+
+        // check getUserSelfHash() default = 0;
+        it('check getUserSelfHash(wallet/account1/account2)', async () => {
+            const instanceLizMiner_fromAccount1 = instanceLizMiner.connect(account1);
+            await instanceLizMiner_fromAccount1.bindParent(wallet.address,{gasLimit:GAS_LIMIT});
+    
+            const instanceLizMiner_fromAccount2 = instanceLizMiner.connect(account2);
+            await instanceLizMiner_fromAccount2.bindParent(wallet.address,{gasLimit:GAS_LIMIT});
+    
+            expect(await instanceLizMiner.getUserSelfHash(wallet.address)).to.equal(0);
+            expect(await instanceLizMiner.getUserSelfHash(account1.address)).to.equal(0);
+            expect(await instanceLizMiner.getUserSelfHash(account2.address)).to.equal(0);
+    
+            // const getUserSelfHash_wallet = await instanceLizMiner.getUserSelfHash(wallet.address);
+            // console.log(chalk.yellow("getUserSelfHash_wallet: ",getUserSelfHash_wallet));
+            // const getUserSelfHash_account1 = await instanceLizMiner.getUserSelfHash(account1.address);
+            // console.log(chalk.yellow("getUserSelfHash_account1: ",getUserSelfHash_account1));
+            // const getUserSelfHash_account2 = await instanceLizMiner.getUserSelfHash(account2.address);
+            // console.log(chalk.yellow("getUserSelfHash_account2: ",getUserSelfHash_account2));
+        });
     
 });

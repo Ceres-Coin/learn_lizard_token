@@ -175,16 +175,19 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
          return bb;
      }
 
+    // TEST CASES DONE
      function getUserLevel(address user) public view returns (uint)
     {
         return _userInfos[user].userlevel;
     }
 
+    // TEST CASES DONE
     function getUserTeamHash(address user) public view returns (uint256)
     {
         return _userInfos[user].teamhash;
     }
  
+    // TEST CASES DONE
     function getUserSelfHash(address user) public view returns (uint256)
     {
         return _userInfos[user].selfhash;
