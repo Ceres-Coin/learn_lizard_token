@@ -63,7 +63,7 @@ describe('LizMiner', () => {
         expect(await instanceLizMiner.getParent(account2.address)).to.equal(account1.address);
     });
 
-    it('wallet-->account1-->account2, account2 buyVIP1', async () => {
+    it('wallet-->account1-->account2, account1 buyVIP7 + account2 buyVIP1', async () => {
         // Set Parent
         await instanceLizMiner.SetParentByAdmin(account1.address,wallet.address);
         await instanceLizMiner.SetParentByAdmin(account2.address,account1.address);
