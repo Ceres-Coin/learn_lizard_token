@@ -96,5 +96,11 @@ describe('LizMiner', () => {
     it('getTotalHash()', async () => {
         expect(await instanceLizMiner.getTotalHash()).to.equal(0);
     });
+
+    // CurrentBlockReward()
+    // Check Default CurrentBlockReward = 0
+    it('CurrentBlockReward()', async () => {
+        expect(await instanceLizMiner.CurrentBlockReward()).to.equal(0);
+    });
     
 });
