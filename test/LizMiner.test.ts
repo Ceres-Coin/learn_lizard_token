@@ -12,7 +12,7 @@ import chalk from 'chalk';
 use(solidity);
 
 describe('LizMiner', () => {
-  const [wallet, account1,account2,account3] = new MockProvider().getWallets();
+  const [wallet, account1,account2,account3,account4] = new MockProvider().getWallets();
   let instanceLizMiner: Contract;
   let instanceLIZToken: Contract;
   let instanceWETH : Contract;
@@ -33,8 +33,11 @@ describe('LizMiner', () => {
     console.log(chalk.blue("instanceFakeCollateral_USDC.address: ",instanceFakeCollateral_USDC.address));
     console.log(chalk.blue("instanceFakeCollateral_USDT.address: ",instanceFakeCollateral_USDT.address));
     
-    // await deployer.deploy(FakeCollateral_USDC, CONTRACT_OWNER, ONE_HUNDRED_MILLION_DEC6, "USDC", 6);
-    // await deployer.deploy(FakeCollateral_USDT, CONTRACT_OWNER, ONE_HUNDRED_MILLION_DEC6, "USDC", 6);
+    console.log(chalk.blue("wallet.address: ",wallet.address));
+    console.log(chalk.blue("account1.address: ",account1.address));
+    console.log(chalk.blue("account2.address: ",account2.address));
+    console.log(chalk.blue("account3.address: ",account3.address));
+    console.log(chalk.blue("account4.address: ",account4.address));
 
   });
 
