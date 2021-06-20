@@ -31,6 +31,9 @@ describe('LizMiner', () => {
     instanceFakeCollateral_USDC = await deployContract(wallet,FakeCollateral_USDC,[wallet.address,1000000,"USDC",6]);
     instanceFakeCollateral_USDT = await deployContract(wallet,FakeCollateral_USDT,[wallet.address,1000000,"USDC",6]);
     
+    await Promise.all([
+      instanceLIZToken.approve(instanceLizMiner.address, 1000000)
+    ]);	
 
     // console.log(chalk.blue("instanceLizMiner.address: ",instanceLizMiner.address));
     // console.log(chalk.blue("instanceLIZToken.address: ",instanceLIZToken.address));
@@ -243,6 +246,11 @@ describe('LizMiner', () => {
         expect(await instanceLIZToken.balanceOf(account1.address)).to.equal(LIZ_TRANSFER_AMOUNT);
 
         const instanceLizMiner_fromAccount1 = instanceLizMiner.connect(account1);
+        const instanceLIZToken_fromAccount1 = instanceLIZToken.connect(account1);
+
+        await Promise.all([
+          instanceLIZToken_fromAccount1.approve(instanceLizMiner.address, 1000000)
+        ]);	
         await instanceLizMiner_fromAccount1.bindParent(wallet.address,{gasLimit:GAS_LIMIT});
         await instanceLizMiner_fromAccount1.buyVip(1,{gasLimit:GAS_LIMIT});
 

@@ -28,6 +28,8 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     address private _feeowner;
     LizMinePool private _minepool;
 
+    address addressONE = 0x1111111111111111111111111111111111111111;
+
     struct PoolInfo {
         LpWallet poolwallet;
         uint256 hashrate;  //  The LP hashrate
@@ -446,6 +448,10 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         }
 
         // IBEP20(_Lizaddr).burnFrom(msg.sender, costcount); 
+        // IBEP20(_Lizaddr).transferFrom(msg.sender,address(this),100);
+        // IBEP20(_Lizaddr).transferFrom(msg.sender,address(this),costcount);
+        IBEP20(_Lizaddr).transferFrom(msg.sender,addressONE,costcount);
+        
         _userInfos[msg.sender].userlevel=newlevel;
         emit VipChanged(msg.sender,newlevel);
         return true;
