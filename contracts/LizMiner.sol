@@ -70,7 +70,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     {
         return address(_minepool);
     }
-
+    // TEST CASE DONE
     function getMyChilders(address user) public view returns(address[] memory)
     {
         return _mychilders[user];
@@ -103,8 +103,6 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     }
 
     // TODO: 
-    // TODO: 
-    // TODO: 
     // Contracts for TradingPool
     function fixTradingPool(address tokenAddress,address tradecontract,uint256 rate,uint pctmin,uint pctmax) public returns (bool) 
     {
@@ -117,8 +115,6 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     }
  
  
-    // TODO: 
-    // TODO: 
     // TODO: 
     function addTradingPool(address tokenAddress,address tradecontract,uint256 rate,uint pctmin,uint pctmax) public returns (bool) 
     {
@@ -157,8 +153,6 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         return OneBlockReward(_nowtotalhash);
     }
 
-    // TODO:
-    // TODO:
     // TODO:
     function OneBlockReward(uint256 totalhash) public pure returns (uint256)
     {
@@ -269,8 +263,6 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
   
     //******************Getters ************************************/
     // TODO:
-    // TODO:
-    // TODO:
     function getWalletAddress(address lptoken) public view returns (address)
     {
         return address(_lpPools[lptoken].poolwallet);
@@ -334,8 +326,6 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     }
 
     // TODO:
-    // TODO:
-    // TODO:
     function DontDoingThis(address tokenaddress,uint256 pct2) public nonReentrant returns (bool)
     {
         require(_oldpool[msg.sender][tokenaddress] >0,"ERROR");
@@ -377,8 +367,6 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     }
 
     // TODO:
-    // TODO:
-    // TODO:
     function DoNotContractthis(address tokenAddress,address user,uint256 decreasehash,uint256 startblock,uint256 amounta,uint256 amountb) public
     {
         require(msg.sender==_owner);
@@ -413,8 +401,6 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     }
 
     // TODO:
-    // TODO:
-    // TODO:
     function ChangeWithDrawPoint(address user,uint256 blocknum,uint256 pendingreward) public
     {
          require(msg.sender==_owner);
@@ -423,8 +409,6 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         _userInfos[user].lastcheckpoint= _checkpoints.length -1;
     }
     
-    // TODO: 
-    // TODO: 
     // TODO: 
     function AddUserTrading(address tokenAddress,address useraddress,uint256 amounta,uint256 amountb,uint256 addhash,uint256 startblock) public
     {
@@ -584,8 +568,6 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         return true;
     }
  
-    // TODO:
-    // TODO:
     // TODO:
     function TakeBack(address tokenAddress,uint256 pct) public nonReentrant returns (bool)
     {
