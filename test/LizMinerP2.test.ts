@@ -144,12 +144,13 @@ describe('LizMiner', () => {
 
         const wallet_childer = (await instanceLizMiner.getMyChilders(wallet.address))[0];
         expect(wallet_childer).to.equal(account1.address);
-        
+
         const account1_childer = (await instanceLizMiner.getMyChilders(account1.address))[0];
         expect(account1_childer).to.equal(account2.address);
+    });
 
-        
-
+    it('check parameter _nowtotalhash', async () => {
+        console.log(chalk.yellow(await instanceLizMiner._nowtotalhash.call()));
     });
 
     

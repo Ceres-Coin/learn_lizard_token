@@ -43,7 +43,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     uint256[11] _vipbuyprice =[0,100,300,500,800,1200,1600,2000,0,0,0];
     CheckPoint[] _checkpoints;
 
-    uint256 _nowtotalhash;
+    uint256 public _nowtotalhash;
  
     mapping(address=>mapping(address=>uint256)) _oldpool;
     mapping(address=>mapping(address=>uint256)) _userLphash;
@@ -102,7 +102,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         _levelconfig[7] = [250,180,160,110,40,30,20,10,10,10,10,10,10,10,10,10,10,10,10,10];
     }
 
-    // TODO: 
+    // TODO: TradingPool#1 Test -- fixTradingPool
     // Contracts for TradingPool
     function fixTradingPool(address tokenAddress,address tradecontract,uint256 rate,uint pctmin,uint pctmax) public returns (bool) 
     {
@@ -115,7 +115,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     }
  
  
-    // TODO: 
+    // TODO: TradingPool#2 Test -- addTradingPool
     function addTradingPool(address tokenAddress,address tradecontract,uint256 rate,uint pctmin,uint pctmax) public returns (bool) 
     {
         require(msg.sender==_owner);
