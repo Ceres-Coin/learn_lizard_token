@@ -329,10 +329,16 @@ describe('LizMiner', () => {
 
     it ('test for _checkpoints[]', async() => {
         await loadFixture(buildConnWalletToAccount1ToAccount2);
-
         const checkPoint_0 = (await instanceLizMiner._checkpoints(0));
         expect(checkPoint_0.startblock).to.equal(STARTBLOCK_INITIAL);
         expect(checkPoint_0.totalhash).to.equal(TOTALHASH_INITIAL);
+    });
+
+    it ('handle Array in Solidity in Waffle', async() => {
+        await loadFixture(buildConnWalletToAccount1ToAccount2);
+
+        console.log(chalk.yellow("TO DO"));
+
     });
 
     
