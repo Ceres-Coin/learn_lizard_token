@@ -132,22 +132,26 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     }
 
      //******************Getters ******************/
-    //  Test scripts done
+    // TEST CASES DONE
     function getOwner() public view returns(address) {
         return _owner;
     }
 
+    // TEST CASES DONE
     function getParent(address user) public view returns(address)
     {
         return _parents[user];
     }
 
-    // Test Cases Done
+    // TEST CASES DONE
     function CurrentBlockReward() public view returns (uint256)
     {
         return OneBlockReward(_nowtotalhash);
     }
 
+    // TODO:
+    // TODO:
+    // TODO:
     function OneBlockReward(uint256 totalhash) public pure returns (uint256)
     {
         if(totalhash < 10000000 * 1000000000000000000)
