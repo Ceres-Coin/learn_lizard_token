@@ -149,8 +149,8 @@ describe('LizMiner', () => {
         expect(account1_childer).to.equal(account2.address);
     });
 
-    it('check parameter _nowtotalhash', async () => {
-        console.log(chalk.yellow(await instanceLizMiner._nowtotalhash.call()));
+    it('check _nowtotalhash default is 0', async () => {
+        expect(await instanceLizMiner._nowtotalhash.call()).to.equal(0);
     });
 
     
