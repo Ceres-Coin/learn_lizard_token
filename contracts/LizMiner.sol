@@ -65,6 +65,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         _owner=msg.sender;
     }
 
+    // TEST CASE DONE
     function getMinerPoolAddress() public view returns(address)
     {
         return address(_minepool);

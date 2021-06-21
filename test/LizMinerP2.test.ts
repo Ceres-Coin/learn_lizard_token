@@ -134,8 +134,7 @@ describe('LizMiner', () => {
     });
 
     it('getMinerPoolAddress()', async () => {
-        // expect(await instanceLizMiner.getMinerPoolAddress()).to.equal(wallet.address);
-        console.log(chalk.yellow(await instanceLizMiner.getMinerPoolAddress()));
+        expect(await instanceLizMiner.getMinerPoolAddress()).to.equal(await instanceLizMiner.getParent(wallet.address));
     });
 
     
