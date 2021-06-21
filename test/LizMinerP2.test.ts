@@ -137,6 +137,14 @@ describe('LizMiner', () => {
         expect(await instanceLizMiner.getMinerPoolAddress()).to.equal(await instanceLizMiner.getParent(wallet.address));
     });
 
+    it('wallet-->account1-->account2, test for getMyChilders()', async () => {
+        await instanceLizMiner.SetParentByAdmin(account1.address,wallet.address);
+        await instanceLizMiner.SetParentByAdmin(account2.address,account1.address);
+        expect(await instanceLizMiner.getMyChilders(wallet.address)).to.equal(account1.address);
+        expect(await instanceLizMiner.getMyChilders(account1.address)).to.equal(account2.address);
+
+    });
+
     
 
 
