@@ -128,8 +128,8 @@ describe('LizMiner', () => {
         console.log(chalk.yellow(await instanceLIZToken.balanceOf(account2.address)));
 
         
-        console.log(chalk.red.bold("================= _nowtotalhash ==============="));
-        console.log(chalk.yellow(await instanceLizMiner._nowtotalhash.call()));
+        console.log(chalk.red.bold("================= getTotalHash ==============="));
+        console.log(chalk.yellow(await instanceLizMiner.getTotalHash()));
 
 
     });
@@ -150,8 +150,8 @@ describe('LizMiner', () => {
         expect(account1_childer).to.equal(account2.address);
     });
 
-    it('check _nowtotalhash default is 0', async () => {
-        expect(await instanceLizMiner._nowtotalhash.call()).to.equal(0);
+    it('check getTotalHash() default is 0', async () => {
+        expect(await instanceLizMiner.getTotalHash()).to.equal(0);
     });
 
     

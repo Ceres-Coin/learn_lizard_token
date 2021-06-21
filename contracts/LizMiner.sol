@@ -43,7 +43,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     uint256[11] _vipbuyprice =[0,100,300,500,800,1200,1600,2000,0,0,0];
     CheckPoint[] _checkpoints;
 
-    uint256 public _nowtotalhash;
+    uint256 private _nowtotalhash;
  
     mapping(address=>mapping(address=>uint256)) _oldpool;
     mapping(address=>mapping(address=>uint256)) _userLphash;
