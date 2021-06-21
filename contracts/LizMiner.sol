@@ -49,10 +49,10 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     mapping(address=>mapping(address=>uint256)) _userLphash;
     mapping(address=>mapping(address=>uint256)) _teamhashdetail;
     mapping(address=>mapping(uint=>uint256)) _userlevelhashtotal; // level hash in my team
-    mapping(address=>address) public _parents;//Inviter test cases done
-    mapping(address=>UserInfo) _userInfos;
+    mapping(address=>address) public _parents;//Inviter //TEST CASES DONE
+    mapping(address=>UserInfo) public _userInfos;
     mapping(address=>PoolInfo) _lpPools;
-    mapping(address=>address[]) _mychilders; //test case done
+    mapping(address=>address[]) _mychilders; //TEST CASES DONE
     event BindingParents(address indexed user,address  inviter);
     event VipChanged(address indexed user,uint256  userlevel);
     event TradingPooladded(address indexed tradetoken);
