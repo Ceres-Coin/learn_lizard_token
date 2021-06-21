@@ -214,7 +214,7 @@ describe('LizMiner', () => {
 
     });
 
-    it('wallet-->account1-->account2, setUserLevel()', async () => {
+    it('wallet-->account1-->account2, setUserLevel() & getUserLevel()', async () => {
         // Set Parent
         await instanceLizMiner.SetParentByAdmin(account1.address,wallet.address);
         await instanceLizMiner.SetParentByAdmin(account2.address,account1.address);
@@ -254,6 +254,13 @@ describe('LizMiner', () => {
 
         expect(await instanceLizMiner.getUserLevel(account1.address)).to.equal(7);
         expect(await instanceLizMiner.getUserLevel(account2.address)).to.equal(1);
+
+        // set account1 = 6; set account2 = 2;
+        await instanceLizMiner.SetUserLevel(account1.address,6);
+        await instanceLizMiner.SetUserLevel(account2.address,2);
+
+        expect(await instanceLizMiner.getUserLevel(account1.address)).to.equal(6);
+        expect(await instanceLizMiner.getUserLevel(account2.address)).to.equal(2);
 
 
     });
