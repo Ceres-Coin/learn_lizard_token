@@ -338,7 +338,7 @@ describe('LizMiner', () => {
         await loadFixture(buildConnWalletToAccount1ToAccount2);
 
         const checkPoint_0 = await instanceLizMiner._checkpoints(0);
-        console.log(chalk.yellow(checkPoint_0));
+        console.log(chalk.yellow("checkPoint_0: ",checkPoint_0));
     });
 
     
