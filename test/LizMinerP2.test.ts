@@ -339,6 +339,11 @@ describe('LizMiner', () => {
 
         const checkPoint_0 = await instanceLizMiner._checkpoints(0);
         console.log(chalk.yellow("checkPoint_0: ",checkPoint_0));
+
+        // it will fail because the length of _checkPoint is 1;
+        // const checkPoint_1 = await instanceLizMiner._checkpoints(1);
+        // const checkPoint_2 = await instanceLizMiner._checkpoints(2);
+        
     });
 
     
