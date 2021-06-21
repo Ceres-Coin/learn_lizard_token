@@ -128,7 +128,8 @@ describe('LizMiner', () => {
         console.log(chalk.yellow(await instanceLIZToken.balanceOf(account2.address)));
 
         
-        
+        console.log(chalk.red.bold("================= _nowtotalhash ==============="));
+        console.log(chalk.yellow(await instanceLizMiner._nowtotalhash.call()));
 
 
     });
