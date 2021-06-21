@@ -75,6 +75,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         return _mychilders[user];
     } 
 
+    // TEST CASES DONE
     function InitalContract(address lizToken,address liztrade,address wrappedbnbaddress,address bnbtradeaddress,address usdtaddress,address feeowner) public
     {
         require(msg.sender==_owner);
@@ -100,6 +101,9 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         _levelconfig[7] = [250,180,160,110,40,30,20,10,10,10,10,10,10,10,10,10,10,10,10,10];
     }
 
+    // TODO: 
+    // TODO: 
+    // TODO: 
     // Contracts for TradingPool
     function fixTradingPool(address tokenAddress,address tradecontract,uint256 rate,uint pctmin,uint pctmax) public returns (bool) 
     {
@@ -112,6 +116,9 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     }
  
  
+    // TODO: 
+    // TODO: 
+    // TODO: 
     function addTradingPool(address tokenAddress,address tradecontract,uint256 rate,uint pctmin,uint pctmax) public returns (bool) 
     {
         require(msg.sender==_owner);
