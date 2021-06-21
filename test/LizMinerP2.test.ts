@@ -309,23 +309,27 @@ describe('LizMiner', () => {
     //     expect(await instanceLizMiner.getUserLevel(account2.address)).to.equal(3);
     // });
 
-    it('test for userInfo', async() => {
-        await loadFixture(buildConnWalletToAccount1ToAccount2);
+    // it('test for userInfo', async() => {
+    //     await loadFixture(buildConnWalletToAccount1ToAccount2);
         
-        const userInfo = await instanceLizMiner._userInfos(account1.address);
-        console.log(chalk.yellow("userInfo.selfhash: ",userInfo.selfhash));
-        console.log(chalk.yellow("userInfo.teamhash: ",userInfo.teamhash));
-        console.log(chalk.yellow("userInfo.userlevel: ",userInfo.userlevel));
-        console.log(chalk.yellow("userInfo.pendingreward: ",userInfo.pendingreward));
-        console.log(chalk.yellow("userInfo.lastcheckpoint: ",userInfo.lastcheckpoint));
-        console.log(chalk.yellow("userInfo.lastblock: ",userInfo.lastblock));
+    //     const userInfo = await instanceLizMiner._userInfos(account1.address);
+    //     console.log(chalk.yellow("userInfo.selfhash: ",userInfo.selfhash));
+    //     console.log(chalk.yellow("userInfo.teamhash: ",userInfo.teamhash));
+    //     console.log(chalk.yellow("userInfo.userlevel: ",userInfo.userlevel));
+    //     console.log(chalk.yellow("userInfo.pendingreward: ",userInfo.pendingreward));
+    //     console.log(chalk.yellow("userInfo.lastcheckpoint: ",userInfo.lastcheckpoint));
+    //     console.log(chalk.yellow("userInfo.lastblock: ",userInfo.lastblock));
 
-        console.log(chalk.yellow("UserInfo: ",userInfo));
-    });
+    //     console.log(chalk.yellow("UserInfo: ",userInfo));
+    // });
 
     it ('test for _checkpoints[]', async() => {
         await loadFixture(buildConnWalletToAccount1ToAccount2);
-        console.log("TODO: _checkpoints[]");
+        
+        const checkPoint_0 = (await instanceLizMiner._checkpoints(0));
+        console.log(chalk.yellow("checkPoint_0_startblock",checkPoint_0.startblock));
+        console.log(chalk.yellow("checkPoint_0_totalhash",checkPoint_0.totalhash));
+        
     });
 
     
