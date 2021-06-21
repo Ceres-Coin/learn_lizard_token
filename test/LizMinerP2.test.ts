@@ -264,7 +264,7 @@ describe('LizMiner', () => {
         expect(await instanceLizMiner.getUserLevel(account2.address)).to.equal(2);
     });
 
-    async function fixture() {
+    async function buildConnWalletToAccount1ToAccount2() {
         // Set Parent
         await instanceLizMiner.SetParentByAdmin(account1.address,wallet.address);
         await instanceLizMiner.SetParentByAdmin(account2.address,account1.address);
@@ -294,17 +294,17 @@ describe('LizMiner', () => {
         await instanceLizMiner_fromAccount2.buyVip(1,{gasLimit:GAS_LIMIT});
       }
 
-    it('wallet-->account1-->account2, test for fixture)', async () => {
-        await loadFixture(fixture);
+    it('wallet-->account1-->account2, test for fixture & setUserLevel & getUserLevel)', async () => {
+        await loadFixture(buildConnWalletToAccount1ToAccount2);
         expect(await instanceLizMiner.getUserLevel(account1.address)).to.equal(7);
         expect(await instanceLizMiner.getUserLevel(account2.address)).to.equal(1);
 
-        // set account1 = 6; set account2 = 2;
-        await instanceLizMiner.SetUserLevel(account1.address,6);
-        await instanceLizMiner.SetUserLevel(account2.address,2);
+        // set account1 = 5; set account2 = 3;
+        await instanceLizMiner.SetUserLevel(account1.address,5);
+        await instanceLizMiner.SetUserLevel(account2.address,3);
 
-        expect(await instanceLizMiner.getUserLevel(account1.address)).to.equal(6);
-        expect(await instanceLizMiner.getUserLevel(account2.address)).to.equal(2);
+        expect(await instanceLizMiner.getUserLevel(account1.address)).to.equal(5);
+        expect(await instanceLizMiner.getUserLevel(account2.address)).to.equal(3);
     });
     
 
