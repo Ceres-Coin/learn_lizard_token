@@ -40,8 +40,8 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     }
 
     mapping(uint=>uint256[20]) internal _levelconfig; //credit level config
-    uint256[11] _vipbuyprice =[0,100,300,500,800,1200,1600,2000,0,0,0];
-    CheckPoint[] _checkpoints;
+    uint256[11] public _vipbuyprice =[0,100,300,500,800,1200,1600,2000,0,0,0];
+    CheckPoint[] public _checkpoints;
 
     uint256 private _nowtotalhash;
  

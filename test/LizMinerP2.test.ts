@@ -321,10 +321,11 @@ describe('LizMiner', () => {
         console.log(chalk.yellow("userInfo.lastblock: ",userInfo.lastblock));
 
         console.log(chalk.yellow("UserInfo: ",userInfo));
+    });
 
-        
-        
-
+    it ('test for _checkpoints[]', async() => {
+        await loadFixture(buildConnWalletToAccount1ToAccount2);
+        console.log("TODO: _checkpoints[]");
     });
 
     
