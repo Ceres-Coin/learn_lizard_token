@@ -154,7 +154,55 @@ describe('LizMiner', () => {
         expect(await instanceLizMiner.getTotalHash()).to.equal(0);
     });
 
-    
+    it('wallet-->account1-->account2, getUserTeamHash()', async () => {
+        // Set Parent
+        await instanceLizMiner.SetParentByAdmin(account1.address,wallet.address);
+        await instanceLizMiner.SetParentByAdmin(account2.address,account1.address);
+
+        expect(await instanceLizMiner.getParent(account1.address)).to.equal(wallet.address);
+        expect(await instanceLizMiner.getParent(account2.address)).to.equal(account1.address);
+
+        // transfer LIZ_TRANSFER_AMOUNT to account1
+        await expect(instanceLIZToken.transfer(account1.address, LIZ_TRANSFER_AMOUNT))
+        .to.emit(instanceLIZToken, 'Transfer')
+        .withArgs(wallet.address, account1.address, LIZ_TRANSFER_AMOUNT);
+        // transfer LIZ_TRANSFER_AMOUNT to account2
+        await expect(instanceLIZToken.transfer(account2.address, LIZ_TRANSFER_AMOUNT))
+        .to.emit(instanceLIZToken, 'Transfer')
+        .withArgs(wallet.address, account2.address, LIZ_TRANSFER_AMOUNT);
+
+        // account1 buyVIP(7)
+                
+
+                // Prepare-approve lizToken
+                const instanceLIZToken_fromAccount1 = instanceLIZToken.connect(account1);
+                await Promise.all([
+                    instanceLIZToken_fromAccount1.approve(instanceLizMiner.address, ALLOWANCE_AMOUNT)
+                ]);	
+                const instanceLizMiner_fromAccount1 = instanceLizMiner.connect(account1);
+                await instanceLizMiner_fromAccount1.buyVip(7,{gasLimit:GAS_LIMIT});
+
+        // account2 buyVIP(2)
+
+        // Prepare-approve lizToken
+        const instanceLIZToken_fromAccount2 = instanceLIZToken.connect(account2);
+        await Promise.all([
+            instanceLIZToken_fromAccount2.approve(instanceLizMiner.address, 1000000)
+        ]);	
+        const instanceLizMiner_fromAccount2 = instanceLizMiner.connect(account2);
+        await instanceLizMiner_fromAccount2.buyVip(1,{gasLimit:GAS_LIMIT});
+
+        console.log(chalk.yellow("getTotalHash: ",await instanceLizMiner.getTotalHash()));
+        console.log(chalk.yellow("getUserTeamHash(wallet.address)",await instanceLizMiner.getUserTeamHash(wallet.address)));
+        console.log(chalk.yellow("getUserTeamHash(account1.address)",await instanceLizMiner.getUserTeamHash(account1.address)));
+        console.log(chalk.yellow("getUserTeamHash(account2.address)",await instanceLizMiner.getUserTeamHash(account2.address)));
+
+        expect(await instanceLizMiner.getTotalHash()).to.equal(0);
+        expect(await instanceLizMiner.getUserTeamHash(wallet.address)).to.equal(0);
+        expect(await instanceLizMiner.getUserTeamHash(account1.address)).to.equal(0);
+        expect(await instanceLizMiner.getUserTeamHash(account2.address)).to.equal(0);
+
+    });
 
 
     
