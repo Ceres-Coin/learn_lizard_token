@@ -18,6 +18,10 @@ const LIZ_TOTAL_SUPPLY = 100000000;
 const addressONE = "0x1111111111111111111111111111111111111111";
 const ALLOWANCE_AMOUNT = 1000000;
 
+const STARTBLOCK_INITIAL = 40000;
+const TOTALHASH_INITIAL = 1;
+
+
 describe('LizMiner', () => {
   const [wallet, account1,account2,account3,account4,account5] = new MockProvider().getWallets();
   let FEE_OWNER = account5;
@@ -325,11 +329,10 @@ describe('LizMiner', () => {
 
     it ('test for _checkpoints[]', async() => {
         await loadFixture(buildConnWalletToAccount1ToAccount2);
-        
+
         const checkPoint_0 = (await instanceLizMiner._checkpoints(0));
-        console.log(chalk.yellow("checkPoint_0_startblock",checkPoint_0.startblock));
-        console.log(chalk.yellow("checkPoint_0_totalhash",checkPoint_0.totalhash));
-        
+        expect(checkPoint_0.startblock).to.equal(STARTBLOCK_INITIAL);
+        expect(checkPoint_0.totalhash).to.equal(TOTALHASH_INITIAL);
     });
 
     
