@@ -192,6 +192,7 @@ describe('LizMiner', () => {
         const instanceLizMiner_fromAccount2 = instanceLizMiner.connect(account2);
         await instanceLizMiner_fromAccount2.buyVip(1,{gasLimit:GAS_LIMIT});
 
+        console.log(chalk.red.bold("================= getTotalHash & getUserTeamHash ==============="))
         console.log(chalk.yellow("getTotalHash: ",await instanceLizMiner.getTotalHash()));
         console.log(chalk.yellow("getUserTeamHash(wallet.address)",await instanceLizMiner.getUserTeamHash(wallet.address)));
         console.log(chalk.yellow("getUserTeamHash(account1.address)",await instanceLizMiner.getUserTeamHash(account1.address)));
@@ -201,6 +202,15 @@ describe('LizMiner', () => {
         expect(await instanceLizMiner.getUserTeamHash(wallet.address)).to.equal(0);
         expect(await instanceLizMiner.getUserTeamHash(account1.address)).to.equal(0);
         expect(await instanceLizMiner.getUserTeamHash(account2.address)).to.equal(0);
+
+        console.log(chalk.red.bold("================= getUserSelfHash ==============="));
+        console.log(chalk.yellow("getUserSelfHash(wallet.address)",await instanceLizMiner.getUserSelfHash(wallet.address)));
+        console.log(chalk.yellow("getUserSelfHash(account1.address)",await instanceLizMiner.getUserSelfHash(account1.address)));
+        console.log(chalk.yellow("getUserSelfHash(account2.address)",await instanceLizMiner.getUserSelfHash(account2.address)));
+        expect(await instanceLizMiner.getUserSelfHash(wallet.address)).to.equal(0);
+        expect(await instanceLizMiner.getUserSelfHash(account1.address)).to.equal(0);
+        expect(await instanceLizMiner.getUserSelfHash(account2.address)).to.equal(0);
+
 
     });
 
