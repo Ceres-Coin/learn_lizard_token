@@ -12,12 +12,13 @@ contract("LizMiner test script", async accounts => {
         const instanceLizToken = await LizToken.deployed();
         const wethInstance = await WETH.deployed();
 
-        // Print
+        // Print instantceLizMiner.address & instanceLizToken.address
         // console.log(chalk.redBright.bold("instantceLizMiner: ",instantceLizMiner.address));
         // console.log(chalk.redBright.bold("instanceLizToken: ",instanceLizToken.address));
 
         const poolInfo = await instantceLizMiner.getPoolInfo(wethInstance.address);
-        console.log(chalk.yellow("poolInfo: ",poolInfo));
+        // Print poolInfo
+        // console.log(chalk.yellow("poolInfo: ",poolInfo));
     });
 
     it("should put 10000 MetaCoin in the first account", async () => {
