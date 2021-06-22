@@ -15,6 +15,7 @@
     "test": "export NODE_ENV=test && mocha"
   },
   "dependencies": {
+    "@truffle/hdwallet-provider": "^1.2.2",
     "chalk": "^4.1.1"
   }
 }
