@@ -9,7 +9,7 @@ const BIG6 = new BigNumber("1e6");
 const BIG18 = new BigNumber("1e18");
 const chalk = require('chalk');
 
-// const UniswapV2ERC20 = artifacts.require("Uniswap/UniswapV2ERC20");
+const UniswapV2ERC20 = artifacts.require("Uniswap/UniswapV2ERC20");
 // const UniswapV2OracleLibrary = artifacts.require("Uniswap/UniswapV2OracleLibrary");
 // const UniswapV2Library = artifacts.require("Uniswap/UniswapV2Library");
 // const UniswapV2Pair = artifacts.require("Uniswap/UniswapV2Pair");
@@ -34,7 +34,7 @@ module.exports = async function(deployer, network, accounts) {
     const IS_BSC_TESTNET = (network == 'testnet');
 
     if (IS_DEV || IS_BSC_TESTNET) {
-        // await deployer.deploy(UniswapV2ERC20);
+        await deployer.deploy(UniswapV2ERC20);
         // await deployer.deploy(UniswapV2OracleLibrary);
         // await deployer.deploy(UniswapV2Library);
 
