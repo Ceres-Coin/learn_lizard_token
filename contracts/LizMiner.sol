@@ -172,6 +172,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
          return _nowtotalhash;
      }
 
+    // TEST CASES DONE
      function getPoolTotal(address tokenaddress) public view returns (uint256)
      {
          return _lpPools[tokenaddress].totaljthash;

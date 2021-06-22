@@ -98,5 +98,13 @@ describe('LizMiner', () => {
         expect(await instanceLizMiner.getOwner()).to.equal(wallet.address);
     });
 
+    it('test for addTradingPool()', async() => {
+        const testToken_address = instanceWETH.address;
+        await instanceLizMiner.addTradingPool(testToken_address,testToken_address,1,1,10000);
+
+        const getPoolTotal = await instanceLizMiner.getPoolTotal(testToken_address);
+        console.log(chalk.yellow("getPoolTotal: ",getPoolTotal));
+    });
+
 
 });
