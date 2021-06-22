@@ -28,18 +28,27 @@ const DUMP_ADDRESS = "0x1111111111111111111111111111111111111111";
 module.exports = async function(deployer, network, accounts) {
 	// Deploy Contracts P3
 	console.log(chalk.red('====== Deploy Contracts P3 ======='));
+    const IS_MAINNET = (network == 'mainnet');
+	const IS_ROPSTEN = (network == 'ropsten');
+	const IS_DEV = (network == 'development');
+    const IS_BSC_TESTNET = (network == 'testnet');
 
-    // await deployer.deploy(UniswapV2ERC20);
-    // await deployer.deploy(UniswapV2OracleLibrary);
-    // await deployer.deploy(UniswapV2Library);
+    if (IS_DEV || IS_BSC_TESTNET) {
+        // await deployer.deploy(UniswapV2ERC20);
+        // await deployer.deploy(UniswapV2OracleLibrary);
+        // await deployer.deploy(UniswapV2Library);
 
-    // await deployer.deploy(UniswapV2Pair);
-    // await deployer.deploy(UniswapV2Factory, DUMP_ADDRESS);
-    // await deployer.deploy(SafeERC20);
+        // await deployer.deploy(UniswapV2Pair);
+        // await deployer.deploy(UniswapV2Factory, DUMP_ADDRESS);
+        // await deployer.deploy(SafeERC20);
 
-    // await deployer.deploy(ChainlinkETHUSDPriceConsumer);
-	// await deployer.deploy(ChainlinkETHUSDPriceConsumerTest);
-    // await deployer.deploy(ChainlinkETHUSDPriceConsumerTest2);
+        // await deployer.deploy(ChainlinkETHUSDPriceConsumer);
+        // await deployer.deploy(ChainlinkETHUSDPriceConsumerTest);
+        // await deployer.deploy(ChainlinkETHUSDPriceConsumerTest2);
+
+    }
+
+
 
 
 
