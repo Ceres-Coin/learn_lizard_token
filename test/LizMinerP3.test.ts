@@ -9,6 +9,7 @@ import FakeCollateral_USDC from '../build/contracts/FakeCollateral_USDC.json'
 import FakeCollateral_USDT from '../build/contracts/FakeCollateral_USDT.json'
 import {loadFixture} from 'ethereum-waffle';
 
+
 import chalk from 'chalk';
 
 use(solidity);
@@ -179,6 +180,8 @@ describe('LizMiner', () => {
         testToken_address = instanceWETH.address;
         const poolwallet_address = await (await instanceLizMiner._lpPools(testToken_address)).poolwallet;
         console.log(chalk.yellow("poolwallet_address: ",poolwallet_address));
+
+        
 
         const hashrate = await (await instanceLizMiner._lpPools(testToken_address)).hashrate;
         console.log(chalk.yellow("hashrate: ",hashrate));
