@@ -106,5 +106,14 @@ describe('LizMiner', () => {
         console.log(chalk.yellow("getPoolTotal: ",getPoolTotal));
     });
 
+    it('test for _lpPools', async() => {
+        const testToken_address = instanceWETH.address;
+        await instanceLizMiner.addTradingPool(testToken_address,testToken_address,1,1,10000);
+
+        const PoolInfo_testToken_address = await instanceLizMiner._lpPools(testToken_address);
+        console.log(chalk.yellow("testToken_address = WETH & address is : ",testToken_address))
+        console.log(chalk.yellow("PoolInfo_testToken_address: ",PoolInfo_testToken_address));
+    });
+
 
 });
