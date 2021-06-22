@@ -18,7 +18,7 @@ contract("LizMiner test script", async accounts => {
 
         const poolInfo = await instantceLizMiner.getPoolInfo(wethInstance.address);
         // Print poolInfo
-        // console.log(chalk.yellow("poolInfo: ",poolInfo));
+        console.log(chalk.yellow("poolInfo: ",poolInfo));
     });
 
     it("should put 10000 MetaCoin in the first account", async () => {
