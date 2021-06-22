@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 pragma solidity >=0.5.0;
+pragma experimental ABIEncoderV2;
 
 import "./lib/math/SafeMath.sol";
 import "./lib/utils/ReentrancyGuard.sol";
@@ -160,6 +161,11 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
      function getPoolTotal(address tokenaddress) public view returns (uint256)
      {
          return _lpPools[tokenaddress].totaljthash;
+     }
+
+     function getPoolInfo(address tokenAddress) public view returns(PoolInfo memory)
+     {
+         return _lpPools[tokenAddress];
      }
  
 
