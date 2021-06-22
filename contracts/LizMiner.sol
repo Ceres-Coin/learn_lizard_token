@@ -636,6 +636,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
                uint256 fee = amountb.div(100);//Destory 1%
                _Lizaddr.safeTransfer(msg.sender, amountb.sub(fee));
             //    IBEP20(_Lizaddr).burn(fee);
+                BEP20(_Lizaddr).burn(fee);
            }
            else
            {
