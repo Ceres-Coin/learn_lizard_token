@@ -20,6 +20,11 @@ const ALLOWANCE_AMOUNT = 1000000;
 
 const STARTBLOCK_INITIAL = 40000;
 const TOTALHASH_INITIAL = 1;
+const TRADINGPOOL_HASHRATE = 1;
+const TRADINGPOOL_PCTMIN = 1;
+const TRADINGPOOL_PCTMAX = 1;
+
+
 
 
 describe('LizMiner', () => {
@@ -110,11 +115,18 @@ describe('LizMiner', () => {
 
     it('test for _lpPools', async() => {
         const testToken_address = instanceWETH.address;
-        await instanceLizMiner.addTradingPool(testToken_address,testToken_address,1,1,10000);
+        await instanceLizMiner.addTradingPool(testToken_address,testToken_address,TRADINGPOOL_HASHRATE,TRADINGPOOL_PCTMIN,TRADINGPOOL_PCTMAX);
 
-        const PoolInfo_testToken_address = await instanceLizMiner._lpPools(testToken_address);
-        console.log(chalk.yellow("testToken_address = WETH & address is : ",testToken_address))
-        console.log(chalk.yellow("PoolInfo_testToken_address: ",PoolInfo_testToken_address));
+        const PoolInfo = await instanceLizMiner._lpPools(testToken_address);
+        // console.log(chalk.yellow("testToken_address = WETH & address is : ",testToken_address))
+        // console.log(chalk.yellow("PoolInfo: ",PoolInfo));
+        // console.log(chalk.yellow("PoolInfo.minpct",PoolInfo.minpct))
+        expect(PoolInfo.hashrate).to.equal(TRADINGPOOL_HASHRATE);
+        expect(PoolInfo.tradeContract).to.equal(testToken_address);
+        expect(PoolInfo.totaljthash).to.equal(0);
+        expect(PoolInfo.minpct).to.equal(TRADINGPOOL_PCTMIN);
+        expect(PoolInfo.maxpct).to.equal(TRADINGPOOL_PCTMAX);
+
     });
 
 
