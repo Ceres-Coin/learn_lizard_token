@@ -17,7 +17,7 @@ interface IPancakePair {
     function getReserves() external view returns (uint112 reserve0, uint112 reserve1, uint32 blockTimestampLast);
 }
 
-contract LizMiner is ReentrancyGuard,LizMinerDefine {
+contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
     using TransferHelper for address;
     using SafeMath for uint256;
     address private _Lizaddr;
@@ -48,8 +48,8 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     mapping(address=>mapping(address=>uint256)) _teamhashdetail;
     mapping(address=>mapping(uint=>uint256)) _userlevelhashtotal; 
     mapping(address=>address) public _parents;
-    mapping(address=>UserInfo) public _userInfos; 
-    mapping(address=>PoolInfo) public _lpPools;
+    mapping(address=>UserInfo) _userInfos; 
+    mapping(address=>PoolInfo) _lpPools;
     mapping(address=>address[]) _mychilders; 
 
 
@@ -75,9 +75,8 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         return _mychilders[user];
     } 
 
-    function InitalContract(address lizToken,address liztrade,address wrappedbnbaddress,address bnbtradeaddress,address usdtaddress,address feeowner) public
+    function InitalContract(address lizToken,address liztrade,address wrappedbnbaddress,address bnbtradeaddress,address usdtaddress,address feeowner) public onlyOwner
     {
-        require(msg.sender==_owner);
         require(_checkpoints.length==0);
         _Lizaddr=lizToken;
         _Liztrade=liztrade; 
@@ -100,9 +99,9 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         _levelconfig[7] = [250,180,160,110,40,30,20,10,10,10,10,10,10,10,10,10,10,10,10,10];
     }
 
-    function fixTradingPool(address tokenAddress,address tradecontract,uint256 rate,uint pctmin,uint pctmax) public returns (bool) 
+    function fixTradingPool(address tokenAddress,address tradecontract,uint256 rate,uint pctmin,uint pctmax) public onlyOwner returns (bool) 
     {
-        require(msg.sender==_owner);
+        
         _lpPools[tokenAddress].tradeContract=tradecontract;
         _lpPools[tokenAddress].hashrate=rate;
         _lpPools[tokenAddress].minpct=pctmin;
@@ -111,9 +110,9 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     }
  
 
-    function addTradingPool(address tokenAddress,address tradecontract,uint256 rate,uint pctmin,uint pctmax) public returns (bool) 
+    function addTradingPool(address tokenAddress,address tradecontract,uint256 rate,uint pctmin,uint pctmax) public onlyOwner returns (bool) 
     {
-        require(msg.sender==_owner);
+        
         require(rate > 0,"ERROR RATE");
         require(_lpPools[tokenAddress].hashrate==0,"LP EXISTS");
  
@@ -299,26 +298,23 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         return hashdiff;
     }
 
-    function SetUserLevel(address user,uint level) public
+    function SetUserLevel(address user,uint level)  public onlyOwner
     {
-        require(msg.sender==_owner);
         _userInfos[user].userlevel=level;
 
     }
 
     // TODO: add test cases of ChangeWithDrawPoint
-    function ChangeWithDrawPoint(address user,uint256 blocknum,uint256 pendingreward) public
+    function ChangeWithDrawPoint(address user,uint256 blocknum,uint256 pendingreward) public onlyOwner
     {
-         require(msg.sender==_owner);
          _userInfos[user].pendingreward=pendingreward;
         _userInfos[user].lastblock=blocknum;
         _userInfos[user].lastcheckpoint= _checkpoints.length -1;
     }
     
     // TODO: add test cases for AddUserTrading
-    function AddUserTrading(address tokenAddress,address useraddress,uint256 amounta,uint256 amountb,uint256 addhash,uint256 startblock) public
+    function AddUserTrading(address tokenAddress,address useraddress,uint256 amounta,uint256 amountb,uint256 addhash,uint256 startblock) public onlyOwner
     {
-        require(msg.sender==_owner);
         require(startblock >= _checkpoints[_checkpoints.length -1].startblock);
         _lpPools[tokenAddress].poolwallet.addBalance(useraddress,amounta,amountb);
         _lpPools[tokenAddress].totaljthash= _lpPools[tokenAddress].totaljthash.add(addhash);
@@ -354,7 +350,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     function buyVip(uint newlevel) public nonReentrant returns (bool)
     {
         require(newlevel<8);
-        require(_parents[msg.sender] !=address(0),"must bind parent first");
+        require(_parents[msg.sender] !=address(0),"err");
         uint256 costcount=buyVipPrice(msg.sender,newlevel);
         require(costcount>0);
         uint256 diff=getHashDiffOnLevelChange(msg.sender,newlevel);
@@ -386,9 +382,9 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         emit BindingParents(msg.sender,parent);
     }
 
-    function SetParentByAdmin(address user,address parent) public
+    function SetParentByAdmin(address user,address parent) public onlyOwner
     {
-        require(msg.sender==_owner);
+        
          _parents[user]=parent;
          _mychilders[parent].push(user);
     }
