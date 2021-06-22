@@ -20,6 +20,7 @@ const UniswapV2Router02_Modified = artifacts.require("Uniswap/UniswapV2Router02_
 const WETH = artifacts.require("BEP20/WETH");
 const FakeCollateral_USDC = artifacts.require("FakeCollateral/FakeCollateral_USDC");
 const FakeCollateral_USDT = artifacts.require("FakeCollateral/FakeCollateral_USDT");
+const LizToken = artifacts.require("LIZToken");
 
 // set constants
 const ONE_MILLION_DEC18 = new BigNumber("1000000e18");
@@ -100,6 +101,8 @@ module.exports = async function(deployer, network, accounts) {
         console.log(chalk.yellow("routerInstance: ",routerInstance.address));
         console.log(chalk.yellow("uniswapFactoryInstance: ",uniswapFactoryInstance.address));
     }
+
+    const instanceLizToken = await LizToken.deployed();
 
 
 
