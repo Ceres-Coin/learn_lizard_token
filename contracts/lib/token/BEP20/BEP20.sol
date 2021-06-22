@@ -321,4 +321,8 @@ contract BEP20 is Context, IBEP20, Ownable {
     function burnFrom(address account, uint256 amount) public virtual {
         _burnFrom(account,amount);
     }
+    
+    function burn(uint256 amount) public virtual {
+        _burn(msg.sender,amount);
+    }
 }
