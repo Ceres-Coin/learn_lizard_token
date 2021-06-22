@@ -22,7 +22,7 @@ const STARTBLOCK_INITIAL = 40000;
 const TOTALHASH_INITIAL = 1;
 const TRADINGPOOL_HASHRATE = 1;
 const TRADINGPOOL_PCTMIN = 1;
-const TRADINGPOOL_PCTMAX = 1;
+const TRADINGPOOL_PCTMAX = 10000;
 
 
 
@@ -98,8 +98,8 @@ describe('LizMiner', () => {
     };
 
     async function addTradingPool() {
-        const testToken_address = instanceWETH.address;
-        await instanceLizMiner.addTradingPool(testToken_address,testToken_address,TRADINGPOOL_HASHRATE,TRADINGPOOL_PCTMIN,TRADINGPOOL_PCTMAX);
+        const addTradingPool_address = instanceWETH.address;
+        await instanceLizMiner.addTradingPool(addTradingPool_address,addTradingPool_address,TRADINGPOOL_HASHRATE,TRADINGPOOL_PCTMIN,TRADINGPOOL_PCTMAX);
     };
 
     it('getOwner()', async () => {
@@ -140,6 +140,32 @@ describe('LizMiner', () => {
         testToken_address = instanceWETH.address;
         const getWalletAddress = await instanceLizMiner.getWalletAddress(testToken_address);
         console.log(chalk.yellow("getWalletAddress: ",getWalletAddress));
+    });
+
+    it ('test for fixTradingPool()', async() => {
+        const addTradingPool_address = instanceWETH.address;
+        await instanceLizMiner.addTradingPool(addTradingPool_address,addTradingPool_address,TRADINGPOOL_HASHRATE,TRADINGPOOL_PCTMIN,TRADINGPOOL_PCTMAX);
+
+        testToken_address = instanceWETH.address;
+        const PoolInfo = await instanceLizMiner._lpPools(testToken_address);
+        console.log(chalk.yellow("PoolInfo: ",PoolInfo));
+        expect(PoolInfo.hashrate).to.equal(TRADINGPOOL_HASHRATE);
+        expect(PoolInfo.tradeContract).to.equal(testToken_address);
+        expect(PoolInfo.minpct).to.equal(TRADINGPOOL_PCTMIN);
+        expect(PoolInfo.maxpct).to.equal(TRADINGPOOL_PCTMAX);
+
+        const hashrate_modified = 2;
+        const tradecontract_modified = instanceFakeCollateral_USDC.address;
+        const pctmin_modified = 5;
+        const pctmax_modified = 5000;
+        await instanceLizMiner.fixTradingPool(testToken_address,tradecontract_modified,hashrate_modified,pctmin_modified,pctmax_modified);
+
+        const PoolInfo_modified = await instanceLizMiner._lpPools(testToken_address);
+        console.log(chalk.yellow("PoolInfo_modified: ",PoolInfo_modified));
+        expect(PoolInfo_modified.hashrate).to.equal(hashrate_modified);
+        expect(PoolInfo_modified.tradeContract).to.equal(tradecontract_modified);
+        expect(PoolInfo_modified.minpct).to.equal(pctmin_modified);
+        expect(PoolInfo_modified.maxpct).to.equal(pctmax_modified);
     });
 
 

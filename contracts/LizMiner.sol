@@ -106,8 +106,9 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         _levelconfig[7] = [250,180,160,110,40,30,20,10,10,10,10,10,10,10,10,10,10,10,10,10];
     }
 
-    // TODO: TradingPool#1 Test -- fixTradingPool
+    // TradingPool#1 Test -- fixTradingPool
     // Contracts for TradingPool
+    // TEST CASES DONE
     function fixTradingPool(address tokenAddress,address tradecontract,uint256 rate,uint pctmin,uint pctmax) public returns (bool) 
     {
         require(msg.sender==_owner);
@@ -267,7 +268,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     }
   
     //******************Getters ************************************/
-    // TODO: add test cases for getWalletAddress
+    // add test cases for getWalletAddress
     function getWalletAddress(address lptoken) public view returns (address)
     {
         return address(_lpPools[lptoken].poolwallet);
@@ -330,7 +331,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
 
     }
 
-    // TODO:
+    // TODO: add test cases of DontDoingThis 
     function DontDoingThis(address tokenaddress,uint256 pct2) public nonReentrant returns (bool)
     {
         require(_oldpool[msg.sender][tokenaddress] >0,"ERROR");
@@ -371,7 +372,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         return true;
     }
 
-    // TODO:
+    // TODO: add test cases of DoNotContractthis
     function DoNotContractthis(address tokenAddress,address user,uint256 decreasehash,uint256 startblock,uint256 amounta,uint256 amountb) public
     {
         require(msg.sender==_owner);
@@ -405,7 +406,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         _lpPools[tokenAddress].poolwallet.decBalance(user,amounta,amountb);
     }
 
-    // TODO:
+    // TODO: add test cases of ChangeWithDrawPoint
     function ChangeWithDrawPoint(address user,uint256 blocknum,uint256 pendingreward) public
     {
          require(msg.sender==_owner);
@@ -414,7 +415,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         _userInfos[user].lastcheckpoint= _checkpoints.length -1;
     }
     
-    // TODO: 
+    // TODO: add test cases for AddUserTrading
     function AddUserTrading(address tokenAddress,address useraddress,uint256 amounta,uint256 amountb,uint256 addhash,uint256 startblock) public
     {
         require(msg.sender==_owner);
@@ -573,7 +574,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         return true;
     }
  
-    // TODO:
+    // TODO: add test cases of TakeBack
     function TakeBack(address tokenAddress,uint256 pct) public nonReentrant returns (bool)
     {
         require(pct >=10000 &&pct <=1000000);
