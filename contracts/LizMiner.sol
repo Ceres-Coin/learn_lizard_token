@@ -51,7 +51,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     mapping(address=>mapping(uint=>uint256)) _userlevelhashtotal; // level hash in my team
     mapping(address=>address) public _parents;//Inviter //TEST CASES DONE
     mapping(address=>UserInfo) public _userInfos; //TEST CASES DONE
-    mapping(address=>PoolInfo) _lpPools;
+    mapping(address=>PoolInfo) public _lpPools;
     mapping(address=>address[]) _mychilders; //TEST CASES DONE
 
 
