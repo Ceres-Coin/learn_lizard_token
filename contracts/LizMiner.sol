@@ -50,9 +50,11 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     mapping(address=>mapping(address=>uint256)) _teamhashdetail;
     mapping(address=>mapping(uint=>uint256)) _userlevelhashtotal; // level hash in my team
     mapping(address=>address) public _parents;//Inviter //TEST CASES DONE
-    mapping(address=>UserInfo) public _userInfos;
+    mapping(address=>UserInfo) public _userInfos; //TEST CASES DONE
     mapping(address=>PoolInfo) _lpPools;
     mapping(address=>address[]) _mychilders; //TEST CASES DONE
+
+
     event BindingParents(address indexed user,address  inviter);
     event VipChanged(address indexed user,uint256  userlevel);
     event TradingPooladded(address indexed tradetoken);
@@ -82,10 +84,12 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         require(msg.sender==_owner);
         require(_checkpoints.length==0);
         _Lizaddr=lizToken;
-        _Liztrade=liztrade;
-        _wrappedbnbaddress= wrappedbnbaddress;
-        _bnbtradeaddress=bnbtradeaddress;
+        // PAIR
+        _Liztrade=liztrade; 
+        _wrappedbnbaddress= wrappedbnbaddress; 
+        _bnbtradeaddress=bnbtradeaddress; 
         _usdtaddress=usdtaddress;
+        // FEE OWNER
         _feeowner= feeowner;
 
         _minepool = new LizMinePool(lizToken,feeowner);
@@ -256,8 +260,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         if(userlevel >= newlevel)
             return 0;
         uint256 costprice=_vipbuyprice[newlevel] - _vipbuyprice[userlevel];
-        // uint256 costcount=costprice.mul(getExchangeCountOfOneUsdt(_Lizaddr)); 
-        uint256 costcount=costprice.mul(1); 
+        uint256 costcount=costprice.mul(getExchangeCountOfOneUsdt(_Lizaddr)); 
         return costcount;
     }
   
