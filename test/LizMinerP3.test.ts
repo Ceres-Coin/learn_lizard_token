@@ -3,6 +3,7 @@ import {Contract} from 'ethers';
 import {deployContract, MockProvider, solidity} from 'ethereum-waffle';
 import LIZToken from '../build/contracts/LIZToken.json';
 import LizMiner from '../build/contracts/LizMiner.json';
+import LpWallet from '../build/contracts/LpWallet.json';
 import WETH from '../build/contracts/WETH.json'
 import FakeCollateral_USDC from '../build/contracts/FakeCollateral_USDC.json'
 import FakeCollateral_USDT from '../build/contracts/FakeCollateral_USDT.json'
@@ -32,6 +33,7 @@ describe('LizMiner', () => {
   let FEE_OWNER = account5;
   let instanceLizMiner: Contract;
   let instanceLIZToken: Contract;
+  let instanceLpWallet: Contract;
   let instanceWETH : Contract;
   let instanceFakeCollateral_USDC: Contract;
   let instanceFakeCollateral_USDT: Contract;
@@ -175,8 +177,11 @@ describe('LizMiner', () => {
         await instanceLizMiner.addTradingPool(addTradingPool_address,addTradingPool_address,TRADINGPOOL_HASHRATE,TRADINGPOOL_PCTMIN,TRADINGPOOL_PCTMAX);
 
         testToken_address = instanceWETH.address;
-        const poolwallet = await (await instanceLizMiner._lpPools(testToken_address)).poolwallet;
-        console.log(chalk.yellow("poolwallet: ",poolwallet));
+        const poolwallet_address = await (await instanceLizMiner._lpPools(testToken_address)).poolwallet;
+        console.log(chalk.yellow("poolwallet_address: ",poolwallet_address));
+
+        const hashrate = await (await instanceLizMiner._lpPools(testToken_address)).hashrate;
+        console.log(chalk.yellow("hashrate: ",hashrate));
     });
 
 
