@@ -104,6 +104,16 @@ module.exports = async function(deployer, network, accounts) {
 
     const instanceLizToken = await LizToken.deployed();
 
+    // ======== Set the Uniswap pairs CERES_WETH & CERES_USDC ========
+	console.log(chalk.yellow('===== SET UNISWAP PAIRS ====='));
+	console.log(chalk.blue('=== instanceLizToken / XXXX ==='));
+	console.log("instanceLizToken - WETH");
+	console.log("instanceLizToken - USDC");
+	await Promise.all([
+		uniswapFactoryInstance.createPair(instanceLizToken.address, wethInstance.address, { from: CONTRACT_OWNER }),
+		uniswapFactoryInstance.createPair(instanceLizToken.address, col_instance_USDC.address, { from: CONTRACT_OWNER }),
+	]);
+
 
 
 
