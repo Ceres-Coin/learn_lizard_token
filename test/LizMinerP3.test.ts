@@ -139,7 +139,9 @@ describe('LizMiner', () => {
         
         testToken_address = instanceWETH.address;
         const getWalletAddress = await instanceLizMiner.getWalletAddress(testToken_address);
-        console.log(chalk.yellow("getWalletAddress: ",getWalletAddress));
+        // console.log(chalk.yellow("getWalletAddress: ",getWalletAddress));
+        // const tmp = await instanceLizMiner._lpPools(testToken_address);
+        // console.log(chalk.yellow(tmp.poolwallet));
     });
 
     it ('test for fixTradingPool()', async() => {
@@ -148,7 +150,7 @@ describe('LizMiner', () => {
 
         testToken_address = instanceWETH.address;
         const PoolInfo = await instanceLizMiner._lpPools(testToken_address);
-        console.log(chalk.yellow("PoolInfo: ",PoolInfo));
+        // console.log(chalk.yellow("PoolInfo: ",PoolInfo));
         expect(PoolInfo.hashrate).to.equal(TRADINGPOOL_HASHRATE);
         expect(PoolInfo.tradeContract).to.equal(testToken_address);
         expect(PoolInfo.minpct).to.equal(TRADINGPOOL_PCTMIN);
@@ -161,7 +163,7 @@ describe('LizMiner', () => {
         await instanceLizMiner.fixTradingPool(testToken_address,tradecontract_modified,hashrate_modified,pctmin_modified,pctmax_modified);
 
         const PoolInfo_modified = await instanceLizMiner._lpPools(testToken_address);
-        console.log(chalk.yellow("PoolInfo_modified: ",PoolInfo_modified));
+        // console.log(chalk.yellow("PoolInfo_modified: ",PoolInfo_modified));
         expect(PoolInfo_modified.hashrate).to.equal(hashrate_modified);
         expect(PoolInfo_modified.tradeContract).to.equal(tradecontract_modified);
         expect(PoolInfo_modified.minpct).to.equal(pctmin_modified);
