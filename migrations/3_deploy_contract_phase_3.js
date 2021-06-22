@@ -15,6 +15,7 @@ const UniswapV2Library = artifacts.require("Uniswap/UniswapV2Library");
 const UniswapV2Pair = artifacts.require("Uniswap/UniswapV2Pair");
 const UniswapV2Factory = artifacts.require("Uniswap/UniswapV2Factory");
 const UniswapV2Router02_Modified = artifacts.require("Uniswap/UniswapV2Router02_Modified");
+const SwapToPrice = artifacts.require("Uniswap/SwapToPrice");
 
 // FAKE token
 const WETH = artifacts.require("BEP20/WETH");
@@ -23,6 +24,7 @@ const FakeCollateral_USDT = artifacts.require("FakeCollateral/FakeCollateral_USD
 const LizToken = artifacts.require("LIZToken");
 
 // set constants
+console.log(chalk.yellow('===== SET CONSTANTS ====='));
 const ONE_MILLION_DEC18 = new BigNumber("1000000e18");
 const FIVE_MILLION_DEC18 = new BigNumber("5000000e18");
 const TEN_MILLION_DEC18 = new BigNumber("10000000e18");
@@ -30,6 +32,13 @@ const ONE_HUNDRED_MILLION_DEC18 = new BigNumber("100000000e18");
 const ONE_HUNDRED_MILLION_DEC6 = new BigNumber("100000000e6");
 const ONE_BILLION_DEC18 = new BigNumber("1000000000e18");
 const COLLATERAL_SEED_DEC18 = new BigNumber(508500e18);
+const SIX_HUNDRED_DEC18 = new BigNumber(600e18);
+const SIX_HUNDRED_DEC6 = new BigNumber(600e6);
+const ONE_DEC18 = new BigNumber(1e18);
+const ONE_HUNDRED_DEC18 = new BigNumber(100e18);
+const ONE_HUNDRED_DEC6 = new BigNumber(100e6);
+const Number133_DEC18 = new BigNumber(133e18);
+const EIGHT_HUNDRED_DEC18 = new BigNumber(800e18);
 
 
 
@@ -71,8 +80,9 @@ module.exports = async function(deployer, network, accounts) {
 	let uniswapFactoryInstance;
     let wethInstance;
     let col_instance_USDC;
+    let swapToPriceInstance;
 
-    if (IS_DEV) {
+    if (IS_DEV || IS_BSC_TESTNET) {
         console.log(chalk.yellow('===== FAKE COLLATERAL ====='));
 
 		await deployer.deploy(WETH, CONTRACT_OWNER);
@@ -85,7 +95,7 @@ module.exports = async function(deployer, network, accounts) {
 		console.log("col_instance_USDC: ",col_instance_USDC.address);
     }
 
-    if (IS_DEV) {
+    if (IS_DEV || IS_BSC_TESTNET) {
         await deployer.deploy(UniswapV2ERC20);
         await deployer.deploy(UniswapV2OracleLibrary);
         await deployer.deploy(UniswapV2Library);
@@ -97,10 +107,40 @@ module.exports = async function(deployer, network, accounts) {
 		routerInstance = await UniswapV2Router02_Modified.deployed(); 
 		uniswapFactoryInstance = await UniswapV2Factory.deployed(); 
 
+        
+
+
+
+        
+        await deployer.link(UniswapV2ERC20, [UniswapV2Pair]);
+        await deployer.link(UniswapV2Pair, [UniswapV2Factory]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         console.log(chalk.yellow('===== RouterInstantce & Uniswap Factory address ====='));
         console.log(chalk.yellow("routerInstance: ",routerInstance.address));
         console.log(chalk.yellow("uniswapFactoryInstance: ",uniswapFactoryInstance.address));
-    }
+
+        // Deploy SwapToPrice contract
+		await deployer.deploy(SwapToPrice, uniswapFactoryInstance.address, routerInstance.address);
+		swapToPriceInstance = await SwapToPrice.deployed();
+        console.log(chalk.yellow('===== swapToPriceInstance address ====='));
+        console.log("swapToPriceInstance: ",swapToPriceInstance.address);
+	}
 
     const instanceLizToken = await LizToken.deployed();
 
@@ -126,6 +166,42 @@ module.exports = async function(deployer, network, accounts) {
 	const pair_instance_LIZ_USDC = await UniswapV2Pair.at(pair_addr_LIZ_USDC);
 	console.log(chalk.red.bold("pair_instance_LIZ_WETH: ",pair_instance_LIZ_WETH.address));
 	console.log(chalk.red.bold("pair_instance_LIZ_USDC: ",pair_instance_LIZ_USDC.address));
+
+    await Promise.all([
+		wethInstance.approve(routerInstance.address, new BigNumber(2000000e18), { from: CONTRACT_OWNER }),
+		col_instance_USDC.approve(routerInstance.address, new BigNumber(2000000e6), { from: CONTRACT_OWNER }),
+	]);	
+
+    console.log(chalk.redBright.bold(await instanceLizToken.balanceOf(CONTRACT_OWNER)));
+    console.log(chalk.redBright.bold(await instanceLizToken.totalSupply()));
+
+    // add liquidility
+	await Promise.all([
+		// LIZToken / WETH
+		// routerInstance.addLiquidity(
+		// 	instanceLizToken.address, 
+		// 	wethInstance.address,
+		// 	new BigNumber(SIX_HUNDRED_DEC18), 
+		// 	new BigNumber(ONE_DEC18), 
+		// 	new BigNumber(SIX_HUNDRED_DEC18), 
+		// 	new BigNumber(ONE_DEC18), 
+		// 	CONTRACT_OWNER, 
+		// 	new BigNumber(2105300114), 
+		// 	{ from: CONTRACT_OWNER }
+		// ),
+		// LIZToken / USDC
+		routerInstance.addLiquidity(
+			instanceLizToken.address, 
+			col_instance_USDC.address,
+			new BigNumber(ONE_HUNDRED_DEC18), 
+			new BigNumber(ONE_HUNDRED_DEC6), 
+			new BigNumber(ONE_HUNDRED_DEC18), 
+			new BigNumber(ONE_HUNDRED_DEC6), 
+			CONTRACT_OWNER, 
+			new BigNumber(2105300114), 
+			{ from: CONTRACT_OWNER }
+		)
+    ]);
 	
 
 
