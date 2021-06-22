@@ -168,6 +168,7 @@ module.exports = async function(deployer, network, accounts) {
 	console.log(chalk.red.bold("pair_instance_LIZ_USDC: ",pair_instance_LIZ_USDC.address));
 
     await Promise.all([
+        instanceLizToken.approve(routerInstance.address, new BigNumber(2000000e18), { from: CONTRACT_OWNER }),
 		wethInstance.approve(routerInstance.address, new BigNumber(2000000e18), { from: CONTRACT_OWNER }),
 		col_instance_USDC.approve(routerInstance.address, new BigNumber(2000000e6), { from: CONTRACT_OWNER }),
 	]);	
@@ -178,17 +179,17 @@ module.exports = async function(deployer, network, accounts) {
     // add liquidility
 	await Promise.all([
 		// LIZToken / WETH
-		// routerInstance.addLiquidity(
-		// 	instanceLizToken.address, 
-		// 	wethInstance.address,
-		// 	new BigNumber(SIX_HUNDRED_DEC18), 
-		// 	new BigNumber(ONE_DEC18), 
-		// 	new BigNumber(SIX_HUNDRED_DEC18), 
-		// 	new BigNumber(ONE_DEC18), 
-		// 	CONTRACT_OWNER, 
-		// 	new BigNumber(2105300114), 
-		// 	{ from: CONTRACT_OWNER }
-		// ),
+		routerInstance.addLiquidity(
+			instanceLizToken.address, 
+			wethInstance.address,
+			new BigNumber(SIX_HUNDRED_DEC18), 
+			new BigNumber(ONE_DEC18), 
+			new BigNumber(SIX_HUNDRED_DEC18), 
+			new BigNumber(ONE_DEC18), 
+			CONTRACT_OWNER, 
+			new BigNumber(2105300114), 
+			{ from: CONTRACT_OWNER }
+		),
 		// LIZToken / USDC
 		routerInstance.addLiquidity(
 			instanceLizToken.address, 
