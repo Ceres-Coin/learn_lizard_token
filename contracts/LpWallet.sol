@@ -6,10 +6,10 @@ import "./lib/token/BEP20/IBEP20.sol";
 
 contract LpWallet //EMPTY CONTRACT TO HOLD THE USERS assetS
 {
-    address lptoken;
-    address liztoken;
-    address _MainContract;
-    address _feeowner;
+    address public _MainContract;
+    address public lptoken;
+    address public liztoken;
+    address public _feeowner;
 
     mapping(address=>uint256) _balancesa;
     mapping(address=>uint256) _balancesb;
