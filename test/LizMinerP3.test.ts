@@ -103,7 +103,9 @@ describe('LizMiner', () => {
         await instanceLizMiner.addTradingPool(testToken_address,testToken_address,1,1,10000);
 
         const getPoolTotal = await instanceLizMiner.getPoolTotal(testToken_address);
-        console.log(chalk.yellow("getPoolTotal: ",getPoolTotal));
+        // check getPoolTotal default value is 0;
+        expect(getPoolTotal).to.equal(0);
+
     });
 
     it('test for _lpPools', async() => {
