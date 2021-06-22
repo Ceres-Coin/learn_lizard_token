@@ -40,6 +40,7 @@ describe('LizMiner', () => {
   let instanceLIZToken_fromAccount2;
   let instanceLizMiner_fromAccount1;
   let instanceLizMiner_fromAccount2;
+  let testToken_address:any;
 
   beforeEach(async () => {
     instanceLizMiner = await deployContract(wallet, LizMiner,[]);
@@ -63,7 +64,6 @@ describe('LizMiner', () => {
 
     // console.log(chalk.redBright.bold("========= initial contract ========="));
     await instanceLizMiner.InitalContract(instanceLIZToken.address,instanceWETH.address,instanceWETH.address,instanceWETH.address,instanceWETH.address,FEE_OWNER.address);
-
   });
 
 
@@ -95,7 +95,12 @@ describe('LizMiner', () => {
         ]);	
         instanceLizMiner_fromAccount2 = instanceLizMiner.connect(account2);
         await instanceLizMiner_fromAccount2.buyVip(1,{gasLimit:GAS_LIMIT});
-    }
+    };
+
+    async function addTradingPool() {
+        const testToken_address = instanceWETH.address;
+        await instanceLizMiner.addTradingPool(testToken_address,testToken_address,TRADINGPOOL_HASHRATE,TRADINGPOOL_PCTMIN,TRADINGPOOL_PCTMAX);
+    };
 
     it('getOwner()', async () => {
         await loadFixture(buildConnWalletToAccount1ToAccount2);
@@ -127,6 +132,14 @@ describe('LizMiner', () => {
         expect(PoolInfo.minpct).to.equal(TRADINGPOOL_PCTMIN);
         expect(PoolInfo.maxpct).to.equal(TRADINGPOOL_PCTMAX);
 
+    });
+
+    it ('test for getWalletAddress()', async() => {
+        await loadFixture(addTradingPool);
+        
+        testToken_address = instanceWETH.address;
+        const getWalletAddress = await instanceLizMiner.getWalletAddress(testToken_address);
+        console.log(chalk.yellow("getWalletAddress: ",getWalletAddress));
     });
 
 

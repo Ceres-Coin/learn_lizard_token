@@ -119,7 +119,8 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     }
  
  
-    // TODO: TradingPool#2 Test -- addTradingPool
+    // TradingPool#2 Test -- addTradingPool
+    // TEST CASES DONE
     function addTradingPool(address tokenAddress,address tradecontract,uint256 rate,uint pctmin,uint pctmax) public returns (bool) 
     {
         require(msg.sender==_owner);
@@ -157,7 +158,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         return OneBlockReward(_nowtotalhash);
     }
 
-    // TODO:
+    // TODO: OneBlockReward
     function OneBlockReward(uint256 totalhash) public pure returns (uint256)
     {
         if(totalhash < 10000000 * 1000000000000000000)
@@ -266,7 +267,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     }
   
     //******************Getters ************************************/
-    // TODO:
+    // TODO: add test cases for getWalletAddress
     function getWalletAddress(address lptoken) public view returns (address)
     {
         return address(_lpPools[lptoken].poolwallet);
