@@ -29,25 +29,25 @@ contract("2nd MetaCoin test", async accounts => {
     const balance = await meta.getBalance.call(account_one);
     const account_one_starting_balance = balance.toNumber();
 
-    // balance = await meta.getBalance.call(account_two);
-    // const account_two_starting_balance = balance.toNumber();
-    // await meta.sendCoin(account_two, amount, { from: account_one });
+    const balance2 = await meta.getBalance.call(account_two);
+    const account_two_starting_balance = balance2.toNumber();
+    await meta.sendCoin(account_two, amount, { from: account_one });
 
-    // balance = await meta.getBalance.call(account_one);
-    // const account_one_ending_balance = balance.toNumber();
+    const balance_after = await meta.getBalance.call(account_one);
+    const account_one_ending_balance = balance_after.toNumber();
 
-    // balance = await meta.getBalance.call(account_two);
-    // const account_two_ending_balance = balance.toNumber();
+    const balance2_after = await meta.getBalance.call(account_two);
+    const account_two_ending_balance = balance2_after.toNumber();
 
-    // assert.equal(
-    //   account_one_ending_balance,
-    //   account_one_starting_balance - amount,
-    //   "Amount wasn't correctly taken from the sender"
-    // );
-    // assert.equal(
-    //   account_two_ending_balance,
-    //   account_two_starting_balance + amount,
-    //   "Amount wasn't correctly sent to the receiver"
-    // );
+    assert.equal(
+      account_one_ending_balance,
+      account_one_starting_balance - amount,
+      "Amount wasn't correctly taken from the sender"
+    );
+    assert.equal(
+      account_two_ending_balance,
+      account_two_starting_balance + amount,
+      "Amount wasn't correctly sent to the receiver"
+    );
   });
 });
