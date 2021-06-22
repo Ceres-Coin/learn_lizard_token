@@ -1,18 +1,18 @@
 const MetaCoin = artifacts.require("MetaCoin");
+const LizMiner = artifacts.require("LizMiner");
+const LizToken = artifacts.require("LIZToken");
+
+const chalk = require('chalk');
 
 contract("LizMiner test script", async accounts => {
-  it("should put 10000 MetaCoin in the first account", async () => {
-    const instance = await MetaCoin.deployed();
-    const balance = await instance.getBalance.call(accounts[0]);
-    assert.equal(balance.valueOf(), 10000);
+  it("LizMiner_test001", async () => {
+    const instantceLizMiner = await LizMiner.deployed()
+    const instanceLizToken = await LizToken.deployed();
+    
+    // Print
+    console.log(chalk.redBright.bold("instantceLizMiner: ",instantceLizMiner.address));
+    console.log(chalk.redBright.bold("instanceLizToken: ",instanceLizToken.address));
   });
 
-  it("should call a function that depends on a linked library", async () => {
-    const meta = await MetaCoin.deployed();
-    const outCoinBalance = await meta.getBalance.call(accounts[0]);
-    const metaCoinBalance = outCoinBalance.toNumber();
-    const outCoinBalanceEth = await meta.getBalanceInEth.call(accounts[0]);
-    const metaCoinEthBalance = outCoinBalanceEth.toNumber();
-    assert.equal(metaCoinEthBalance, 2 * metaCoinBalance);
-  });
+
 });
