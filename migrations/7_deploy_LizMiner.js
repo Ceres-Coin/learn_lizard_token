@@ -43,6 +43,7 @@ module.exports = async function(deployer, network, accounts) {
     console.log(chalk.green.bold("=================== START Test 3_test_LizMiner ==================="));
     console.log(chalk.green.bold("=================== START Test 3_test_LizMiner ==================="));
     
+    
     // Print Accounts list
     const account0 = accounts[0];
     const CONTRACT_OWNER = account0;
@@ -72,9 +73,9 @@ module.exports = async function(deployer, network, accounts) {
     if (IS_DEV || IS_BSC_TESTNET) {
         console.log(chalk.yellow('===== FAKE COLLATERAL ====='));
 
-		await deployer.deploy(WETH, CONTRACT_OWNER);
-        await deployer.deploy(FakeCollateral_USDC, CONTRACT_OWNER, ONE_HUNDRED_MILLION_DEC6, "USDC", 6);
-        await deployer.deploy(FakeCollateral_USDT, CONTRACT_OWNER, ONE_HUNDRED_MILLION_DEC6, "USDC", 6);
+		// await deployer.deploy(WETH, CONTRACT_OWNER);
+        // await deployer.deploy(FakeCollateral_USDC, CONTRACT_OWNER, ONE_HUNDRED_MILLION_DEC6, "USDC", 6);
+        // await deployer.deploy(FakeCollateral_USDT, CONTRACT_OWNER, ONE_HUNDRED_MILLION_DEC6, "USDC", 6);
 
         wethInstance = await WETH.deployed();
 		col_instance_USDC = await FakeCollateral_USDC.deployed(); 
