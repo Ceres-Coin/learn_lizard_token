@@ -8,6 +8,7 @@ import "./lib/token/BEP20/BEP20.sol";
 import "./LizMinerDefine.sol";
 import "./LpWallet.sol";
 import "./LizMinePool.sol";
+import "./lib/access/Ownable.sol";
 
 
 interface IPancakePair {
@@ -27,7 +28,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     address private _owner;
     address private _feeowner;
     LizMinePool private _minepool;
-    
+
     struct PoolInfo {
         LpWallet poolwallet;
         uint256 hashrate;  //  The LP hashrate
@@ -45,11 +46,11 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     mapping(address=>mapping(address=>uint256)) _oldpool;
     mapping(address=>mapping(address=>uint256)) _userLphash;
     mapping(address=>mapping(address=>uint256)) _teamhashdetail;
-    mapping(address=>mapping(uint=>uint256)) _userlevelhashtotal; // level hash in my team
-    mapping(address=>address) public _parents;//Inviter //TEST CASES DONE
-    mapping(address=>UserInfo) public _userInfos; //TEST CASES DONE
+    mapping(address=>mapping(uint=>uint256)) _userlevelhashtotal; 
+    mapping(address=>address) public _parents;
+    mapping(address=>UserInfo) public _userInfos; 
     mapping(address=>PoolInfo) public _lpPools;
-    mapping(address=>address[]) _mychilders; //TEST CASES DONE
+    mapping(address=>address[]) _mychilders; 
 
 
     event BindingParents(address indexed user,address  inviter);
@@ -64,29 +65,25 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         _owner=msg.sender;
     }
 
-    // TEST CASE DONE
     function getMinerPoolAddress() public view returns(address)
     {
         return address(_minepool);
     }
-    // TEST CASE DONE
+
     function getMyChilders(address user) public view returns(address[] memory)
     {
         return _mychilders[user];
     } 
 
-    // TEST CASES DONE
     function InitalContract(address lizToken,address liztrade,address wrappedbnbaddress,address bnbtradeaddress,address usdtaddress,address feeowner) public
     {
         require(msg.sender==_owner);
         require(_checkpoints.length==0);
         _Lizaddr=lizToken;
-        // PAIR
         _Liztrade=liztrade; 
         _wrappedbnbaddress= wrappedbnbaddress; 
         _bnbtradeaddress=bnbtradeaddress; 
         _usdtaddress=usdtaddress;
-        // FEE OWNER
         _feeowner= feeowner;
 
         _minepool = new LizMinePool(lizToken,feeowner);
@@ -103,9 +100,6 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         _levelconfig[7] = [250,180,160,110,40,30,20,10,10,10,10,10,10,10,10,10,10,10,10,10];
     }
 
-    // TradingPool#1 Test -- fixTradingPool
-    // Contracts for TradingPool
-    // TEST CASES DONE
     function fixTradingPool(address tokenAddress,address tradecontract,uint256 rate,uint pctmin,uint pctmax) public returns (bool) 
     {
         require(msg.sender==_owner);
@@ -116,9 +110,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         return true;
     }
  
- 
-    // TradingPool#2 Test -- addTradingPool
-    // TEST CASES DONE
+
     function addTradingPool(address tokenAddress,address tradecontract,uint256 rate,uint pctmin,uint pctmax) public returns (bool) 
     {
         require(msg.sender==_owner);
@@ -139,24 +131,20 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     }
 
      //******************Getters ******************/
-    // TEST CASES DONE
     function getOwner() public view returns(address) {
         return _owner;
     }
 
-    // TEST CASES DONE
     function getParent(address user) public view returns(address)
     {
         return _parents[user];
     }
 
-    // TEST CASES DONE
     function CurrentBlockReward() public view returns (uint256)
     {
         return OneBlockReward(_nowtotalhash);
     }
 
-    // TODO: OneBlockReward
     function OneBlockReward(uint256 totalhash) public pure returns (uint256)
     {
         if(totalhash < 10000000 * 1000000000000000000)
@@ -165,13 +153,11 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
             return 100000000;
     }
 
-    // Test Cases Done
      function getTotalHash() public view returns (uint256)
      {
          return _nowtotalhash;
      }
 
-    // TEST CASES DONE
      function getPoolTotal(address tokenaddress) public view returns (uint256)
      {
          return _lpPools[tokenaddress].totaljthash;
@@ -187,31 +173,26 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
          return bb;
      }
 
-    // TEST CASES DONE
      function getUserLevel(address user) public view returns (uint)
     {
         return _userInfos[user].userlevel;
     }
 
-    // TEST CASES DONE
     function getUserTeamHash(address user) public view returns (uint256)
     {
         return _userInfos[user].teamhash;
     }
  
-    // TEST CASES DONE
     function getUserSelfHash(address user) public view returns (uint256)
     {
         return _userInfos[user].selfhash;
     }
 
-    // Test Cases done
     function getFeeOnwer() public view returns (address)
     {
         return _feeowner;
     }
   
-    // TEST CASES DONE
     function getExchangeCountOfOneUsdt(address lptoken) public view returns (uint256)
     {
         // require(_lpPools[lptoken].tradeContract !=address(0));
@@ -250,7 +231,6 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         }
     }
 
-    // TEST CASES DONE
     function buyVipPrice(address user,uint newlevel) public view returns (uint256)
     {
         if(newlevel>=8)
@@ -265,7 +245,6 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
     }
   
     //******************Getters ************************************/
-    // add test cases for getWalletAddress
     function getWalletAddress(address lptoken) public view returns (address)
     {
         return address(_lpPools[lptoken].poolwallet);
@@ -320,88 +299,12 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         return hashdiff;
     }
 
-    // TEST CASES DONE
     function SetUserLevel(address user,uint level) public
     {
         require(msg.sender==_owner);
         _userInfos[user].userlevel=level;
 
     }
-
-    // // TODO: add test cases of DontDoingThis 
-    // function DontDoingThis(address tokenaddress,uint256 pct2) public nonReentrant returns (bool)
-    // {
-    //     require(_oldpool[msg.sender][tokenaddress] >0,"ERROR");
-    //     require(pct2 >=10000 &&pct2 <=1000000);
-    //     require(_lpPools[tokenaddress].poolwallet.getBalance(msg.sender,true) >= 10000,"ERROR AMOUNT");
-    //     uint256 decreasehash=_userLphash[msg.sender][tokenaddress];
-    //     uint256 amounta= _lpPools[tokenaddress].poolwallet.getBalance(msg.sender,true);
-    //     uint256 amountb= _lpPools[tokenaddress].poolwallet.getBalance(msg.sender,false);
-    //     _userLphash[msg.sender][tokenaddress]=0;
-    //     _lpPools[tokenaddress].totaljthash= _lpPools[tokenaddress].totaljthash.sub(decreasehash);
-       
-    //     address parent=msg.sender;
-    //     uint256 dthash=0;
-    //     for(uint i=0;i<20;i++)
-    //     {
-    //         parent = _parents[parent];
-    //         if(parent==address(0))
-    //             break;
-    //         uint256 basehash= decreasehash;
-    //         if(_teamhashdetail[parent][msg.sender] < basehash)
-    //             basehash= _teamhashdetail[parent][msg.sender];
-
-    //          _teamhashdetail[parent][msg.sender]= _teamhashdetail[parent][msg.sender].sub(basehash);
-
-    //         _userlevelhashtotal[parent][i]= _userlevelhashtotal[parent][i].sub(basehash);
-    //         uint256 parentlevel= _userInfos[parent].userlevel;
-    //         uint256 pdechash= basehash.mul(_levelconfig[parentlevel][i]).div(1000);
-    //         if(pdechash > 0)
-    //         {
-    //             dthash=dthash.add(pdechash);
-    //             UserHashChanged(parent,0,pdechash,false,block.number);
-    //         } 
-    //     }
-    //     UserHashChanged(msg.sender,decreasehash,0,false,block.number);
-    //     logCheckPoint(decreasehash.add(dthash),false,block.number);
-    //     _lpPools[tokenaddress].poolwallet.decBalance(msg.sender,amounta,amountb);
-    //     _oldpool[msg.sender][tokenaddress]=0;
-    //     return true;
-    // }
-
-    // // TODO: add test cases of DoNotContractthis
-    // function DoNotContractthis(address tokenAddress,address user,uint256 decreasehash,uint256 startblock,uint256 amounta,uint256 amountb) public
-    // {
-    //     require(msg.sender==_owner);
-    //     _userLphash[user][tokenAddress]= _userLphash[user][tokenAddress].sub(decreasehash);
-    //     _lpPools[tokenAddress].totaljthash= _lpPools[tokenAddress].totaljthash.sub(decreasehash);
-       
-    //     address parent=user;
-    //     uint256 dthash=0;
-    //     for(uint i=0;i<20;i++)
-    //     {
-    //         parent = _parents[parent];
-    //         if(parent==address(0))
-    //             break;
-    //         uint256 basehash= decreasehash;
-    //         if(_teamhashdetail[parent][user] < basehash)
-    //             basehash= _teamhashdetail[parent][user];
-
-    //          _teamhashdetail[parent][user]= _teamhashdetail[parent][user].sub(basehash);
-
-    //         _userlevelhashtotal[parent][i]= _userlevelhashtotal[parent][i].sub(basehash);
-    //         uint256 parentlevel= _userInfos[parent].userlevel;
-    //         uint256 pdechash= basehash.mul(_levelconfig[parentlevel][i]).div(1000);
-    //         if(pdechash > 0)
-    //         {
-    //             dthash=dthash.add(pdechash);
-    //             UserHashChanged(parent,0,pdechash,false,startblock);
-    //         } 
-    //     }
-    //     UserHashChanged(user,decreasehash,0,false,startblock);
-    //     logCheckPoint(decreasehash.add(dthash),false,startblock);
-    //     _lpPools[tokenAddress].poolwallet.decBalance(user,amounta,amountb);
-    // }
 
     // TODO: add test cases of ChangeWithDrawPoint
     function ChangeWithDrawPoint(address user,uint256 blocknum,uint256 pendingreward) public
@@ -467,13 +370,11 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         return true;
     }
 
-    // TEST CASE DONE
     function getBalanceIBEP20() public view returns (uint256)
     {
         return IBEP20(_Lizaddr).balanceOf(msg.sender);
     }
 
-    // TEST CASES DONE
     function bindParent(address parent) public 
     {
         require(_parents[msg.sender]==address(0),"Already bind");
@@ -484,7 +385,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         _mychilders[parent].push(msg.sender);
         emit BindingParents(msg.sender,parent);
     }
-    // TEST CASE DONE
+
     function SetParentByAdmin(address user,address parent) public
     {
         require(msg.sender==_owner);
@@ -492,7 +393,6 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
          _mychilders[parent].push(user);
     }
 
-    // TEST CASE DONE
     function  getPendingCoin(address user) public view returns(uint256)
     {
         if(_userInfos[user].lastblock==0)
@@ -557,7 +457,6 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         _userInfos[user]=info;
     }
 
-    // TEST CASES DONE
     function WithDrawCredit() public nonReentrant returns (bool)
     {
         uint256 amount = getPendingCoin(msg.sender);
@@ -571,7 +470,6 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine {
         return true;
     }
  
-    // TODO: add test cases of TakeBack
     function TakeBack(address tokenAddress,uint256 pct) public nonReentrant returns (bool)
     {
         require(pct >=10000 &&pct <=1000000);
