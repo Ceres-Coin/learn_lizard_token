@@ -170,5 +170,14 @@ describe('LizMiner', () => {
         expect(PoolInfo_modified.maxpct).to.equal(pctmax_modified);
     });
 
+    it ('test for _lpPools.poolwallet',async() => {
+        const addTradingPool_address = instanceWETH.address;
+        await instanceLizMiner.addTradingPool(addTradingPool_address,addTradingPool_address,TRADINGPOOL_HASHRATE,TRADINGPOOL_PCTMIN,TRADINGPOOL_PCTMAX);
+
+        testToken_address = instanceWETH.address;
+        const poolwallet = await (await instanceLizMiner._lpPools(testToken_address)).poolwallet;
+        console.log(chalk.yellow("poolwallet: ",poolwallet));
+    });
+
 
 });
