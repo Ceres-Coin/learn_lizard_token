@@ -21,9 +21,13 @@ contract("LizMiner test script", async (accounts,network) => {
     const account6 = accounts[6];
     const account7 = accounts[7];
     let wethInstance;
+    let instanceLizToken;
+    let instanceLizMiner;
 
     beforeEach(async () => {
         wethInstance = await WETH.deployed();
+        instanceLizMiner = await LizMiner.deployed()
+        instanceLizToken = await LizToken.deployed();
       });
 
     it("check LizMiner.getPoolTotal default value is 0", async () => {
@@ -91,6 +95,11 @@ contract("LizMiner test script", async (accounts,network) => {
         expect(new BigNumber(getMyLpInfo[0]).toNumber()).to.equal(0);
         expect(new BigNumber(getMyLpInfo[1]).toNumber()).to.equal(0);
         expect(new BigNumber(getMyLpInfo[2]).toNumber()).to.equal(0);
+    });
+
+    it ("check getExchangeCountOfOneUsdt",async() => {
+        const getExchangeCountOfOneUsdt = (new BigNumber(await instanceLizMiner.getExchangeCountOfOneUsdt(instanceLizToken.address))).toNumber();
+        console.log(chalk.yellow("getExchangeCountOfOneUsdt: ",getExchangeCountOfOneUsdt));
     });
 
 
