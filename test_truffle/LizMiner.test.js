@@ -25,6 +25,7 @@ const COLLATERAL_SEED_DEC18 = new BigNumber(508500e18);
 const SIX_HUNDRED_DEC18 = new BigNumber(600e18);
 const SIX_HUNDRED_DEC6 = new BigNumber(600e6);
 const ONE_DEC18 = new BigNumber(1e18);
+const TWO_DEC18 = new BigNumber(2e18);
 const ONE_HUNDRED_DEC18 = new BigNumber(100e18);
 const ONE_HUNDRED_DEC6 = new BigNumber(100e6);
 const Number133_DEC18 = new BigNumber(133e18);
@@ -201,6 +202,19 @@ contract("LizMiner test script", async (accounts,network) => {
         // Print
         // console.log(chalk.yellow("getBalance_account0_true: ",getBalance_account0_true));
         // console.log(chalk.yellow("getBalance_account0_false: ",getBalance_account0_false));
+    });
+
+    it ("check LPWallet_LIZToken.decBalance() works & getBalance works", async() => {
+        await instanceLpWallet_LIZToken.addBalance(account0,ONE_DEC18,ONE_DEC18);
+
+        const getBalance_account0_true = (new BigNumber(await instanceLpWallet_LIZToken.getBalance(account0,true))).toNumber();
+        const getBalance_account0_false = (new BigNumber(await instanceLpWallet_LIZToken.getBalance(account0,false))).toNumber();
+        expect(getBalance_account0_true).to.equal(TWO_DEC18.toNumber());
+        expect(getBalance_account0_false).to.equal(TWO_DEC18.toNumber());
+        // ACTION & ASSERTION
+        await instanceLpWallet_LIZToken.decBalance(account0,ONE_DEC18,ONE_DEC18);
+        expect((new BigNumber(await instanceLpWallet_LIZToken.getBalance(account0,true))).toNumber()).to.equal(ONE_DEC18.toNumber());
+        expect((new BigNumber(await instanceLpWallet_LIZToken.getBalance(account0,false))).toNumber()).to.equal(ONE_DEC18.toNumber());
     });
 
 
