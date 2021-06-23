@@ -252,4 +252,10 @@ contract("LizMiner test script", async (accounts,network) => {
         const balanceOf = (new BigNumber(await instanceLizToken.balanceOf(instanceMinerPool.address))).toNumber();
         expect(balanceOf).to.equal(0);
     });
+
+    it ("check instanceLizMiner.getPoolTotal() default value is 0" , async() => {
+        expect(new BigNumber(await instanceLizMiner.getPoolTotal(wethInstance.address)).toNumber()).to.equal(0);
+        expect(new BigNumber(await instanceLizMiner.getPoolTotal(col_instance_USDC.address)).toNumber()).to.equal(0);
+        expect(new BigNumber(await instanceLizMiner.getPoolTotal(instanceLizToken.address)).toNumber()).to.equal(0);
+    });
 });

@@ -100,6 +100,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         _levelconfig[7] = [250,180,160,110,40,30,20,10,10,10,10,10,10,10,10,10,10,10,10,10];
     }
 
+    // TEST CASE DONE
     function fixTradingPool(address tokenAddress,address tradecontract,uint256 rate,uint pctmin,uint pctmax) public onlyOwner returns (bool) 
     {
         
@@ -110,7 +111,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         return true;
     }
  
-
+    // TEST CASE DONE
     function addTradingPool(address tokenAddress,address tradecontract,uint256 rate,uint pctmin,uint pctmax) public onlyOwner returns (bool) 
     {
         
@@ -131,20 +132,24 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
     }
 
      //******************Getters ******************/
+    // TEST CASE DONE    
     function getOwner() public view returns(address) {
         return _owner;
     }
 
+    // TEST CASE DONE
     function getParent(address user) public view returns(address)
     {
         return _parents[user];
     }
 
+    // TEST CASE DONE
     function CurrentBlockReward() public view returns (uint256)
     {
         return OneBlockReward(_nowtotalhash);
     }
 
+    // TEST CASE DONE
     function OneBlockReward(uint256 totalhash) public pure returns (uint256)
     {
         if(totalhash < 10000000 * 1000000000000000000)
@@ -153,10 +158,12 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
             return 100000000;
     }
 
-     function getTotalHash() public view returns (uint256)
-     {
+    // TEST CASE DONE
+    function getTotalHash() public view returns (uint256)
+    {
          return _nowtotalhash;
-     }
+    }
+
 
      function getPoolTotal(address tokenaddress) public view returns (uint256)
      {
