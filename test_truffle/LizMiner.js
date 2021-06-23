@@ -21,10 +21,12 @@ contract("LizMiner test script", async (accounts,network) => {
     const account6 = accounts[6];
     const account7 = accounts[7];
 
-    it("LizMiner_test001", async () => {
+    it("check LizMiner.getPoolTotal default value is 0", async () => {
         const instantceLizMiner = await LizMiner.deployed()
         const instanceLizToken = await LizToken.deployed();
         const wethInstance = await WETH.deployed();
+        const getPoolTotal = await instantceLizMiner.getPoolTotal(wethInstance.address);
+        console.log(chalk.blue("getPoolTotal: ",getPoolTotal));
 
         // Print instantceLizMiner.address & instanceLizToken.address
         // console.log(chalk.redBright.bold("instantceLizMiner: ",instantceLizMiner.address));
