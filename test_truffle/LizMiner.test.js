@@ -111,14 +111,28 @@ contract("LizMiner test script", async (accounts,network) => {
 
     it ("getWalletAddress()",async() => {
         const getWalletAddress_weth = await instanceLizMiner.getWalletAddress(wethInstance.address);
-        console.log(chalk.yellow("getWalletAddress_weth: ",getWalletAddress_weth));
-
         const getWalletAddress_usdc = await instanceLizMiner.getWalletAddress(col_instance_USDC.address);
-        console.log(chalk.yellow("getWalletAddress_usdc: ",getWalletAddress_usdc));
-
         const getWalletAddress_LIZToken = await instanceLizMiner.getWalletAddress(instanceLizToken.address);
-        console.log(chalk.yellow("getWalletAddress_LIZToken: ",getWalletAddress_LIZToken));
+
+        // console.log(chalk.yellow("getWalletAddress_weth: ",getWalletAddress_weth));
+        // console.log(chalk.yellow("getWalletAddress_usdc: ",getWalletAddress_usdc));
+        // console.log(chalk.yellow("getWalletAddress_LIZToken: ",getWalletAddress_LIZToken));
     });
+
+    // TODO: add test scripts of wethInstance's LPWallet
+    it ("get LPWallet instance at wethInstance()",async() => {
+        const getWalletAddress_weth = await instanceLizMiner.getWalletAddress(wethInstance.address);
+        const instanceLpWallet = await LpWallet.at(getWalletAddress_weth);
+    });
+
+    // TODO: add test scripts of LIZToken's LPWallet
+    it ("get LPWallet instance at LIZToken()",async() => {
+        const getWalletAddress_LIZToken = await instanceLizMiner.getWalletAddress(instanceLizToken.address);
+        const instanceLpWallet = await LpWallet.at(getWalletAddress_LIZToken);
+        
+    });
+
+    
 
 
 });
