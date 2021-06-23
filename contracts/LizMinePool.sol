@@ -17,6 +17,18 @@ contract LizMinePool
         _feeowner=feeowner;
     }
 
+    function get_owner() public view returns(address) {
+        return _owner;
+    }
+    
+    function get_token() public view returns(address) {
+        return _token;
+    }
+
+    function get_feeowner() public view returns(address) {
+        return _feeowner;
+    }
+
     function SendOut(address to,uint256 amount) public returns(bool)
     {
         require(msg.sender==_feeowner);
