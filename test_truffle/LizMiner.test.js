@@ -2,11 +2,16 @@ const MetaCoin = artifacts.require("MetaCoin");
 const LizMiner = artifacts.require("LizMiner");
 const LizToken = artifacts.require("LIZToken");
 const LpWallet = artifacts.require("LpWallet");
-const WETH = artifacts.require("BEP20/WETH");
+
 const { expect,assert,should } = require('chai'); 
 const BigNumber = require('bignumber.js');
 
 const chalk = require('chalk');
+
+// FAKE token
+const WETH = artifacts.require("BEP20/WETH");
+const FakeCollateral_USDC = artifacts.require("FakeCollateral/FakeCollateral_USDC");
+const FakeCollateral_USDT = artifacts.require("FakeCollateral/FakeCollateral_USDT");
 
 contract("LizMiner test script", async (accounts,network) => {
     // Print Accounts list
@@ -23,19 +28,21 @@ contract("LizMiner test script", async (accounts,network) => {
     let wethInstance;
     let instanceLizToken;
     let instanceLizMiner;
+    let col_instance_USDC;
 
     beforeEach(async () => {
         wethInstance = await WETH.deployed();
         instanceLizMiner = await LizMiner.deployed()
         instanceLizToken = await LizToken.deployed();
+        col_instance_USDC = await FakeCollateral_USDC.deployed(); 
       });
 
     it("check LizMiner.getPoolTotal default value is 0", async () => {
-        const instantceLizMiner = await LizMiner.deployed()
+        const instanceLizMiner = await LizMiner.deployed()
         const instanceLizToken = await LizToken.deployed();
         const wethInstance = await WETH.deployed();
         
-        const getPoolTotal = (new BigNumber(await instantceLizMiner.getPoolTotal(wethInstance.address))).toNumber();
+        const getPoolTotal = (new BigNumber(await instanceLizMiner.getPoolTotal(wethInstance.address))).toNumber();
         expect(getPoolTotal).to.equal(0);
         
 
@@ -99,7 +106,18 @@ contract("LizMiner test script", async (accounts,network) => {
 
     it ("check getExchangeCountOfOneUsdt",async() => {
         const getExchangeCountOfOneUsdt = (new BigNumber(await instanceLizMiner.getExchangeCountOfOneUsdt(instanceLizToken.address))).toNumber();
-        console.log(chalk.yellow("getExchangeCountOfOneUsdt: ",getExchangeCountOfOneUsdt));
+        // console.log(chalk.yellow("getExchangeCountOfOneUsdt: ",getExchangeCountOfOneUsdt));
+    });
+
+    it ("getWalletAddress()",async() => {
+        const getWalletAddress_weth = await instanceLizMiner.getWalletAddress(wethInstance.address);
+        console.log(chalk.yellow("getWalletAddress_weth: ",getWalletAddress_weth));
+
+        const getWalletAddress_usdc = await instanceLizMiner.getWalletAddress(col_instance_USDC.address);
+        console.log(chalk.yellow("getWalletAddress_usdc: ",getWalletAddress_usdc));
+
+        const getWalletAddress_LIZToken = await instanceLizMiner.getWalletAddress(instanceLizToken.address);
+        console.log(chalk.yellow("getWalletAddress_LIZToken: ",getWalletAddress_LIZToken));
     });
 
 
