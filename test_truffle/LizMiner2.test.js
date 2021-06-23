@@ -69,10 +69,15 @@ contract("LizMiner test script", async (accounts,network) => {
       });
 
     it ("helloworld", async() => {
-        let acc = await web3.eth.getAccounts()
+        let acc = await web3.eth.getAccounts();
+        let tmp;
         for (var i=0;i<10;i++)
         { 
-            console.log(chalk.yellow(`acc${i}: ${acc[i]}`));
+            // console.log(chalk.yellow(`acc${i}: ${acc[i]}`));
+            tmp = acc[i];
         }
     });
+    it ("check web3.eth.getBlockNumber()", async() => {
+        console.log(chalk.yellow("web3.eth.getBlockNumber(): ",await web3.eth.getBlockNumber()));
+    })
 });
