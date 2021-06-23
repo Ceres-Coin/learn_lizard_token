@@ -86,47 +86,10 @@ module.exports = async function(deployer, network, accounts) {
     const instanceLizToken = await LizToken.deployed();
     console.log(chalk.redBright.bold("instanceLizToken: ",instanceLizToken.address));
 
-
     console.log(chalk.red.bold("========================= INITIAL CONTRACT =================="));
     await instantceLizMiner.InitalContract(instanceLizToken.address,wethInstance.address,wethInstance.address,wethInstance.address,wethInstance.address,FEE_OWNER);
     
     console.log(chalk.red.bold("========================= ADD Trading Pool =================="));
     const addTradingPool_address = wethInstance.address;
     await instantceLizMiner.addTradingPool(addTradingPool_address,addTradingPool_address,TRADINGPOOL_HASHRATE,TRADINGPOOL_PCTMIN,TRADINGPOOL_PCTMAX);
-
-    // const poolInfo = await instantceLizMiner.getPoolInfo(addTradingPool_address);
-    // console.log(chalk.redBright.bold("poolInfo: ",poolInfo));
-
-    // let parentOfAccount0,parentOfAccount1,parentOfAccount2;
-    // const _parents_account0 = (await instantceLizMiner._parents.call(account0));
-    // const _parents_account1 = (await instantceLizMiner._parents.call(account1));
-    // console.log(chalk.yellow(account0, "'s Parents: ",_parents_account0.toString()));
-    // console.log(chalk.yellow(account1, "'s Parents: ",_parents_account1.toString()));
-
-    // console.log(chalk.red.bold("bind account1's parent = account0 "))
-    // await instantceLizMiner.bindParent(account0,{from:account1});
-
-    // const _parents_account0_after = (await instantceLizMiner._parents.call(account0));
-    // const _parents_account1_after = (await instantceLizMiner._parents.call(account1));
-    // console.log(chalk.yellow(account0, "'s Parents: ",_parents_account0_after.toString()));
-    // console.log(chalk.yellow(account1, "'s Parents: ",_parents_account1_after.toString()));
-
-
-    // console.log(chalk.red.bold("bind account2's parent = account0 "))
-    // await instantceLizMiner.bindParent(account0,{from:account2});
-
-    // parentOfAccount0 = (await instantceLizMiner._parents.call(account0));
-    // parentOfAccount1 = (await instantceLizMiner._parents.call(account1));
-    // parentOfAccount2 = (await instantceLizMiner._parents.call(account2));
-    // console.log(chalk.yellow(account0, "'s Parents: ",parentOfAccount0.toString()));
-    // console.log(chalk.yellow(account1, "'s Parents: ",parentOfAccount1.toString()));
-    // console.log(chalk.yellow(account2, "'s Parents: ",parentOfAccount2.toString()));
-
-
-
-
-
-
-
-
 }
