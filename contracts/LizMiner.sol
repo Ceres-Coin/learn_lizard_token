@@ -392,6 +392,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         return IBEP20(_Lizaddr).balanceOf(msg.sender);
     }
 
+    // TEST CASE DONE
     function bindParent(address parent) public 
     {
         require(_parents[msg.sender]==address(0),"Already bind");
@@ -403,13 +404,14 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         emit BindingParents(msg.sender,parent);
     }
 
+    // TEST CASE DONE
     function SetParentByAdmin(address user,address parent) public onlyOwner
     {
         
          _parents[user]=parent;
          _mychilders[parent].push(user);
     }
-
+    
     function  getPendingCoin(address user) public view returns(uint256)
     {
         if(_userInfos[user].lastblock==0)

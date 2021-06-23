@@ -270,4 +270,9 @@ contract("LizMiner test script", async (accounts,network) => {
         expect(balanceOf_account2).to.equal(0);
         
     });
+
+    it ("helloworld", async() => {
+        let acc = await web3.eth.getAccounts()
+        console.log(chalk.yellow("acc0: ",acc[0]));
+    });
 });
