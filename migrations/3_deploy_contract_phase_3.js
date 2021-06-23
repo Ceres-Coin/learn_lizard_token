@@ -161,9 +161,6 @@ module.exports = async function(deployer, network, accounts) {
 		col_instance_USDC.approve(routerInstance.address, new BigNumber(2000000e6), { from: CONTRACT_OWNER }),
 	]);	
 
-    console.log(chalk.redBright.bold(await instanceLizToken.balanceOf(CONTRACT_OWNER)));
-    console.log(chalk.redBright.bold(await instanceLizToken.totalSupply()));
-
     // add liquidility
 	await Promise.all([
 		// LIZToken / WETH
