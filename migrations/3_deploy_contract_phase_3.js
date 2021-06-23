@@ -192,8 +192,9 @@ module.exports = async function(deployer, network, accounts) {
 	console.log(chalk.red.bold("========================= INITIAL CONTRACT =================="));
     await instantceLizMiner.InitalContract(instanceLizToken.address,pair_instance_LIZ_WETH.address,pair_instance_LIZ_USDC.address,pair_instance_LIZ_USDC.address,pair_instance_LIZ_USDC.address,FEE_OWNER);
     
-    console.log(chalk.red.bold("========================= ADD Trading Pool =================="));
+    console.log(chalk.red.bold("========================= ADD Trading Pool weth & usdc pool =================="));
     await instantceLizMiner.addTradingPool(wethInstance.address,pair_instance_LIZ_WETH.address,TRADINGPOOL_HASHRATE,TRADINGPOOL_PCTMIN,TRADINGPOOL_PCTMAX);
+	await instantceLizMiner.addTradingPool(col_instance_USDC.address,pair_instance_LIZ_USDC.address,TRADINGPOOL_HASHRATE,TRADINGPOOL_PCTMIN,TRADINGPOOL_PCTMAX);
 
 	
 
