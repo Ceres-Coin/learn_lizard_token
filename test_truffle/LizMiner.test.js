@@ -1,6 +1,7 @@
 const MetaCoin = artifacts.require("MetaCoin");
 const LizMiner = artifacts.require("LizMiner");
 const LizToken = artifacts.require("LIZToken");
+const LizMinePool = artifacts.require("LizMinePool");
 const LpWallet = artifacts.require("LpWallet");
 
 const { expect,assert,should } = require('chai'); 
@@ -49,6 +50,7 @@ contract("LizMiner test script", async (accounts,network) => {
     let col_instance_USDC;
     let instanceLpWallet_LIZToken;
     let instanceLpWallet_WETH;
+    let instanceMinerPool;
 
     beforeEach(async () => {
         wethInstance = await WETH.deployed();
@@ -61,6 +63,9 @@ contract("LizMiner test script", async (accounts,network) => {
 
         const getWalletAddress_WETH = await instanceLizMiner.getWalletAddress(wethInstance.address);
         instanceLpWallet_WETH= await LpWallet.at(getWalletAddress_WETH);
+
+        const getMinerPoolAddress = await instanceLizMiner.getMinerPoolAddress();
+        instanceMinerPool = await LizMinePool.at(getMinerPoolAddress);
       });
 
     it("check LizMiner.getPoolTotal default value is 0", async () => {
@@ -232,5 +237,14 @@ contract("LizMiner test script", async (accounts,network) => {
         expect((new BigNumber(await instanceLpWallet_LIZToken.getBalance(account0,false))).toNumber()).to.equal(ONE_DEC18.toNumber());
         // console.log((new BigNumber(await instanceLpWallet_LIZToken.getBalance(account0,true))).toNumber());
         // console.log((new BigNumber(await instanceLpWallet_LIZToken.getBalance(account0,false))).toNumber());
+    });
+    it ("check instanceMinerPool().owner = instanceLizMiner.address", async() => {
+        expect(await instanceMinerPool.get_owner()).to.equal(instanceLizMiner.address);
+    });
+    it ("check instanceMinerPool().get_token = LIZToken.address", async() => {
+        expect(await instanceMinerPool.get_token()).to.equal(instanceLizToken.address);
+    });
+    it ("check instanceMinerPool().get_feeowner = FEE_OWNER", async() => {
+        expect(await instanceMinerPool.get_feeowner()).to.equal(FEE_OWNER);
     });
 });
