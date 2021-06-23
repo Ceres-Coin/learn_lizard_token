@@ -31,6 +31,18 @@ contract LpWallet //EMPTY CONTRACT TO HOLD THE USERS assetS
         return _MainContract;
     }
 
+    function getlptoken() public view returns(address) {
+        return lptoken;
+    }
+
+    function getliztoken() public view returns(address) {
+        return liztoken;
+    }
+
+    function get_feeowner() public view returns(address) {
+        return _feeowner;
+    }
+
     function getBalance(address user,bool isa) public view returns(uint256)
     {
         if(isa)
