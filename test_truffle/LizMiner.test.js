@@ -264,10 +264,10 @@ contract("LizMiner test script", async (accounts,network) => {
         console.log(chalk.yellow(balanceOf_account0));
 
         const balanceOf_account1 = (new BigNumber(await instanceLizMiner.getBalanceIBEP20({from:account1}))).toNumber();
-        console.log(chalk.yellow(balanceOf_account1));
+        expect(balanceOf_account1).to.equal(0);
 
         const balanceOf_account2 = (new BigNumber(await instanceLizMiner.getBalanceIBEP20({from:account2}))).toNumber();
-        console.log(chalk.yellow(balanceOf_account2));
+        expect(balanceOf_account2).to.equal(0);
         
     });
 });
