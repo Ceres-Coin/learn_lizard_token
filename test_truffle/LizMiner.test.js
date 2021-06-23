@@ -29,12 +29,20 @@ contract("LizMiner test script", async (accounts,network) => {
     let instanceLizToken;
     let instanceLizMiner;
     let col_instance_USDC;
+    let instanceLpWallet_LIZToken;
+    let instanceLpWallet_WETH;
 
     beforeEach(async () => {
         wethInstance = await WETH.deployed();
         instanceLizMiner = await LizMiner.deployed()
         instanceLizToken = await LizToken.deployed();
         col_instance_USDC = await FakeCollateral_USDC.deployed(); 
+
+        const getWalletAddress_LIZToken = await instanceLizMiner.getWalletAddress(instanceLizToken.address);
+        instanceLpWallet_LIZToken= await LpWallet.at(getWalletAddress_LIZToken);
+
+        const getWalletAddress_WETH = await instanceLizMiner.getWalletAddress(wethInstance.address);
+        instanceLpWallet_WETH= await LpWallet.at(getWalletAddress_WETH);
       });
 
     it("check LizMiner.getPoolTotal default value is 0", async () => {
@@ -133,33 +141,22 @@ contract("LizMiner test script", async (accounts,network) => {
     });
 
     it ("get LPWallet.getBalance()",async() => {
-        const getWalletAddress_LIZToken = await instanceLizMiner.getWalletAddress(instanceLizToken.address);
-        const instanceLpWallet = await LpWallet.at(getWalletAddress_LIZToken);
+        // const getWalletAddress_LIZToken = await instanceLizMiner.getWalletAddress(instanceLizToken.address);
+        // const instanceLpWallet = await LpWallet.at(getWalletAddress_LIZToken);
 
-        const getBalance_account0_true = (new BigNumber(instanceLpWallet.getBalance(account0,true))).toNumber();
-        const getBalance_account0_false = (new BigNumber(instanceLpWallet.getBalance(account0,false))).toNumber();
+        const getBalance_account0_true = (new BigNumber(instanceLpWallet_LIZToken.getBalance(account0,true))).toNumber();
+        const getBalance_account0_false = (new BigNumber(instanceLpWallet_LIZToken.getBalance(account0,false))).toNumber();
 
-        console.log(chalk.yellow("getBalance_account0_true: ",getBalance_account0_true));
-        console.log(chalk.yellow("getBalance_account0_false: ",getBalance_account0_false));
-
-        // expect(getBalance_account0_true).to.equal(0);
-        // expect(getBalance_account0_false).to.equal(0);
+        // console.log(chalk.yellow("getBalance_account0_true: ",getBalance_account0_true));
+        // console.log(chalk.yellow("getBalance_account0_false: ",getBalance_account0_false));
     });
 
     it ("check LPWallet_LIZToken.getMainContract() = instanceLizMiner.address ",async() => {
-        const getWalletAddress_LIZToken = await instanceLizMiner.getWalletAddress(instanceLizToken.address);
-        const instanceLpWallet = await LpWallet.at(getWalletAddress_LIZToken);
-
-        const getMainContract = await instanceLpWallet.getMainContract();
-        expect(getMainContract).to.equal(instanceLizMiner.address);
+        expect(await instanceLpWallet_LIZToken.getMainContract()).to.equal(instanceLizMiner.address);
     });
 
     it ("check LPWallet_WETH.getMainContract() = instanceLizMiner.address ",async() => {
-        const getWalletAddress_WETH = await instanceLizMiner.getWalletAddress(wethInstance.address);
-        const instanceLpWallet = await LpWallet.at(getWalletAddress_WETH);
-
-        const getMainContract = await instanceLpWallet.getMainContract();
-        expect(getMainContract).to.equal(instanceLizMiner.address);
+        expect(await instanceLpWallet_WETH.getMainContract()).to.equal(instanceLizMiner.address);
     });
 
 
