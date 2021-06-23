@@ -32,13 +32,13 @@ contract("LizMiner test script", async (accounts,network) => {
 
         const poolInfo = await instantceLizMiner.getPoolInfo(wethInstance.address);
         // Print poolInfo
-        console.log(chalk.yellow("poolInfo: ",poolInfo));
-        console.log(chalk.yellow("poolInfo.poolwallet",poolInfo.poolwallet));
-        console.log(chalk.yellow("poolInfo.hashrate",poolInfo.hashrate));
-        console.log(chalk.yellow("poolInfo.tradeContract",poolInfo.tradeContract));
-        console.log(chalk.yellow("poolInfo.totaljthash",poolInfo.totaljthash));
-        console.log(chalk.yellow("poolInfo.minpct",poolInfo.minpct));
-        console.log(chalk.yellow("poolInfo.maxpct",poolInfo.maxpct));
+        // console.log(chalk.yellow("poolInfo: ",poolInfo));
+        // console.log(chalk.yellow("poolInfo.poolwallet",poolInfo.poolwallet));
+        // console.log(chalk.yellow("poolInfo.hashrate",poolInfo.hashrate));
+        // console.log(chalk.yellow("poolInfo.tradeContract",poolInfo.tradeContract));
+        // console.log(chalk.yellow("poolInfo.totaljthash",poolInfo.totaljthash));
+        // console.log(chalk.yellow("poolInfo.minpct",poolInfo.minpct));
+        // console.log(chalk.yellow("poolInfo.maxpct",poolInfo.maxpct));
 
         const poolInfo_poolwallet_address = poolInfo.poolwallet;
         // console.log(poolInfo_poolwallet_address);
