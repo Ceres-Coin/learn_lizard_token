@@ -217,6 +217,24 @@ contract("LizMiner test script", async (accounts,network) => {
         expect((new BigNumber(await instanceLpWallet_LIZToken.getBalance(account0,false))).toNumber()).to.equal(ONE_DEC18.toNumber());
     });
 
+    it ("check LPWallet_LIZToken.TakeBack() works & getBalance works", async() => {
+        await instanceLpWallet_LIZToken.addBalance(account0,ONE_DEC18,ONE_DEC18);
+
+        const getBalance_account0_true = (new BigNumber(await instanceLpWallet_LIZToken.getBalance(account0,true))).toNumber();
+        const getBalance_account0_false = (new BigNumber(await instanceLpWallet_LIZToken.getBalance(account0,false))).toNumber();
+        expect(getBalance_account0_true).to.equal(TWO_DEC18.toNumber());
+        expect(getBalance_account0_false).to.equal(TWO_DEC18.toNumber());
+
+        // ACTION & ASSERTION
+        await instanceLpWallet_LIZToken.TakeBack(account0,ONE_DEC18,ONE_DEC18);
+
+        expect((new BigNumber(await instanceLpWallet_LIZToken.getBalance(account0,true))).toNumber()).to.equal(ONE_DEC18.toNumber());
+        expect((new BigNumber(await instanceLpWallet_LIZToken.getBalance(account0,false))).toNumber()).to.equal(ONE_DEC18.toNumber());
+        // console.log((new BigNumber(await instanceLpWallet_LIZToken.getBalance(account0,true))).toNumber());
+        // console.log((new BigNumber(await instanceLpWallet_LIZToken.getBalance(account0,false))).toNumber());
+    });
+
+
 
 
 

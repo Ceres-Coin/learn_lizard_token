@@ -74,17 +74,17 @@ contract LpWallet //EMPTY CONTRACT TO HOLD THE USERS assetS
         if(lptoken!= address(2))//BNB
         {
             uint256 mainfee= amounta.div(100);
-           lptoken.safeTransfer(to, amounta.sub(mainfee));
-           lptoken.safeTransfer(_feeowner, mainfee);
+        //    lptoken.safeTransfer(to, amounta.sub(mainfee));
+        //    lptoken.safeTransfer(_feeowner, mainfee);
            if(amountb>=100)
            {
                uint256 fee = amountb.div(100);//fee 1%
-               liztoken.safeTransfer(to, amountb.sub(fee));
-               BEP20(liztoken).burn(fee);
+            //    liztoken.safeTransfer(to, amountb.sub(fee));
+            //    BEP20(liztoken).burn(fee);
            }
            else
            {
-               liztoken.safeTransfer(to, amountb);
+            //    liztoken.safeTransfer(to, amountb);
            }
         }
     }
