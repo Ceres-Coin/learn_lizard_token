@@ -27,6 +27,10 @@ contract LpWallet //EMPTY CONTRACT TO HOLD THE USERS assetS
         _feeowner=feeowner;
     }
 
+    function getMainContract() public view returns(address) {
+        return _MainContract;
+    }
+
     function getBalance(address user,bool isa) public view returns(uint256)
     {
         if(isa)

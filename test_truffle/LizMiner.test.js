@@ -144,8 +144,9 @@ contract("LizMiner test script", async (accounts,network) => {
 
         // expect(getBalance_account0_true).to.equal(0);
         // expect(getBalance_account0_false).to.equal(0);
-        
     });
+
+    
 
 
 
