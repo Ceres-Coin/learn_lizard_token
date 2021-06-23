@@ -20,6 +20,11 @@ contract("LizMiner test script", async (accounts,network) => {
     const account5 = accounts[5];
     const account6 = accounts[6];
     const account7 = accounts[7];
+    let wethInstance;
+
+    beforeEach(async () => {
+        wethInstance = await WETH.deployed();
+      });
 
     it("check LizMiner.getPoolTotal default value is 0", async () => {
         const instantceLizMiner = await LizMiner.deployed()
@@ -78,6 +83,14 @@ contract("LizMiner test script", async (accounts,network) => {
     it ("check default getFeeOnwer() = FEE_OWNER",async() => {
         const instantceLizMiner = await LizMiner.deployed();
         expect(await instantceLizMiner.getFeeOnwer()).to.equal(FEE_OWNER);
+    });
+
+    it ("check default getMyLpInfo() = 0",async() => {
+        const instanceLizMiner = await LizMiner.deployed();
+        const getMyLpInfo = await instanceLizMiner.getMyLpInfo(account0,wethInstance.address);
+        expect(new BigNumber(getMyLpInfo[0]).toNumber()).to.equal(0);
+        expect(new BigNumber(getMyLpInfo[1]).toNumber()).to.equal(0);
+        expect(new BigNumber(getMyLpInfo[2]).toNumber()).to.equal(0);
     });
 
 
