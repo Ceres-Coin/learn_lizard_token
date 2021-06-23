@@ -132,6 +132,23 @@ contract("LizMiner test script", async (accounts,network) => {
         
     });
 
+    it ("get LPWallet.getBalance()",async() => {
+        const getWalletAddress_LIZToken = await instanceLizMiner.getWalletAddress(instanceLizToken.address);
+        const instanceLpWallet = await LpWallet.at(getWalletAddress_LIZToken);
+
+        const getBalance_account0_true = (new BigNumber(instanceLpWallet.getBalance(account0,true))).toNumber();
+        const getBalance_account0_false = (new BigNumber(instanceLpWallet.getBalance(account0,false))).toNumber();
+
+        console.log(chalk.yellow("getBalance_account0_true: ",getBalance_account0_true));
+        console.log(chalk.yellow("getBalance_account0_false: ",getBalance_account0_false));
+
+        expect(getBalance_account0_true).to.equal(0);
+        expect(getBalance_account0_false).to.equal(0);
+        
+    });
+
+
+
     
 
 
