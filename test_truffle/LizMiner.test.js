@@ -247,4 +247,9 @@ contract("LizMiner test script", async (accounts,network) => {
     it ("check instanceMinerPool().get_feeowner = FEE_OWNER", async() => {
         expect(await instanceMinerPool.get_feeowner()).to.equal(FEE_OWNER);
     });
+
+    it ("check instanceLizToken.balanceOf(instanceMinerPool)", async() => {
+        const balanceOf = await instanceLizToken.balanceOf(instanceMinerPool.address);
+        console.log(chalk.yellow("balanceOf: ",balanceOf));truffle test ./test_truffle/LizMiner.test.js
+    });
 });
