@@ -200,7 +200,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
   
     function getExchangeCountOfOneUsdt(address lptoken) public view returns (uint256)
     {
-        // require(_lpPools[lptoken].tradeContract !=address(0));
+        require(_lpPools[lptoken].tradeContract !=address(0));
 
         if(lptoken == address(2))//BNB
         {
