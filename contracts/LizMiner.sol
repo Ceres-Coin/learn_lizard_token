@@ -164,7 +164,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
          return _nowtotalhash;
     }
 
-
+    // TEST CASE DONE
      function getPoolTotal(address tokenaddress) public view returns (uint256)
      {
          return _lpPools[tokenaddress].totaljthash;
@@ -175,7 +175,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
          return _lpPools[tokenAddress];
      }
  
-
+    // TEST CASE DONE
      function getMyLpInfo(address user,address tokenaddress) public view returns (uint256[3] memory )
      {
          uint256[3] memory bb;
@@ -185,26 +185,31 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
          return bb;
      }
 
+    // TEST CASE DONE
      function getUserLevel(address user) public view returns (uint)
     {
         return _userInfos[user].userlevel;
     }
 
+    // TEST CASE DONE
     function getUserTeamHash(address user) public view returns (uint256)
     {
         return _userInfos[user].teamhash;
     }
  
+    // TEST CASE DONE
     function getUserSelfHash(address user) public view returns (uint256)
     {
         return _userInfos[user].selfhash;
     }
 
+    // TEST CASE DONE
     function getFeeOnwer() public view returns (address)
     {
         return _feeowner;
     }
   
+    // TEST CASE DONE
     function getExchangeCountOfOneUsdt(address lptoken) public view returns (uint256)
     {
         require(_lpPools[lptoken].tradeContract !=address(0));
@@ -241,6 +246,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         }
     }
 
+    // TEST CASE DONE
     function buyVipPrice(address user,uint newlevel) public view returns (uint256)
     {
         if(newlevel>=8)
@@ -255,11 +261,13 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
     }
   
     //******************Getters ************************************/
+    // TEST CASE DONE
     function getWalletAddress(address lptoken) public view returns (address)
     {
         return address(_lpPools[lptoken].poolwallet);
     }
 
+    // NOTHING TO DO PRIVATE
     function logCheckPoint(uint256 totalhashdiff,bool add,uint256 blocknumber) private
     {
         if(add)
@@ -286,6 +294,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         }
     }
 
+    // NOTHING TO DO PRIVATE
     function getHashDiffOnLevelChange(address user,uint newlevel) private view returns (uint256)
     {
          uint256 hashdiff=0;
@@ -309,6 +318,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         return hashdiff;
     }
 
+    // TEST CASE DONE
     function SetUserLevel(address user,uint level)  public onlyOwner
     {
         _userInfos[user].userlevel=level;
@@ -376,7 +386,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         emit VipChanged(msg.sender,newlevel);
         return true;
     }
-
+    // TEST CASE DONE
     function getBalanceIBEP20() public view returns (uint256)
     {
         return IBEP20(_Lizaddr).balanceOf(msg.sender);

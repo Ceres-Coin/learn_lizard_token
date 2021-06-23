@@ -258,4 +258,16 @@ contract("LizMiner test script", async (accounts,network) => {
         expect(new BigNumber(await instanceLizMiner.getPoolTotal(col_instance_USDC.address)).toNumber()).to.equal(0);
         expect(new BigNumber(await instanceLizMiner.getPoolTotal(instanceLizToken.address)).toNumber()).to.equal(0);
     });
+
+    it ("check instanceLizToken.getBalanceIBEP20()", async() => {
+        const balanceOf_account0 = (new BigNumber(await instanceLizMiner.getBalanceIBEP20({from:account0}))).toNumber();
+        console.log(chalk.yellow(balanceOf_account0));
+
+        const balanceOf_account1 = (new BigNumber(await instanceLizMiner.getBalanceIBEP20({from:account1}))).toNumber();
+        console.log(chalk.yellow(balanceOf_account1));
+
+        const balanceOf_account2 = (new BigNumber(await instanceLizMiner.getBalanceIBEP20({from:account2}))).toNumber();
+        console.log(chalk.yellow(balanceOf_account2));
+        
+    });
 });
