@@ -30,7 +30,7 @@ contract("LizMiner test script", async (accounts,network) => {
         // console.log(chalk.redBright.bold("instantceLizMiner: ",instantceLizMiner.address));
         // console.log(chalk.redBright.bold("instanceLizToken: ",instanceLizToken.address));
 
-        const poolInfo = await instantceLizMiner.getPoolInfo(wethInstance.address);
+        // const poolInfo = await instantceLizMiner.getPoolInfo(wethInstance.address);
         // Print poolInfo
         // console.log(chalk.yellow("poolInfo: ",poolInfo));
         // console.log(chalk.yellow("poolInfo.poolwallet",poolInfo.poolwallet));
@@ -40,10 +40,10 @@ contract("LizMiner test script", async (accounts,network) => {
         // console.log(chalk.yellow("poolInfo.minpct",poolInfo.minpct));
         // console.log(chalk.yellow("poolInfo.maxpct",poolInfo.maxpct));
 
-        const poolInfo_poolwallet_address = poolInfo.poolwallet;
+        // const poolInfo_poolwallet_address = poolInfo.poolwallet;
         // console.log(poolInfo_poolwallet_address);
 
-        const instanceLpWallet = await LpWallet.at(poolInfo_poolwallet_address);
+        // const instanceLpWallet = await LpWallet.at(poolInfo_poolwallet_address);
         // console.log(chalk.yellow(await instanceLpWallet.getBalance(account0,true)));
         // console.log(chalk.yellow(await instanceLpWallet.getBalance(account0,false)));
 
