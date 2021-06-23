@@ -233,13 +233,4 @@ contract("LizMiner test script", async (accounts,network) => {
         // console.log((new BigNumber(await instanceLpWallet_LIZToken.getBalance(account0,true))).toNumber());
         // console.log((new BigNumber(await instanceLpWallet_LIZToken.getBalance(account0,false))).toNumber());
     });
-
-
-
-
-
-
-    
-
-
 });
