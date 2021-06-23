@@ -160,14 +160,19 @@ contract("LizMiner test script", async (accounts,network) => {
     });
 
     it ("check getlptoken()",async() => {
-        const getlptoken = await instanceLpWallet_LIZToken.getlptoken();
-        const getliztoken = await instanceLpWallet_LIZToken.getliztoken();
-        const get_feeowner = await instanceLpWallet_LIZToken.get_feeowner();
+        console.log(await instanceLpWallet_LIZToken.getlptoken());
+        expect(await instanceLpWallet_LIZToken.getlptoken()).to.equal(instanceLizToken.address);
+;
+    });
 
-        console.log(chalk.yellow("getlptoken: ",getlptoken));
-        console.log(chalk.yellow("getliztoken: ",getliztoken));
-        console.log(chalk.yellow("get_feeowner: ",get_feeowner));
-    })
+    it ("check LpWallet.getliztoken() = instanceLizToken.address", async() => {
+        console.log(await instanceLpWallet_LIZToken.getliztoken());
+        expect(await instanceLpWallet_LIZToken.getliztoken()).to.equal(instanceLizToken.address);
+    });
+
+    it ("check LpWallet.get_feeowner() = FEE_OWNER", async() => {
+        expect(await instanceLpWallet_LIZToken.get_feeowner()).to.equal(FEE_OWNER);
+    });
 
 
 
