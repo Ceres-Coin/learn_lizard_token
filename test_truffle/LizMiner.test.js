@@ -13,6 +13,23 @@ const WETH = artifacts.require("BEP20/WETH");
 const FakeCollateral_USDC = artifacts.require("FakeCollateral/FakeCollateral_USDC");
 const FakeCollateral_USDT = artifacts.require("FakeCollateral/FakeCollateral_USDT");
 
+// set constants
+console.log(chalk.yellow('===== SET CONSTANTS ====='));
+const ONE_MILLION_DEC18 = new BigNumber("1000000e18");
+const FIVE_MILLION_DEC18 = new BigNumber("5000000e18");
+const TEN_MILLION_DEC18 = new BigNumber("10000000e18");
+const ONE_HUNDRED_MILLION_DEC18 = new BigNumber("100000000e18");
+const ONE_HUNDRED_MILLION_DEC6 = new BigNumber("100000000e6");
+const ONE_BILLION_DEC18 = new BigNumber("1000000000e18");
+const COLLATERAL_SEED_DEC18 = new BigNumber(508500e18);
+const SIX_HUNDRED_DEC18 = new BigNumber(600e18);
+const SIX_HUNDRED_DEC6 = new BigNumber(600e6);
+const ONE_DEC18 = new BigNumber(1e18);
+const ONE_HUNDRED_DEC18 = new BigNumber(100e18);
+const ONE_HUNDRED_DEC6 = new BigNumber(100e6);
+const Number133_DEC18 = new BigNumber(133e18);
+const EIGHT_HUNDRED_DEC18 = new BigNumber(800e18);
+
 contract("LizMiner test script", async (accounts,network) => {
     // Print Accounts list
     const account0 = accounts[0];
@@ -140,13 +157,12 @@ contract("LizMiner test script", async (accounts,network) => {
         
     });
 
-    it ("get LPWallet.getBalance()",async() => {
-        // const getWalletAddress_LIZToken = await instanceLizMiner.getWalletAddress(instanceLizToken.address);
-        // const instanceLpWallet = await LpWallet.at(getWalletAddress_LIZToken);
+    it ("check LPWallet.getBalance() default value = 0",async() => {
+        const getBalance_account0_true = (new BigNumber(await instanceLpWallet_LIZToken.getBalance(account0,true))).toNumber();
+        const getBalance_account0_false = (new BigNumber(await instanceLpWallet_LIZToken.getBalance(account0,false))).toNumber();
 
-        const getBalance_account0_true = (new BigNumber(instanceLpWallet_LIZToken.getBalance(account0,true))).toNumber();
-        const getBalance_account0_false = (new BigNumber(instanceLpWallet_LIZToken.getBalance(account0,false))).toNumber();
-
+        expect(getBalance_account0_true).to.equal(0);
+        expect(getBalance_account0_false).to.equal(0);
         // console.log(chalk.yellow("getBalance_account0_true: ",getBalance_account0_true));
         // console.log(chalk.yellow("getBalance_account0_false: ",getBalance_account0_false));
     });
@@ -172,6 +188,19 @@ contract("LizMiner test script", async (accounts,network) => {
 
     it ("check LPWallet_LIZToken.get_feeowner() = FEE_OWNER", async() => {
         expect(await instanceLpWallet_LIZToken.get_feeowner()).to.equal(FEE_OWNER);
+    });
+
+    it ("check LPWallet_LIZToken.addBalance() works & getBalance works", async() => {
+        await instanceLpWallet_LIZToken.addBalance(account0,ONE_DEC18,ONE_DEC18);
+
+        const getBalance_account0_true = (new BigNumber(await instanceLpWallet_LIZToken.getBalance(account0,true))).toNumber();
+        const getBalance_account0_false = (new BigNumber(await instanceLpWallet_LIZToken.getBalance(account0,false))).toNumber();
+        expect(getBalance_account0_true).to.equal(ONE_DEC18);
+        expect(getBalance_account0_false).to.equal(ONE_DEC18);
+
+        // Print
+        // console.log(chalk.yellow("getBalance_account0_true: ",getBalance_account0_true));
+        // console.log(chalk.yellow("getBalance_account0_false: ",getBalance_account0_false));
     });
 
 

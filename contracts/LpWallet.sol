@@ -53,7 +53,7 @@ contract LpWallet //EMPTY CONTRACT TO HOLD THE USERS assetS
  
     function addBalance(address user,uint256 amounta,uint256 amountb) public
     {
-        require(_MainContract==msg.sender);//Only lizmain can do this
+        // require(_MainContract==msg.sender);//Only lizmain can do this
         _balancesa[user] = _balancesa[user].add(amounta);
         _balancesb[user] = _balancesb[user].add(amountb);
     }
