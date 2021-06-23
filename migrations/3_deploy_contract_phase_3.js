@@ -106,30 +106,9 @@ module.exports = async function(deployer, network, accounts) {
         await deployer.deploy(UniswapV2Router02_Modified, UniswapV2Factory.address, wethInstance.address);
 		routerInstance = await UniswapV2Router02_Modified.deployed(); 
 		uniswapFactoryInstance = await UniswapV2Factory.deployed(); 
-
         
-
-
-
-        
-        await deployer.link(UniswapV2ERC20, [UniswapV2Pair]);
-        await deployer.link(UniswapV2Pair, [UniswapV2Factory]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        // await deployer.link(UniswapV2ERC20, [UniswapV2Pair]);
+        // await deployer.link(UniswapV2Pair, [UniswapV2Factory]);
 
         console.log(chalk.yellow('===== RouterInstantce & Uniswap Factory address ====='));
         console.log(chalk.yellow("routerInstance: ",routerInstance.address));
