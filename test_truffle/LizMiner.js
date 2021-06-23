@@ -44,14 +44,14 @@ contract("LizMiner test script", async (accounts,network) => {
         // console.log(poolInfo_poolwallet_address);
 
         const instanceLpWallet = await LpWallet.at(poolInfo_poolwallet_address);
-        console.log(chalk.yellow(await instanceLpWallet.getBalance(account0,true)));
-        console.log(chalk.yellow(await instanceLpWallet.getBalance(account0,false)));
+        // console.log(chalk.yellow(await instanceLpWallet.getBalance(account0,true)));
+        // console.log(chalk.yellow(await instanceLpWallet.getBalance(account0,false)));
 
-        console.log(chalk.yellow(await instanceLpWallet.getBalance(account1,true)));
-        console.log(chalk.yellow(await instanceLpWallet.getBalance(account1,false)));
+        // console.log(chalk.yellow(await instanceLpWallet.getBalance(account1,true)));
+        // console.log(chalk.yellow(await instanceLpWallet.getBalance(account1,false)));
 
-        console.log(chalk.yellow(await instanceLpWallet.getBalance(account2,true)));
-        console.log(chalk.yellow(await instanceLpWallet.getBalance(account2,false)));
+        // console.log(chalk.yellow(await instanceLpWallet.getBalance(account2,true)));
+        // console.log(chalk.yellow(await instanceLpWallet.getBalance(account2,false)));
 
         
     });
@@ -70,6 +70,16 @@ contract("LizMiner test script", async (accounts,network) => {
     it ("check default CurrentBlockReward = 0",async() => {
         const instantceLizMiner = await LizMiner.deployed();
         expect(new BigNumber(await instantceLizMiner.CurrentBlockReward()).toNumber()).to.equal(0);
+    });
+
+    it ("check default getTotalHash = 0",async() => {
+        const instantceLizMiner = await LizMiner.deployed();
+        expect(new BigNumber(await instantceLizMiner.getTotalHash()).toNumber()).to.equal(0);
+    });
+
+    it ("check default getFeeOnwer() = FEE_OWNER",async() => {
+        const instantceLizMiner = await LizMiner.deployed();
+        expect(await instantceLizMiner.getFeeOnwer()).to.equal(FEE_OWNER);
     });
 
 

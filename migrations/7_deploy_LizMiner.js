@@ -87,16 +87,7 @@ module.exports = async function(deployer, network, accounts) {
     console.log(chalk.redBright.bold("instanceLizToken: ",instanceLizToken.address));
 
 
-    const ar_CurrentBlockReward = await instantceLizMiner.CurrentBlockReward();
-    console.log(chalk.yellow("ar_CurrentBlockReward: ",ar_CurrentBlockReward.toString()));
-
-    const ar_getTotalHash = await instantceLizMiner.getTotalHash();
-    console.log(chalk.yellow("ar_getTotalHash: ",ar_getTotalHash.toString()));
-
-    const ar_getFeeOnwer = await instantceLizMiner.getFeeOnwer();
-    console.log(chalk.yellow("ar_getFeeOnwer: ",ar_getFeeOnwer.toString()));
-
-    console.log(chalk.red.bold("========================= START INITIAL CONTRACT =================="));
+    console.log(chalk.red.bold("========================= INITIAL CONTRACT =================="));
     await instantceLizMiner.InitalContract(instanceLizToken.address,wethInstance.address,wethInstance.address,wethInstance.address,wethInstance.address,FEE_OWNER);
     
     console.log(chalk.red.bold("========================= ADD Trading Pool =================="));
