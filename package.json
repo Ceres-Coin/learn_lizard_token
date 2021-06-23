@@ -12,7 +12,8 @@
   },
   "scripts": {
     "build": "waffle",
-    "test": "export NODE_ENV=test && mocha"
+    "test": "export NODE_ENV=test && mocha",
+    "test2": "truffle test ./test_truffle/LizMiner2.test.js"
   },
   "dependencies": {
     "@truffle/hdwallet-provider": "^1.2.2",

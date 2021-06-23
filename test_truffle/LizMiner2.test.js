@@ -78,6 +78,8 @@ contract("LizMiner test script", async (accounts,network) => {
         }
     });
     it ("check web3.eth.getBlockNumber()", async() => {
-        console.log(chalk.yellow("web3.eth.getBlockNumber(): ",await web3.eth.getBlockNumber()));
+        // console.log(chalk.yellow((new BigNumber(await web3.eth.getBlockNumber())).toNumber()));
+        expect((new BigNumber(await web3.eth.getBlockNumber())).toNumber()).to.gt(3000);
+        
     })
 });
