@@ -249,7 +249,7 @@ contract("LizMiner test script", async (accounts,network) => {
     });
 
     it ("check instanceLizToken.balanceOf(instanceMinerPool)", async() => {
-        const balanceOf = await instanceLizToken.balanceOf(instanceMinerPool.address);
-        console.log(chalk.yellow("balanceOf: ",balanceOf));truffle test ./test_truffle/LizMiner.test.js
+        const balanceOf = (new BigNumber(await instanceLizToken.balanceOf(instanceMinerPool.address))).toNumber();
+        expect(balanceOf).to.equal(0);
     });
 });
