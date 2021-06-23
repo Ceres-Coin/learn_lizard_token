@@ -151,26 +151,26 @@ contract("LizMiner test script", async (accounts,network) => {
         // console.log(chalk.yellow("getBalance_account0_false: ",getBalance_account0_false));
     });
 
+    it ("check instanceLpWallet_LIZToken Print ",async() => {
+        // console.log(await instanceLpWallet_LIZToken.getMainContract());
+        // console.log(await instanceLpWallet_LIZToken.getlptoken());
+        // console.log(await instanceLpWallet_LIZToken.getliztoken());
+        // console.log(await instanceLpWallet_LIZToken.get_feeowner());
+    });
+
     it ("check LPWallet_LIZToken.getMainContract() = instanceLizMiner.address ",async() => {
         expect(await instanceLpWallet_LIZToken.getMainContract()).to.equal(instanceLizMiner.address);
     });
 
-    it ("check LPWallet_WETH.getMainContract() = instanceLizMiner.address ",async() => {
-        expect(await instanceLpWallet_WETH.getMainContract()).to.equal(instanceLizMiner.address);
-    });
-
-    it ("check getlptoken()",async() => {
-        console.log(await instanceLpWallet_LIZToken.getlptoken());
+    it ("check LPWallet_LIZToken.getlptoken()",async() => {
         expect(await instanceLpWallet_LIZToken.getlptoken()).to.equal(instanceLizToken.address);
-;
     });
 
-    it ("check LpWallet.getliztoken() = instanceLizToken.address", async() => {
-        console.log(await instanceLpWallet_LIZToken.getliztoken());
+    it ("check LPWallet_LIZToken.getliztoken() = instanceLizToken.address", async() => {
         expect(await instanceLpWallet_LIZToken.getliztoken()).to.equal(instanceLizToken.address);
     });
 
-    it ("check LpWallet.get_feeowner() = FEE_OWNER", async() => {
+    it ("check LPWallet_LIZToken.get_feeowner() = FEE_OWNER", async() => {
         expect(await instanceLpWallet_LIZToken.get_feeowner()).to.equal(FEE_OWNER);
     });
 
