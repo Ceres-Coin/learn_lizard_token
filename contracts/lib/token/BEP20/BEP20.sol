@@ -45,6 +45,7 @@ contract BEP20 is Context, IBEP20, Ownable {
     string private _name;
     string private _symbol;
     uint8 private _decimals;
+    uint256 private INITIAL_SUPPLY = 100000000 * 10**18;
 
     /**
      * @dev Sets the values for {name} and {symbol}, initializes {decimals} with
@@ -59,7 +60,7 @@ contract BEP20 is Context, IBEP20, Ownable {
         _name = name;
         _symbol = symbol;
         _decimals = 18;
-        mint(100000000 * 10**18);
+        mint(INITIAL_SUPPLY);
     }
 
     /**

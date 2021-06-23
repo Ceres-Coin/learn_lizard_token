@@ -9,6 +9,10 @@ const BIG6 = new BigNumber("1e6");
 const BIG18 = new BigNumber("1e18");
 const chalk = require('chalk');
 
+// Core Contract
+const LizToken = artifacts.require("LIZToken");
+const LizMiner = artifacts.require("LizMiner");
+
 const UniswapV2ERC20 = artifacts.require("Uniswap/UniswapV2ERC20");
 const UniswapV2OracleLibrary = artifacts.require("Uniswap/UniswapV2OracleLibrary");
 const UniswapV2Library = artifacts.require("Uniswap/UniswapV2Library");
@@ -21,7 +25,7 @@ const SwapToPrice = artifacts.require("Uniswap/SwapToPrice");
 const WETH = artifacts.require("BEP20/WETH");
 const FakeCollateral_USDC = artifacts.require("FakeCollateral/FakeCollateral_USDC");
 const FakeCollateral_USDT = artifacts.require("FakeCollateral/FakeCollateral_USDT");
-const LizToken = artifacts.require("LIZToken");
+
 
 // set constants
 console.log(chalk.yellow('===== SET CONSTANTS ====='));
@@ -39,6 +43,10 @@ const ONE_HUNDRED_DEC18 = new BigNumber(100e18);
 const ONE_HUNDRED_DEC6 = new BigNumber(100e6);
 const Number133_DEC18 = new BigNumber(133e18);
 const EIGHT_HUNDRED_DEC18 = new BigNumber(800e18);
+
+const TRADINGPOOL_HASHRATE = 1;
+const TRADINGPOOL_PCTMIN = 1;
+const TRADINGPOOL_PCTMAX = 10000;
 
 
 
@@ -122,6 +130,7 @@ module.exports = async function(deployer, network, accounts) {
 	}
 
     const instanceLizToken = await LizToken.deployed();
+	const instantceLizMiner = await LizMiner.deployed();
 
     // ======== Set the Uniswap pairs CERES_WETH & CERES_USDC ========
 	console.log(chalk.yellow('===== SET UNISWAP PAIRS ====='));
@@ -183,12 +192,12 @@ module.exports = async function(deployer, network, accounts) {
 		)
     ]);
 
-	// console.log(chalk.red.bold("========================= INITIAL CONTRACT =================="));
-    // await instantceLizMiner.InitalContract(instanceLizToken.address,wethInstance.address,wethInstance.address,wethInstance.address,wethInstance.address,FEE_OWNER);
+	console.log(chalk.red.bold("========================= INITIAL CONTRACT =================="));
+    await instantceLizMiner.InitalContract(instanceLizToken.address,wethInstance.address,wethInstance.address,wethInstance.address,wethInstance.address,FEE_OWNER);
     
-    // console.log(chalk.red.bold("========================= ADD Trading Pool =================="));
-    // const addTradingPool_address = wethInstance.address;
-    // await instantceLizMiner.addTradingPool(addTradingPool_address,addTradingPool_address,TRADINGPOOL_HASHRATE,TRADINGPOOL_PCTMIN,TRADINGPOOL_PCTMAX);
+    console.log(chalk.red.bold("========================= ADD Trading Pool =================="));
+    const addTradingPool_address = wethInstance.address;
+    await instantceLizMiner.addTradingPool(addTradingPool_address,addTradingPool_address,TRADINGPOOL_HASHRATE,TRADINGPOOL_PCTMIN,TRADINGPOOL_PCTMAX);
 
 	
 
