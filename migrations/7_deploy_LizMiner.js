@@ -69,20 +69,4 @@ module.exports = async function(deployer, network, accounts) {
     console.log("IS_BSC_TESTNET: ",IS_BSC_TESTNET);
     let wethInstance;
     let col_instance_USDC;
-
-    // if (IS_DEV || IS_BSC_TESTNET) {
-    //     console.log(chalk.yellow('===== FAKE COLLATERAL ====='));
-    //     wethInstance = await WETH.deployed();
-	// 	col_instance_USDC = await FakeCollateral_USDC.deployed(); 
-		
-    //     console.log("wethInstance: ",wethInstance.address);
-	// 	console.log("col_instance_USDC: ",col_instance_USDC.address);
-    // }
-
-    // // Print instanceLizMiner
-    // const instantceLizMiner = await LizMiner.deployed()
-    // console.log(chalk.redBright.bold("instantceLizMiner: ",instantceLizMiner.address));
-    // // Print instanceLizToken
-    // const instanceLizToken = await LizToken.deployed();
-    // console.log(chalk.redBright.bold("instanceLizToken: ",instanceLizToken.address));
 }
