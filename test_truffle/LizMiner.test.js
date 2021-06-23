@@ -146,7 +146,23 @@ contract("LizMiner test script", async (accounts,network) => {
         // expect(getBalance_account0_false).to.equal(0);
     });
 
-    
+    it ("check LPWallet_LIZToken.getMainContract() = instanceLizMiner.address ",async() => {
+        const getWalletAddress_LIZToken = await instanceLizMiner.getWalletAddress(instanceLizToken.address);
+        const instanceLpWallet = await LpWallet.at(getWalletAddress_LIZToken);
+
+        const getMainContract = await instanceLpWallet.getMainContract();
+        expect(getMainContract).to.equal(instanceLizMiner.address);
+    });
+
+    it ("check LPWallet_WETH.getMainContract() = instanceLizMiner.address ",async() => {
+        const getWalletAddress_WETH = await instanceLizMiner.getWalletAddress(wethInstance.address);
+        const instanceLpWallet = await LpWallet.at(getWalletAddress_WETH);
+
+        const getMainContract = await instanceLpWallet.getMainContract();
+        expect(getMainContract).to.equal(instanceLizMiner.address);
+    });
+
+
 
 
 

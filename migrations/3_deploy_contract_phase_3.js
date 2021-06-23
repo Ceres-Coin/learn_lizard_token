@@ -131,6 +131,8 @@ module.exports = async function(deployer, network, accounts) {
 
     const instanceLizToken = await LizToken.deployed();
 	const instantceLizMiner = await LizMiner.deployed();
+	console.log(chalk.red.bold("instantceLizMiner.address: ",instantceLizMiner.address));
+	console.log(chalk.red.bold("instanceLizToken.address: ",instanceLizToken.address));
 
     // ======== Set the Uniswap pairs CERES_WETH & CERES_USDC ========
 	console.log(chalk.yellow('===== SET UNISWAP PAIRS ====='));
