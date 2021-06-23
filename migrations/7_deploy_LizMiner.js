@@ -85,11 +85,4 @@ module.exports = async function(deployer, network, accounts) {
     // Print instanceLizToken
     const instanceLizToken = await LizToken.deployed();
     console.log(chalk.redBright.bold("instanceLizToken: ",instanceLizToken.address));
-
-    console.log(chalk.red.bold("========================= INITIAL CONTRACT =================="));
-    await instantceLizMiner.InitalContract(instanceLizToken.address,wethInstance.address,wethInstance.address,wethInstance.address,wethInstance.address,FEE_OWNER);
-    
-    console.log(chalk.red.bold("========================= ADD Trading Pool =================="));
-    const addTradingPool_address = wethInstance.address;
-    await instantceLizMiner.addTradingPool(addTradingPool_address,addTradingPool_address,TRADINGPOOL_HASHRATE,TRADINGPOOL_PCTMIN,TRADINGPOOL_PCTMAX);
 }
