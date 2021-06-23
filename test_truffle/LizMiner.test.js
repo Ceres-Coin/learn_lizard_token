@@ -195,8 +195,8 @@ contract("LizMiner test script", async (accounts,network) => {
 
         const getBalance_account0_true = (new BigNumber(await instanceLpWallet_LIZToken.getBalance(account0,true))).toNumber();
         const getBalance_account0_false = (new BigNumber(await instanceLpWallet_LIZToken.getBalance(account0,false))).toNumber();
-        expect(getBalance_account0_true).to.equal(ONE_DEC18);
-        expect(getBalance_account0_false).to.equal(ONE_DEC18);
+        expect(getBalance_account0_true).to.equal(ONE_DEC18.toNumber());
+        expect(getBalance_account0_false).to.equal(ONE_DEC18.toNumber());
 
         // Print
         // console.log(chalk.yellow("getBalance_account0_true: ",getBalance_account0_true));
