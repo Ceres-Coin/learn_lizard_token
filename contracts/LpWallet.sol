@@ -2,7 +2,7 @@
 pragma solidity >=0.5.0;
 import "./lib/utils/TransferHelper.sol";
 import "./lib/math/SafeMath.sol";
-import "./lib/token/BEP20/IBEP20.sol";
+import "./lib/token/BEP20/BEP20.sol";
 
 contract LpWallet //EMPTY CONTRACT TO HOLD THE USERS assetS
 {
@@ -80,7 +80,7 @@ contract LpWallet //EMPTY CONTRACT TO HOLD THE USERS assetS
            {
                uint256 fee = amountb.div(100);//fee 1%
                liztoken.safeTransfer(to, amountb.sub(fee));
-            //    IBEP20(liztoken).burn(fee);
+               BEP20(liztoken).burn(fee);
            }
            else
            {
