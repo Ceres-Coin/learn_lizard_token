@@ -3,14 +3,22 @@ const LizMiner = artifacts.require("LizMiner");
 const LizToken = artifacts.require("LIZToken");
 const LpWallet = artifacts.require("LpWallet");
 const WETH = artifacts.require("BEP20/WETH");
+const { expect,assert,should } = require('chai'); 
 
 const chalk = require('chalk');
 
 contract("LizMiner test script", async (accounts,network) => {
+    // Print Accounts list
     const account0 = accounts[0];
-    const OWNER = account0;
+    const CONTRACT_OWNER = account0;
+    const FEE_OWNER = account0;
     const account1 = accounts[1];
     const account2 = accounts[2];
+    const account3 = accounts[3];
+    const account4 = accounts[4];
+    const account5 = accounts[5];
+    const account6 = accounts[6];
+    const account7 = accounts[7];
 
     it("LizMiner_test001", async () => {
         const instantceLizMiner = await LizMiner.deployed()
@@ -52,6 +60,11 @@ contract("LizMiner test script", async (accounts,network) => {
         const balance = await instance.getBalance.call(accounts[0]);
         assert.equal(balance.valueOf(), 10000);
       });
+
+    it ("LizMiner_getOwner()", async () => {
+        const instantceLizMiner = await LizMiner.deployed();
+        expect(await instantceLizMiner.getOwner()).to.equal(CONTRACT_OWNER);
+    });
 
 
 });
