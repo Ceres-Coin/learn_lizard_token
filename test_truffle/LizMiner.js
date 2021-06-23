@@ -4,6 +4,7 @@ const LizToken = artifacts.require("LIZToken");
 const LpWallet = artifacts.require("LpWallet");
 const WETH = artifacts.require("BEP20/WETH");
 const { expect,assert,should } = require('chai'); 
+const BigNumber = require('bignumber.js');
 
 const chalk = require('chalk');
 
@@ -64,6 +65,11 @@ contract("LizMiner test script", async (accounts,network) => {
     it ("LizMiner_getOwner()", async () => {
         const instantceLizMiner = await LizMiner.deployed();
         expect(await instantceLizMiner.getOwner()).to.equal(CONTRACT_OWNER);
+    });
+
+    it ("check default CurrentBlockReward = 0",async() => {
+        const instantceLizMiner = await LizMiner.deployed();
+        expect(new BigNumber(await instantceLizMiner.CurrentBlockReward()).toNumber()).to.equal(0);
     });
 
 
