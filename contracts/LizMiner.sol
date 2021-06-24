@@ -45,6 +45,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
     uint256 private _nowtotalhash;
  
     mapping(address=>mapping(address=>uint256)) _oldpool;
+    // TODO: add test scripts of _userLphash
     mapping(address=>mapping(address=>uint256)) _userLphash;
     mapping(address=>mapping(address=>uint256)) _teamhashdetail;
     mapping(address=>mapping(uint=>uint256)) _userlevelhashtotal; 
@@ -60,22 +61,22 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
     event UserBuied(address indexed tokenaddress,uint256 amount);
     event TakedBack(address indexed tokenaddress,uint256 pct);
     
-   
+    // TEST CASE DONE
     constructor() public
     {
         _owner=msg.sender;
     }
-
+    // TEST CASE DONE
     function getMinerPoolAddress() public view returns(address)
     {
         return address(_minepool);
     }
-
+    // TEST CASE DONE
     function getMyChilders(address user) public view returns(address[] memory)
     {
         return _mychilders[user];
     } 
-
+    // TEST CASE DONE
     function InitalContract(address lizToken,address liztrade,address wrappedbnbaddress,address bnbtradeaddress,address usdtaddress,address feeowner) public onlyOwner
     {
         require(_checkpoints.length==0);
