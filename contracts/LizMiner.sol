@@ -345,11 +345,12 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
 
     }
 
-    // TODO: [func][ChangeWithDrawPoint] add test cases of ChangeWithDrawPoint
-    function ChangeWithDrawPoint(address user,uint256 blocknum,uint256 pendingreward) public onlyOwner
+    // [func][ChangeWithDrawPoint] add test cases of ChangeWithDrawPoint
+    // TEST CASE DONE
+    function ChangeWithDrawPoint(address user,uint256 lastblock,uint256 pendingreward) public onlyOwner
     {
-         _userInfos[user].pendingreward=pendingreward;
-        _userInfos[user].lastblock=blocknum;
+        _userInfos[user].lastblock=lastblock;
+        _userInfos[user].pendingreward=pendingreward;
         _userInfos[user].lastcheckpoint= _checkpoints.length -1;
     }
     
