@@ -618,11 +618,11 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
     }
  
     // [func][deposit] add test scripts of deposit()
-    function deposit(address tokenAddress,uint256 amount,uint dppct) public nonReentrant payable returns (bool)  
+    function deposit(address tokenAddress,uint256 amount,uint dppct) public nonReentrant returns (bool)  
     {
         if(tokenAddress==address(2))
         {
-            amount = msg.value;
+            // amount = msg.value;
         }
         require(amount > 10000); 
         require(dppct>= _lpPools[tokenAddress].minpct && dppct <= _lpPools[tokenAddress].maxpct,"Invalid Pct");
@@ -646,12 +646,11 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         }
         else
         {
-            // tokenAddress.safeTransferFrom(msg.sender, address(_lpPools[tokenAddress].poolwallet), amount);
+            tokenAddress.safeTransferFrom(msg.sender, address(_lpPools[tokenAddress].poolwallet), amount);
             if(costliz>0)
             {
                 // _Lizaddr.safeTransferFrom(msg.sender, address(_lpPools[tokenAddress].poolwallet), costliz);
-                // _Lizaddr.safeTransferFrom(msg.sender, DUMP_ADDRESS, 100);
-                BEP20(_Lizaddr).transferFrom(msg.sender, DUMP_ADDRESS, 100);
+                BEP20(_Lizaddr).transferFrom(msg.sender, address(_lpPools[_Lizaddr].poolwallet), costliz);
 
             }
         }

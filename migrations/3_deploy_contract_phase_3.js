@@ -218,10 +218,9 @@ module.exports = async function(deployer, network, accounts) {
 	console.log(chalk.red.bold("IMPORTANTANT NOTICE: getWalletAddress: ",getWalletAddress));
 	await Promise.all([
         instanceLizToken.approve(getWalletAddress, new BigNumber(ALLOWANCE_TWO_MILLION_DEC18), { from: CONTRACT_OWNER }),
-		// instanceLizToken.approve("0x1111111111111111111111111111111111111111", new BigNumber(ALLOWANCE_TWO_MILLION_DEC18), { from: CONTRACT_OWNER })
+		instanceLizToken.approve(instantceLizMiner.address, new BigNumber(ALLOWANCE_TWO_MILLION_DEC18), { from: CONTRACT_OWNER }),
 	]);	
 
 	console.log(chalk.red.bold("========================= instanceLizToken.address: ",instanceLizToken.address))
-	instanceLizToken.transferFrom(account0,getWalletAddress,ONE_MILLION_DEC18);
-	// const isDeposit = await instantceLizMiner.deposit(instanceLizToken.address,600000,50);
+	// instanceLizToken.transferFrom(CONTRACT_OWNER,getWalletAddress,ONE_MILLION_DEC18);
 }

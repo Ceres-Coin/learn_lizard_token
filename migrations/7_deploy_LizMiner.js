@@ -35,11 +35,6 @@ const COLLATERAL_SEED_DEC18 = new BigNumber(508500e18);
 
 // Make sure Ganache is running beforehand
 module.exports = async function(deployer, network, accounts) {
-
-    // START test file
-    console.log(chalk.green.bold("=================== START Test 3_test_LizMiner ==================="));
-    console.log(chalk.green.bold("=================== START Test 3_test_LizMiner ==================="));
-    console.log(chalk.green.bold("=================== START Test 3_test_LizMiner ==================="));
     
     
     // Print Accounts list
@@ -53,9 +48,7 @@ module.exports = async function(deployer, network, accounts) {
     const account5 = accounts[5];
     const account6 = accounts[6];
     const account7 = accounts[7];
-    console.log(chalk.blue("============= account0 ",account0," ================"));
-    console.log(chalk.blue("============= account1 ",account1," ================"));
-    console.log(chalk.blue("============= account2 ",account2," ================"));
+
 
 
     // verify the network, if network is dev, deploy the fake token;
@@ -63,8 +56,6 @@ module.exports = async function(deployer, network, accounts) {
 	const IS_ROPSTEN = (network == 'ropsten');
 	const IS_DEV = (network == 'development');
     const IS_BSC_TESTNET = (network == 'testnet');
-    console.log("IS_DEV: ",IS_DEV);
-    console.log("IS_BSC_TESTNET: ",IS_BSC_TESTNET);
     let wethInstance;
     let col_instance_USDC;
 }

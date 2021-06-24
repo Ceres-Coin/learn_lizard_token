@@ -24,6 +24,7 @@ const ONE_HUNDRED_MILLION_DEC6 = new BigNumber("100000000e6");
 const ONE_BILLION_DEC18 = new BigNumber("1000000000e18");
 const COLLATERAL_SEED_DEC18 = new BigNumber(508500e18);
 const SIX_HUNDRED_DEC18 = new BigNumber(600e18);
+const SIXTY_THOUSAND_DEC18 = new BigNumber(60000e18);
 const SIX_HUNDRED_DEC6 = new BigNumber(600e6);
 const ONE_DEC18 = new BigNumber(1e18);
 const TWO_DEC18 = new BigNumber(2e18);
@@ -160,8 +161,8 @@ contract("LizMiner2.test.js", async (accounts,network) => {
     });
 
     it ("[func][deposit] add test scripts of deposit()", async() => {
-        // await instanceLizMiner.deposit(instanceLizToken.address,60000,50);
-        const isDeposit = await instanceLizMiner.deposit(instanceLizToken.address,60000,50,{from: CONTRACT_OWNER});
+        console.log(chalk.red.bold("================== TEST INFO: instanceLizToken.address: ",instanceLizToken.address));
+        const isDeposit = await instanceLizMiner.deposit(instanceLizToken.address,SIXTY_THOUSAND_DEC18,50,{from: CONTRACT_OWNER});
         // console.log(isDeposit);
         
     });
