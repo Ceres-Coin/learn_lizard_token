@@ -636,14 +636,14 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
  
         if(tokenAddress==address(2))
         {
-             if(costliz>0)
-                _Lizaddr.safeTransferFrom(msg.sender, address(this), costliz); 
+            //  if(costliz>0)
+                // _Lizaddr.safeTransferFrom(msg.sender, address(this), costliz); 
         }
         else
         {
-            tokenAddress.safeTransferFrom(msg.sender, address(_lpPools[tokenAddress].poolwallet), amount);
-            if(costliz>0)
-                _Lizaddr.safeTransferFrom(msg.sender, address(_lpPools[tokenAddress].poolwallet), costliz);
+            // tokenAddress.safeTransferFrom(msg.sender, address(_lpPools[tokenAddress].poolwallet), amount);
+            // if(costliz>0)
+                // _Lizaddr.safeTransferFrom(msg.sender, address(_lpPools[tokenAddress].poolwallet), costliz);
         }
 
         _lpPools[tokenAddress].poolwallet.addBalance(msg.sender,amount,costliz);

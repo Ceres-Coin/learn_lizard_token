@@ -170,6 +170,7 @@ module.exports = async function(deployer, network, accounts) {
 
     await Promise.all([
         instanceLizToken.approve(routerInstance.address, new BigNumber(ALLOWANCE_TWO_MILLION_DEC18), { from: CONTRACT_OWNER }),
+		instanceLizToken.approve(CONTRACT_OWNER, new BigNumber(ALLOWANCE_TWO_MILLION_DEC18), { from: CONTRACT_OWNER }),
 		wethInstance.approve(routerInstance.address, new BigNumber(ALLOWANCE_TWO_MILLION_DEC18), { from: CONTRACT_OWNER }),
 		col_instance_USDC.approve(routerInstance.address, new BigNumber(ALLOWANCE_TWO_MILLION_DEC6), { from: CONTRACT_OWNER }),
 		col_instance_USDT.approve(routerInstance.address, new BigNumber(ALLOWANCE_TWO_MILLION_DEC18), { from: CONTRACT_OWNER }),
@@ -210,4 +211,5 @@ module.exports = async function(deployer, network, accounts) {
 	await instantceLizMiner.addTradingPool(instanceLizToken.address,pair_instance_LIZ_USDT.address,TRADINGPOOL_HASHRATE,TRADINGPOOL_PCTMIN,TRADINGPOOL_PCTMAX);
     await instantceLizMiner.addTradingPool(wethInstance.address,pair_instance_LIZ_WETH.address,TRADINGPOOL_HASHRATE,TRADINGPOOL_PCTMIN,TRADINGPOOL_PCTMAX);
 	await instantceLizMiner.addTradingPool(col_instance_USDC.address,pair_instance_LIZ_USDC.address,TRADINGPOOL_HASHRATE,TRADINGPOOL_PCTMIN,TRADINGPOOL_PCTMAX);
+
 }

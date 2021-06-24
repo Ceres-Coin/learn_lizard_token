@@ -85,7 +85,7 @@ contract("LizMiner2.test.js", async (accounts,network) => {
     // check getPoolInfo for LIZToken/WETH/USDC
     it ("check getPoolInfo()", async() => {        
         const poolInfo_liztoken = await instanceLizMiner.getPoolInfo(instanceLizToken.address);
-        // console.log(chalk.yellow("poolInfo: ",poolInfo));
+        console.log(chalk.yellow("poolInfo_liztoken: ",poolInfo_liztoken));
         expect(poolInfo_liztoken).to.be.ok;
 
         expect(await instanceLizMiner.getPoolInfo(wethInstance.address)).to.be.ok;
@@ -161,6 +161,7 @@ contract("LizMiner2.test.js", async (accounts,network) => {
 
     it ("[func][deposit] add test scripts of deposit()", async() => {
         // await instanceLizMiner.deposit(instanceLizToken.address,60000,50);
+        
     });
 
 });
