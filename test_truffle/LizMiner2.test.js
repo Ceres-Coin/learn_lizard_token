@@ -101,6 +101,16 @@ contract("LizMiner test script", async (accounts,network) => {
         expect(await instanceLizMiner.getUserInfo(account0)).to.not.be.empty;
         expect(await instanceLizMiner.getUserInfo(account1)).to.not.be.empty;
         expect(await instanceLizMiner.getUserInfo(account2)).to.not.be.empty;
+
+        // console.log(chalk.yellow(`getUserInfo(account1): ${await instanceLizMiner.getUserInfo(account1)}`));
+        // console.log(chalk.yellow((await instanceLizMiner.getUserInfo(account0)).selfhash));
+
+        expect((new BigNumber((await instanceLizMiner.getUserInfo(account1)).selfhash)).toNumber()).to.equal(0);
+        expect((new BigNumber((await instanceLizMiner.getUserInfo(account1)).teamhash)).toNumber()).to.equal(0);
+        expect((new BigNumber((await instanceLizMiner.getUserInfo(account1)).userlevel)).toNumber()).to.equal(1);
+        expect((new BigNumber((await instanceLizMiner.getUserInfo(account1)).pendingreward)).toNumber()).to.equal(0);
+        expect((new BigNumber((await instanceLizMiner.getUserInfo(account1)).lastcheckpoint)).toNumber()).to.equal(0);
+        expect((new BigNumber((await instanceLizMiner.getUserInfo(account1)).lastblock)).toNumber()).to.equal(0);
         
     })
 
