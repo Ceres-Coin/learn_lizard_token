@@ -161,7 +161,14 @@ contract("LizMiner2.test.js", async (accounts,network) => {
 
     it ("[func][deposit] add test scripts of deposit()", async() => {
         // await instanceLizMiner.deposit(instanceLizToken.address,60000,50);
+        const isDeposit = await instanceLizMiner.deposit(instanceLizToken.address,600000,50);
+        console.log(isDeposit);
         
     });
+
+    it ("test for getBalanceIBEP20() ",async() => {
+        const tmp = await instanceLizMiner.getBalanceIBEP20();
+        console.log(chalk.yellow("tmp: ",tmp));
+    })
 
 });
