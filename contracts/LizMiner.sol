@@ -246,8 +246,17 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         if(lptoken==_Lizaddr)
         {
             (uint112 _reserve0, uint112 _reserve1,) = IPancakePair(_Liztrade).getReserves();
-            uint256 a=_reserve0;
-            uint256 b = _reserve1;
+            uint256 a;
+            uint256 b;
+            if (IPancakePair(_Liztrade).token1() == _Lizaddr) 
+            {   
+                a=_reserve0;
+                b= _reserve1;
+            } else
+            {
+                b=_reserve0;
+                a= _reserve1;
+            }
             return b.mul(1000000000000000000).div(a);
         }
         else

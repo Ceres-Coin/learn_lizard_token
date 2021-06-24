@@ -137,7 +137,8 @@ contract("LizMiner2.test.js", async (accounts,network) => {
 
     it ("[func][getExchangeCountOfOneUsdt]: check getExchangeCountOfOneUsdt for LIZToken",async() => {
         const getExchangeCountOfOneUsdt = (new BigNumber(await instanceLizMiner.getExchangeCountOfOneUsdt(instanceLizToken.address))).toNumber();
-        console.log(chalk.yellow("getExchangeCountOfOneUsdt: ",getExchangeCountOfOneUsdt));
+        // console.log(chalk.yellow("getExchangeCountOfOneUsdt: ",getExchangeCountOfOneUsdt));
+        expect(getExchangeCountOfOneUsdt).to.equal(SIX_HUNDRED_DEC18.toNumber());
     });
 
 });
