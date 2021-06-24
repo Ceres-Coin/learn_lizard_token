@@ -43,6 +43,8 @@ const ONE_HUNDRED_DEC18 = new BigNumber(100e18);
 const ONE_HUNDRED_DEC6 = new BigNumber(100e6);
 const Number133_DEC18 = new BigNumber(133e18);
 const EIGHT_HUNDRED_DEC18 = new BigNumber(800e18);
+const ALLOWANCE_TWO_MILLION_DEC18 = new BigNumber(2000000e18) 
+const ALLOWANCE_TWO_MILLION_DEC6 = new BigNumber(2000000e6)
 
 const TRADINGPOOL_HASHRATE = 1;
 const TRADINGPOOL_PCTMIN = 1;
@@ -167,10 +169,10 @@ module.exports = async function(deployer, network, accounts) {
 	console.log(chalk.red.bold("pair_instance_LIZ_USDT: ",pair_instance_LIZ_USDT.address));
 
     await Promise.all([
-        instanceLizToken.approve(routerInstance.address, new BigNumber(2000000e18), { from: CONTRACT_OWNER }),
-		wethInstance.approve(routerInstance.address, new BigNumber(2000000e18), { from: CONTRACT_OWNER }),
-		col_instance_USDC.approve(routerInstance.address, new BigNumber(2000000e6), { from: CONTRACT_OWNER }),
-		col_instance_USDT.approve(routerInstance.address, new BigNumber(2000000e6), { from: CONTRACT_OWNER }),
+        instanceLizToken.approve(routerInstance.address, new BigNumber(ALLOWANCE_TWO_MILLION_DEC18), { from: CONTRACT_OWNER }),
+		wethInstance.approve(routerInstance.address, new BigNumber(ALLOWANCE_TWO_MILLION_DEC18), { from: CONTRACT_OWNER }),
+		col_instance_USDC.approve(routerInstance.address, new BigNumber(ALLOWANCE_TWO_MILLION_DEC6), { from: CONTRACT_OWNER }),
+		col_instance_USDT.approve(routerInstance.address, new BigNumber(ALLOWANCE_TWO_MILLION_DEC18), { from: CONTRACT_OWNER }),
 	]);	
 
     // add liquidility
@@ -178,7 +180,7 @@ module.exports = async function(deployer, network, accounts) {
 		// LIZToken / WETH
 		routerInstance.addLiquidity(
 			instanceLizToken.address, 
-			wethInstance.address,
+			col_instance_USDT.address,
 			new BigNumber(SIX_HUNDRED_DEC18), 
 			new BigNumber(ONE_DEC18), 
 			new BigNumber(SIX_HUNDRED_DEC18), 
@@ -202,20 +204,10 @@ module.exports = async function(deployer, network, accounts) {
     ]);
 
 	console.log(chalk.red.bold("========================= INITIAL CONTRACT =================="));
-    await instantceLizMiner.InitalContract(instanceLizToken.address,pair_instance_LIZ_WETH.address,pair_instance_LIZ_USDC.address,pair_instance_LIZ_USDC.address,pair_instance_LIZ_USDC.address,FEE_OWNER);
+	await instantceLizMiner.InitalContract(instanceLizToken.address,pair_instance_LIZ_USDT.address,pair_instance_LIZ_USDC.address,pair_instance_LIZ_USDC.address,pair_instance_LIZ_USDC.address,FEE_OWNER);
     
     console.log(chalk.red.bold("========================= ADD Trading Pool weth & usdc pool =================="));
-	await instantceLizMiner.addTradingPool(instanceLizToken.address,pair_instance_LIZ_WETH.address,TRADINGPOOL_HASHRATE,TRADINGPOOL_PCTMIN,TRADINGPOOL_PCTMAX);
+	await instantceLizMiner.addTradingPool(instanceLizToken.address,pair_instance_LIZ_USDT.address,TRADINGPOOL_HASHRATE,TRADINGPOOL_PCTMIN,TRADINGPOOL_PCTMAX);
     await instantceLizMiner.addTradingPool(wethInstance.address,pair_instance_LIZ_WETH.address,TRADINGPOOL_HASHRATE,TRADINGPOOL_PCTMIN,TRADINGPOOL_PCTMAX);
 	await instantceLizMiner.addTradingPool(col_instance_USDC.address,pair_instance_LIZ_USDC.address,TRADINGPOOL_HASHRATE,TRADINGPOOL_PCTMIN,TRADINGPOOL_PCTMAX);
-
-	
-
-
-
-
-
-
-
-
 }
