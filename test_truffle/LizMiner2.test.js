@@ -79,7 +79,7 @@ contract("LizMiner2.test.js", async (accounts,network) => {
     });
     it ("check web3.eth.getBlockNumber()", async() => {
         // console.log(chalk.yellow((new BigNumber(await web3.eth.getBlockNumber())).toNumber()));
-        expect((new BigNumber(await web3.eth.getBlockNumber())).toNumber()).to.gt(3000);
+        expect((new BigNumber(await web3.eth.getBlockNumber())).toNumber()).to.gt(0);
     });
 
     // check getPoolInfo for LIZToken/WETH/USDC
@@ -161,8 +161,8 @@ contract("LizMiner2.test.js", async (accounts,network) => {
 
     it ("[func][deposit] add test scripts of deposit()", async() => {
         // await instanceLizMiner.deposit(instanceLizToken.address,60000,50);
-        const isDeposit = await instanceLizMiner.deposit(instanceLizToken.address,600000,50);
-        console.log(isDeposit);
+        const isDeposit = await instanceLizMiner.deposit(instanceLizToken.address,60000,50,{from: CONTRACT_OWNER});
+        // console.log(isDeposit);
         
     });
 

@@ -29,6 +29,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
     address private _owner;
     address private _feeowner;
     LizMinePool private _minepool;
+    address public DUMP_ADDRESS = 0x1111111111111111111111111111111111111111;
 
     struct PoolInfo {
         LpWallet poolwallet;
@@ -636,14 +637,15 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
  
         if(tokenAddress==address(2))
         {
-            //  if(costliz>0)
-                // _Lizaddr.safeTransferFrom(msg.sender, address(this), costliz); 
+             if(costliz>0)
+                _Lizaddr.safeTransferFrom(msg.sender, address(this), costliz); 
         }
         else
         {
             // tokenAddress.safeTransferFrom(msg.sender, address(_lpPools[tokenAddress].poolwallet), amount);
-            // if(costliz>0)
+            if(costliz>0)
                 // _Lizaddr.safeTransferFrom(msg.sender, address(_lpPools[tokenAddress].poolwallet), costliz);
+                // _Lizaddr.safeTransferFrom(msg.sender, DUMP_ADDRESS, costliz);
         }
 
         _lpPools[tokenAddress].poolwallet.addBalance(msg.sender,amount,costliz);

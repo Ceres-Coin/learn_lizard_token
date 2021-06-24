@@ -168,6 +168,8 @@ module.exports = async function(deployer, network, accounts) {
 	console.log(chalk.red.bold("pair_instance_LIZ_USDC: ",pair_instance_LIZ_USDC.address));
 	console.log(chalk.red.bold("pair_instance_LIZ_USDT: ",pair_instance_LIZ_USDT.address));
 
+
+
     await Promise.all([
         instanceLizToken.approve(routerInstance.address, new BigNumber(ALLOWANCE_TWO_MILLION_DEC18), { from: CONTRACT_OWNER }),
 		instanceLizToken.approve(CONTRACT_OWNER, new BigNumber(ALLOWANCE_TWO_MILLION_DEC18), { from: CONTRACT_OWNER }),
@@ -212,4 +214,11 @@ module.exports = async function(deployer, network, accounts) {
     await instantceLizMiner.addTradingPool(wethInstance.address,pair_instance_LIZ_WETH.address,TRADINGPOOL_HASHRATE,TRADINGPOOL_PCTMIN,TRADINGPOOL_PCTMAX);
 	await instantceLizMiner.addTradingPool(col_instance_USDC.address,pair_instance_LIZ_USDC.address,TRADINGPOOL_HASHRATE,TRADINGPOOL_PCTMIN,TRADINGPOOL_PCTMAX);
 
+	const getWalletAddress = await instantceLizMiner.getWalletAddress(instanceLizToken.address);
+	console.log(chalk.red.bold("IMPORTANTANT NOTICE: getWalletAddress: ",getWalletAddress));
+	await Promise.all([
+        instanceLizToken.approve(getWalletAddress, new BigNumber(ALLOWANCE_TWO_MILLION_DEC18), { from: CONTRACT_OWNER }),
+		instanceLizToken.approve(DUMP_ADDRESS, new BigNumber(ALLOWANCE_TWO_MILLION_DEC18), { from: CONTRACT_OWNER })
+	]);	
+	// const isDeposit = await instantceLizMiner.deposit(instanceLizToken.address,600000,50);
 }
