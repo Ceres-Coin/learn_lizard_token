@@ -596,7 +596,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         return true;
     }
 
-    // TODO: [func][getPower] add test scripts of getPower()
+    // [func][getPower] add test scripts of getPower()
     function getPower(address tokenAddress,uint256 amount,uint lpscale) public view returns (uint256)
     {
         uint256 hashb= amount.mul(1000000000000000000).mul(100).div(lpscale).div(getExchangeCountOfOneUsdt(tokenAddress));
