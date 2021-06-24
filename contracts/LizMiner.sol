@@ -38,20 +38,30 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         uint minpct;
         uint maxpct;
     }
+    // TODO: [Parameter][_levelconfig]: add test scripts
     mapping(uint=>uint256[20]) internal _levelconfig; //credit level config
+    // TEST CASE DONE
     uint256[11] public _vipbuyprice =[0,100,300,500,800,1200,1600,2000,0,0,0];
+    // TEST CASE DONE
     CheckPoint[] public _checkpoints;
 
     uint256 private _nowtotalhash;
  
+    // TODO: [Parameter][_oldpool] add test scripts of _oldpool
     mapping(address=>mapping(address=>uint256)) _oldpool;
-    // TODO: add test scripts of _userLphash
+    // TODO: [Parameter][_userLphash] add test scripts of _userLphash
     mapping(address=>mapping(address=>uint256)) _userLphash;
+    // TODO: [Parameter][_teamhashdetail] add test scripts of _teamhashdetail
     mapping(address=>mapping(address=>uint256)) _teamhashdetail;
+    // TODO: [Parameter][_userlevelhashtotal] add test scripts of _userlevelhashtotal
     mapping(address=>mapping(uint=>uint256)) _userlevelhashtotal; 
+    // TEST CASES DONE
     mapping(address=>address) public _parents;
+    // TEST CASES DONE
     mapping(address=>UserInfo) _userInfos; 
+    // TEST CASES DONE
     mapping(address=>PoolInfo) _lpPools;
+    // TEST CASES DONE
     mapping(address=>address[]) _mychilders; 
 
 
@@ -171,7 +181,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
          return _lpPools[tokenaddress].totaljthash;
      }
 
-    // TODO: add test scripts of getPoolInfo()
+    // TODO: [func][getPoolInfo] add test scripts of getPoolInfo()
      function getPoolInfo(address tokenAddress) public view returns(PoolInfo memory)
      {
          return _lpPools[tokenAddress];
@@ -327,7 +337,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
 
     }
 
-    // TODO: add test cases of ChangeWithDrawPoint
+    // TODO: [func][ChangeWithDrawPoint] add test cases of ChangeWithDrawPoint
     function ChangeWithDrawPoint(address user,uint256 blocknum,uint256 pendingreward) public onlyOwner
     {
          _userInfos[user].pendingreward=pendingreward;
@@ -335,7 +345,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         _userInfos[user].lastcheckpoint= _checkpoints.length -1;
     }
     
-    // TODO: add test cases for AddUserTrading
+    // TODO: [func][AddUserTrading] add test cases for AddUserTrading
     function AddUserTrading(address tokenAddress,address useraddress,uint256 amounta,uint256 amountb,uint256 addhash,uint256 startblock) public onlyOwner
     {
         require(startblock >= _checkpoints[_checkpoints.length -1].startblock);
@@ -492,7 +502,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         _minepool.MineOut(msg.sender, amount.sub(fee),fee);
         return true;
     }
-    // TODO: ADD TEST SCRIPTS OF TakeBack() func
+    // TODO: [func][TakeBack] ADD TEST SCRIPTS OF TakeBack() func
     function TakeBack(address tokenAddress,uint256 pct) public nonReentrant returns (bool)
     {
         require(pct >=10000 &&pct <=1000000);
@@ -568,14 +578,14 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         return true;
     }
 
-    // TODO: add test scripts of getPower()
+    // TODO: [func][getPower] add test scripts of getPower()
     function getPower(address tokenAddress,uint256 amount,uint lpscale) public view returns (uint256)
     {
         uint256 hashb= amount.mul(1000000000000000000).mul(100).div(lpscale).div(getExchangeCountOfOneUsdt(tokenAddress));
         return hashb;
     }
 
-    // TODO: add test scripts of getLpPayLiz()
+    // TODO: [func][getLpPayLiz] add test scripts of getLpPayLiz()
     function getLpPayLiz(address tokenAddress,uint256 amount,uint lpscale) public view returns (uint256)
     {
         require(lpscale<=100);
@@ -584,7 +594,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         return costabc;
     }
  
-    // TODO: add test scripts of deposit()
+    // TODO: [func][deposit] add test scripts of deposit()
     function deposit(address tokenAddress,uint256 amount,uint dppct) public nonReentrant payable returns (bool)  
     {
         if(tokenAddress==address(2))
