@@ -88,6 +88,7 @@ module.exports = async function(deployer, network, accounts) {
 	let uniswapFactoryInstance;
     let wethInstance;
     let col_instance_USDC;
+	let col_instance_USDT;
     let swapToPriceInstance;
 
     if (IS_DEV || IS_BSC_TESTNET) {
@@ -95,12 +96,14 @@ module.exports = async function(deployer, network, accounts) {
 
 		await deployer.deploy(WETH, CONTRACT_OWNER);
         await deployer.deploy(FakeCollateral_USDC, CONTRACT_OWNER, ONE_HUNDRED_MILLION_DEC6, "USDC", 6);
-        await deployer.deploy(FakeCollateral_USDT, CONTRACT_OWNER, ONE_HUNDRED_MILLION_DEC6, "USDC", 6);
+        await deployer.deploy(FakeCollateral_USDT, CONTRACT_OWNER, ONE_HUNDRED_MILLION_DEC18, "USDT", 18);
 
         wethInstance = await WETH.deployed();
 		col_instance_USDC = await FakeCollateral_USDC.deployed(); 
-		console.log("wethInstance: ",wethInstance.address);
-		console.log("col_instance_USDC: ",col_instance_USDC.address);
+		col_instance_USDT = await FakeCollateral_USDT.deployed(); 
+		console.log(chalk.red.bold("wethInstance: ",wethInstance.address));
+		console.log(chalk.red.bold("col_instance_USDC: ",col_instance_USDC.address));
+		console.log(chalk.red.bold("col_instance_USDT: ",col_instance_USDC.address));
     }
 
     if (IS_DEV || IS_BSC_TESTNET) {
@@ -139,28 +142,35 @@ module.exports = async function(deployer, network, accounts) {
 	console.log(chalk.blue('=== instanceLizToken / XXXX ==='));
 	console.log("instanceLizToken - WETH");
 	console.log("instanceLizToken - USDC");
+	console.log("instanceLizToken - USDT");
 	await Promise.all([
 		uniswapFactoryInstance.createPair(instanceLizToken.address, wethInstance.address, { from: CONTRACT_OWNER }),
 		uniswapFactoryInstance.createPair(instanceLizToken.address, col_instance_USDC.address, { from: CONTRACT_OWNER }),
+		uniswapFactoryInstance.createPair(instanceLizToken.address, col_instance_USDT.address, { from: CONTRACT_OWNER }),
 	]);
 
     	// ======== Get the addresses of the pairs CERES_WETH & CERES_USDC ========
 	console.log(chalk.yellow('===== GET THE ADDRESSES OF THE PAIRS ====='));
 	const pair_addr_LIZ_WETH = await uniswapFactoryInstance.getPair(instanceLizToken.address, wethInstance.address, { from: CONTRACT_OWNER });
 	const pair_addr_LIZ_USDC = await uniswapFactoryInstance.getPair(instanceLizToken.address, col_instance_USDC.address, { from: CONTRACT_OWNER });
+	const pair_addr_LIZ_USDT = await uniswapFactoryInstance.getPair(instanceLizToken.address, col_instance_USDT.address, { from: CONTRACT_OWNER });
 	console.log(chalk.blue("pair_addr_LIZ_WETH: ",pair_addr_LIZ_WETH));
 	console.log(chalk.blue("pair_addr_LIZ_USDC: ",pair_addr_LIZ_USDC));
+	console.log(chalk.blue("pair_addr_LIZ_USDT: ",pair_addr_LIZ_USDT));
 	
 	console.log(chalk.yellow('===== GET VARIOUS PAIR INSTANCES ====='));
 	const pair_instance_LIZ_WETH = await UniswapV2Pair.at(pair_addr_LIZ_WETH);
 	const pair_instance_LIZ_USDC = await UniswapV2Pair.at(pair_addr_LIZ_USDC);
+	const pair_instance_LIZ_USDT = await UniswapV2Pair.at(pair_addr_LIZ_USDT);
 	console.log(chalk.red.bold("pair_instance_LIZ_WETH: ",pair_instance_LIZ_WETH.address));
 	console.log(chalk.red.bold("pair_instance_LIZ_USDC: ",pair_instance_LIZ_USDC.address));
+	console.log(chalk.red.bold("pair_instance_LIZ_USDT: ",pair_instance_LIZ_USDT.address));
 
     await Promise.all([
         instanceLizToken.approve(routerInstance.address, new BigNumber(2000000e18), { from: CONTRACT_OWNER }),
 		wethInstance.approve(routerInstance.address, new BigNumber(2000000e18), { from: CONTRACT_OWNER }),
 		col_instance_USDC.approve(routerInstance.address, new BigNumber(2000000e6), { from: CONTRACT_OWNER }),
+		col_instance_USDT.approve(routerInstance.address, new BigNumber(2000000e6), { from: CONTRACT_OWNER }),
 	]);	
 
     // add liquidility
