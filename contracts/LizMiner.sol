@@ -612,7 +612,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         return costabc;
     }
  
-    // TODO: [func][deposit] add test scripts of deposit()
+    // [func][deposit] add test scripts of deposit()
     function deposit(address tokenAddress,uint256 amount,uint dppct) public nonReentrant payable returns (bool)  
     {
         if(tokenAddress==address(2))

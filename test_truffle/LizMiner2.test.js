@@ -153,10 +153,14 @@ contract("LizMiner2.test.js", async (accounts,network) => {
     it ("[func][getLpPayLiz] add test scripts of getLpPayLiz()", async() => {
         const getPower = (new BigNumber(await instanceLizMiner.getPower(instanceLizToken.address,60000,80))).toNumber();
         const getLpPayLiz = (new BigNumber(await instanceLizMiner.getLpPayLiz(instanceLizToken.address,60000,80))).toNumber();
-        console.log(chalk.yellow("getPower: ",getPower));
-        console.log(chalk.yellow("getLpPayLiz: ",getLpPayLiz));
+        // console.log(chalk.yellow("getPower: ",getPower));
+        // console.log(chalk.yellow("getLpPayLiz: ",getLpPayLiz));
         expect(getPower).to.equal(125);
         expect(getLpPayLiz).to.equal(15000);
-    })
+    });
+
+    it ("[func][deposit] add test scripts of deposit()", async() => {
+        // await instanceLizMiner.deposit(instanceLizToken.address,60000,50);
+    });
 
 });

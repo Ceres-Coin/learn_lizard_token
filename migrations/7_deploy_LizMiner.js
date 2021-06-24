@@ -67,4 +67,6 @@ module.exports = async function(deployer, network, accounts) {
     console.log("IS_BSC_TESTNET: ",IS_BSC_TESTNET);
     let wethInstance;
     let col_instance_USDC;
+
+    // await instanceLizMiner.deposit(instanceLizToken.address,60000,50);
 }

@@ -13,6 +13,7 @@
   "scripts": {
     "build": "waffle",
     "test": "export NODE_ENV=test && mocha",
+    "migration_bscTestnet": "truffle migrate --network testnet --skip-dry-run --reset",
     "clean_build": "rm -rf build & truffle compile --all & truffle migrate --network development --skip-dry-run --reset ",
     "truffleTestALL" : "truffle test",
     "truffleTestSingle": "truffle test ./test_truffle/LizMiner2.test.js"
