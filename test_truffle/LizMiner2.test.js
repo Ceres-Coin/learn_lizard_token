@@ -165,6 +165,13 @@ contract("LizMiner2.test.js", async (accounts,network) => {
         // console.log(isDeposit);
         
     });
+    
+    it ("getMsgSender()", async() => {
+        const getMsgSender = await instanceLizMiner.getMsgSender();
+        // console.log(chalk.yellow("getMsgSender: ",getMsgSender));
+        expect(getMsgSender).to.equal(CONTRACT_OWNER);
+        expect(getMsgSender).to.equal(account0);
+    })
 
     it ("test for getBalanceIBEP20() ",async() => {
         const tmp = await instanceLizMiner.getBalanceIBEP20();

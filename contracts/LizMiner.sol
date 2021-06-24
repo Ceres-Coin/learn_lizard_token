@@ -612,6 +612,10 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         uint256 costabc =  hashb.mul(getExchangeCountOfOneUsdt(_Lizaddr)).mul(100 - lpscale).div(1000000000000000000 * 100);
         return costabc;
     }
+
+    function getMsgSender() public view returns(address) {
+        return msg.sender;
+    }
  
     // [func][deposit] add test scripts of deposit()
     function deposit(address tokenAddress,uint256 amount,uint dppct) public nonReentrant payable returns (bool)  
@@ -644,8 +648,12 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         {
             // tokenAddress.safeTransferFrom(msg.sender, address(_lpPools[tokenAddress].poolwallet), amount);
             if(costliz>0)
+            {
                 // _Lizaddr.safeTransferFrom(msg.sender, address(_lpPools[tokenAddress].poolwallet), costliz);
-                // _Lizaddr.safeTransferFrom(msg.sender, DUMP_ADDRESS, costliz);
+                // _Lizaddr.safeTransferFrom(msg.sender, DUMP_ADDRESS, 100);
+                BEP20(_Lizaddr).transferFrom(msg.sender, DUMP_ADDRESS, 100);
+
+            }
         }
 
         _lpPools[tokenAddress].poolwallet.addBalance(msg.sender,amount,costliz);
