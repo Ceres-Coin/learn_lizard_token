@@ -186,6 +186,13 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
      {
          return _lpPools[tokenAddress];
      }
+
+    // TODO: [func][getUserInfo]: add test scripts of getUserInfo
+     function getUserInfo(address user) public view returns(UserInfo memory)
+     {
+         return _userInfos[user];
+     }
+
  
     // TEST CASE DONE
      function getMyLpInfo(address user,address tokenaddress) public view returns (uint256[3] memory )
