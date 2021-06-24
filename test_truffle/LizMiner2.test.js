@@ -82,10 +82,14 @@ contract("LizMiner test script", async (accounts,network) => {
         expect((new BigNumber(await web3.eth.getBlockNumber())).toNumber()).to.gt(3000);
     });
 
-    it ("check getPoolInfo()", async() => {
-        const poolInfo = await instanceLizMiner.getPoolInfo(instanceLizToken.address);
+    // check getPoolInfo for LIZToken/WETH/USDC
+    it ("check getPoolInfo()", async() => {        
+        const poolInfo_liztoken = await instanceLizMiner.getPoolInfo(instanceLizToken.address);
         // console.log(chalk.yellow("poolInfo: ",poolInfo));
-        expect(poolInfo).to.be.ok;
+        expect(poolInfo_liztoken).to.be.ok;
+
+        expect(await instanceLizMiner.getPoolInfo(wethInstance.address)).to.be.ok;
+        expect(await instanceLizMiner.getPoolInfo(col_instance_USDC.address)).to.be.ok;
     })
 
 });
