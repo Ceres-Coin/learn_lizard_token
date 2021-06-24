@@ -140,12 +140,23 @@ contract("LizMiner2.test.js", async (accounts,network) => {
         // console.log(chalk.yellow("getExchangeCountOfOneUsdt: ",getExchangeCountOfOneUsdt));
         expect(getExchangeCountOfOneUsdt).to.equal(SIX_HUNDRED_DEC18.toNumber());
     });
-    // check getPower() = 500 & getPower() = 100
+    // check getPower() = 500 & getPower() = 100 & getPower = 200;
     it ("[func][getPower] add test scripts of getPower()", async() => {
         const getPower_500 = (new BigNumber(await instanceLizMiner.getPower(instanceLizToken.address,150000,50))).toNumber();
         expect(getPower_500).to.equal(500);
         const getPower_100 = (new BigNumber(await instanceLizMiner.getPower(instanceLizToken.address,60000,100))).toNumber();
         expect(getPower_100).to.equal(100);
+        const getPower_200 = (new BigNumber(await instanceLizMiner.getPower(instanceLizToken.address,60000,50))).toNumber();
+        expect(getPower_200).to.equal(200);
+    });
+
+    it ("[func][getLpPayLiz] add test scripts of getLpPayLiz()", async() => {
+        const getPower = (new BigNumber(await instanceLizMiner.getPower(instanceLizToken.address,60000,80))).toNumber();
+        const getLpPayLiz = (new BigNumber(await instanceLizMiner.getLpPayLiz(instanceLizToken.address,60000,80))).toNumber();
+        console.log(chalk.yellow("getPower: ",getPower));
+        console.log(chalk.yellow("getLpPayLiz: ",getLpPayLiz));
+        expect(getPower).to.equal(125);
+        expect(getLpPayLiz).to.equal(15000);
     })
 
 });

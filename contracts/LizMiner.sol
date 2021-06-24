@@ -603,7 +603,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         return hashb;
     }
 
-    // TODO: [func][getLpPayLiz] add test scripts of getLpPayLiz()
+    // [func][getLpPayLiz] add test scripts of getLpPayLiz()
     function getLpPayLiz(address tokenAddress,uint256 amount,uint lpscale) public view returns (uint256)
     {
         require(lpscale<=100);
