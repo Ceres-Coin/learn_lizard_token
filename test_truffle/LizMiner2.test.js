@@ -92,4 +92,16 @@ contract("LizMiner test script", async (accounts,network) => {
         expect(await instanceLizMiner.getPoolInfo(col_instance_USDC.address)).to.be.ok;
     })
 
+    // check getUserInfo
+    it ("[func][getUserInfo]: add test scripts of getUserInfo", async() => {
+        await instanceLizMiner.SetUserLevel(account0,0);
+        await instanceLizMiner.SetUserLevel(account1,1);
+        await instanceLizMiner.SetUserLevel(account2,2);
+
+        expect(await instanceLizMiner.getUserInfo(account0)).to.not.be.empty;
+        expect(await instanceLizMiner.getUserInfo(account1)).to.not.be.empty;
+        expect(await instanceLizMiner.getUserInfo(account2)).to.not.be.empty;
+        
+    })
+
 });
