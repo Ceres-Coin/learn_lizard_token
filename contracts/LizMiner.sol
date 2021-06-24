@@ -170,6 +170,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
          return _lpPools[tokenaddress].totaljthash;
      }
 
+    // TODO: add test scripts of getPoolInfo()
      function getPoolInfo(address tokenAddress) public view returns(PoolInfo memory)
      {
          return _lpPools[tokenAddress];
@@ -412,6 +413,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
          _mychilders[parent].push(user);
     }
     
+    // TEST CASE DONE
     function  getPendingCoin(address user) public view returns(uint256)
     {
         if(_userInfos[user].lastblock==0)
@@ -447,7 +449,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         }
         return total;
     }
-
+    // NOTHING TO DO
     function UserHashChanged(address user,uint256 selfhash,uint256 teamhash,bool add,uint256 blocknum) private
     {
         UserInfo memory info = _userInfos[user];
@@ -476,6 +478,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         _userInfos[user]=info;
     }
 
+    // TEST CASE DONE
     function WithDrawCredit() public nonReentrant returns (bool)
     {
         uint256 amount = getPendingCoin(msg.sender);
@@ -488,7 +491,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         _minepool.MineOut(msg.sender, amount.sub(fee),fee);
         return true;
     }
- 
+    // TODO: ADD TEST SCRIPTS OF TakeBack() func
     function TakeBack(address tokenAddress,uint256 pct) public nonReentrant returns (bool)
     {
         require(pct >=10000 &&pct <=1000000);
@@ -564,18 +567,14 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         return true;
     }
 
-    // TO DO:
-    // TO DO:
-    // TO DO:
+    // TODO: add test scripts of getPower()
     function getPower(address tokenAddress,uint256 amount,uint lpscale) public view returns (uint256)
     {
         uint256 hashb= amount.mul(1000000000000000000).mul(100).div(lpscale).div(getExchangeCountOfOneUsdt(tokenAddress));
         return hashb;
     }
 
-    // TO DO:
-    // TO DO:
-    // TO DO:
+    // TODO: add test scripts of getLpPayLiz()
     function getLpPayLiz(address tokenAddress,uint256 amount,uint lpscale) public view returns (uint256)
     {
         require(lpscale<=100);
@@ -584,9 +583,7 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         return costabc;
     }
  
-    // TO DO:
-    // TO DO:
-    // TO DO:
+    // TODO: add test scripts of deposit()
     function deposit(address tokenAddress,uint256 amount,uint dppct) public nonReentrant payable returns (bool)  
     {
         if(tokenAddress==address(2))
@@ -650,5 +647,4 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         emit UserBuied(tokenAddress,amount);
         return true;
     }
-  
 }
