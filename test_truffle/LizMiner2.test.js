@@ -130,7 +130,7 @@ contract("LizMiner test script", async (accounts,network) => {
         expect((new BigNumber((await instanceLizMiner.getUserInfo(account1)).selfhash)).toNumber()).to.equal(0);
         expect((new BigNumber((await instanceLizMiner.getUserInfo(account1)).teamhash)).toNumber()).to.equal(0);
         expect((new BigNumber((await instanceLizMiner.getUserInfo(account1)).userlevel)).toNumber()).to.equal(1);
-        expect((new BigNumber((await instanceLizMiner.getUserInfo(account1)).pendingreward)).toNumber()).to.equal(211);
+        expect((new BigNumber((await instanceLizMiner.getUserInfo(account1)).pendingreward)).toNumber()).to.equal(200);
         expect((new BigNumber((await instanceLizMiner.getUserInfo(account1)).lastcheckpoint)).toNumber()).to.equal(0);
         expect((new BigNumber((await instanceLizMiner.getUserInfo(account1)).lastblock)).toNumber()).to.equal(100);
     })
