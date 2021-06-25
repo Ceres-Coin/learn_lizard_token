@@ -364,10 +364,10 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         _userInfos[user].lastcheckpoint= _checkpoints.length -1;
     }
     
-    // TODO: [func][AddUserTrading] add test cases for AddUserTrading
+    // [func][AddUserTrading] add test cases for AddUserTrading
     function AddUserTrading(address tokenAddress,address useraddress,uint256 amounta,uint256 amountb,uint256 addhash,uint256 startblock) public onlyOwner
     {
-        require(startblock >= _checkpoints[_checkpoints.length -1].startblock);
+        // require(startblock >= _checkpoints[_checkpoints.length -1].startblock);
         _lpPools[tokenAddress].poolwallet.addBalance(useraddress,amounta,amountb);
         _lpPools[tokenAddress].totaljthash= _lpPools[tokenAddress].totaljthash.add(addhash);
         _userLphash[useraddress][tokenAddress] = _userLphash[useraddress][tokenAddress].add(addhash);

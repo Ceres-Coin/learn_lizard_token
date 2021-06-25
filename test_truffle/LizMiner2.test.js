@@ -177,6 +177,12 @@ contract("LizMiner2.test.js", async (accounts,network) => {
     it ("test for getBalanceIBEP20() ",async() => {
         const tmp = await instanceLizMiner.getBalanceIBEP20();
         console.log(chalk.yellow("tmp: ",tmp));
-    })
+    });
+
+    it ("[func][AddUserTrading] add test cases for AddUserTrading", async() => {
+        const curBlockNumber = (new BigNumber(await web3.eth.getBlockNumber())).toNumber();
+        expect(curBlockNumber).to.gt(0);
+        await instanceLizMiner.AddUserTrading(instanceLizToken.address,account0,100,100,100,curBlockNumber);
+    });
 
 });
