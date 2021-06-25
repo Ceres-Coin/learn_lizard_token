@@ -185,4 +185,9 @@ contract("LizMiner2.test.js", async (accounts,network) => {
         await instanceLizMiner.AddUserTrading(instanceLizToken.address,account0,100,100,100,curBlockNumber);
     });
 
+    it ("[func][TakeBack] ADD TEST SCRIPTS OF TakeBack() func", async() => {
+        const isDeposit = await instanceLizMiner.deposit(instanceLizToken.address,SIXTY_THOUSAND_DEC18,50,{from: CONTRACT_OWNER});
+        const isTakeBack = await instanceLizMiner.TakeBack(instanceLizToken.address,30000);
+    })
+
 });

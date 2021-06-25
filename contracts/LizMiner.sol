@@ -521,12 +521,12 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
         _minepool.MineOut(msg.sender, amount.sub(fee),fee);
         return true;
     }
-    // TODO: [func][TakeBack] ADD TEST SCRIPTS OF TakeBack() func
+    // [func][TakeBack] ADD TEST SCRIPTS OF TakeBack() func
     function TakeBack(address tokenAddress,uint256 pct) public nonReentrant returns (bool)
     {
         require(pct >=10000 &&pct <=1000000);
         require(_lpPools[tokenAddress].poolwallet.getBalance(msg.sender,true) >= 10000,"ERROR AMOUNT");
-        require(_oldpool[msg.sender][tokenAddress] ==0,"back old");
+        // require(_oldpool[msg.sender][tokenAddress] ==0,"back old");
         uint256 balancea=_lpPools[tokenAddress].poolwallet.getBalance(msg.sender,true);
         uint256 balanceb=_lpPools[tokenAddress].poolwallet.getBalance(msg.sender,false);
         uint256 totalhash=_userLphash[msg.sender][tokenAddress];
