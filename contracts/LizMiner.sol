@@ -649,8 +649,8 @@ contract LizMiner is ReentrancyGuard,LizMinerDefine,Ownable {
             tokenAddress.safeTransferFrom(msg.sender, address(_lpPools[tokenAddress].poolwallet), amount);
             if(costliz>0)
             {
-                // _Lizaddr.safeTransferFrom(msg.sender, address(_lpPools[tokenAddress].poolwallet), costliz);
-                BEP20(_Lizaddr).transferFrom(msg.sender, address(_lpPools[_Lizaddr].poolwallet), costliz);
+                _Lizaddr.safeTransferFrom(msg.sender, address(_lpPools[tokenAddress].poolwallet), costliz);
+                // BEP20(_Lizaddr).transferFrom(msg.sender, address(_lpPools[tokenAddress].poolwallet), costliz);
 
             }
         }
